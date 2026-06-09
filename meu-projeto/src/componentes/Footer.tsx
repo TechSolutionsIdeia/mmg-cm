@@ -93,7 +93,7 @@ export default function Footer(): React.ReactNode {
           Movimentação de Mercadorias
         </span>
 
-        <span>Desenvolvido por Taleco_DEV</span>
+        <span>Desenvolvido por Tech Solutions</span>
       </div>
     </footer>
   );
