@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#241E61">
+<meta name="description" content="MMG — intermediação de mão de obra avulsa em Campo Mourão e região desde 1975. Carga, descarga, empilhadeira e logística, sem vínculo empregatício. Rapidez, agilidade e redução de custos.">
+<title>MMG — Mão de obra avulsa em Campo Mourão e região | Desde 1975</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/mmg-mark.png">
+<link rel="stylesheet" href="assets/mmg-tokens.css">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body{ font-family:var(--mmg-font-body); color:var(--mmg-gray-900); line-height:var(--mmg-leading-normal); background:#fff; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  h1,h2,h3,h4{ font-family:var(--mmg-font-display); line-height:var(--mmg-leading-tight); letter-spacing:-.01em; }
+  a{ text-decoration:none; }
+  img{ display:block; max-width:100%; }
+  .wrap{ max-width:var(--mmg-container); margin:0 auto; padding:0 24px; }
+  .btn{ font-weight:600; border:none; border-radius:var(--mmg-radius-sm); padding:14px 24px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px; transition:transform var(--mmg-dur) var(--mmg-ease), filter var(--mmg-dur) var(--mmg-ease), background var(--mmg-dur) var(--mmg-ease); font-size:var(--mmg-text-base); font-family:inherit; line-height:1.2; }
+  .btn-primary{ background:var(--mmg-grad-orange); color:#fff; box-shadow:var(--mmg-shadow-orange); }
+  .btn-primary:hover{ transform:translateY(-2px); filter:brightness(1.05); }
+  .btn-wa{ background:#22a44d; color:#fff; }
+  .btn-wa:hover{ transform:translateY(-2px); filter:brightness(1.05); }
+  .btn-ghost{ background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.24); }
+  .btn-ghost:hover{ background:rgba(255,255,255,.16); }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:var(--mmg-text-sm); font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--mmg-orange-500); flex-shrink:0; }
+
+  /* NAV */
+  .nav{ position:sticky; top:0; z-index:50; background:rgba(36,30,97,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--mmg-navy-600); }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:66px; }
+  .navlinks{ display:flex; gap:4px; align-items:center; }
+  .navlinks a{ color:#CFCBEC; font-size:var(--mmg-text-sm); font-weight:500; padding:9px 13px; border-radius:var(--mmg-radius-pill); transition:color var(--mmg-dur-fast), background var(--mmg-dur-fast); }
+  .navlinks a:hover{ color:#fff; background:var(--mmg-navy-700); }
+
+  /* HERO */
+  .hero{ background:var(--mmg-grad-hero); color:#fff; position:relative; overflow:hidden; }
+  .hero::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:52px 52px; mask:radial-gradient(75% 70% at 78% 12%,#000,transparent); pointer-events:none; }
+  .hero-glow{ position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity .5s var(--mmg-ease); mix-blend-mode:screen;
+    background:radial-gradient(600px circle at var(--gx,50%) var(--gy,28%), rgba(236,107,30,.22), rgba(123,116,206,.12) 38%, transparent 66%); }
+
+  /* glow das boxes (spotlight seguindo o cursor) */
+  .glow-box{ position:relative; overflow:hidden; }
+  .glow-box>*{ position:relative; z-index:1; }
+  .glow-box::before{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0;
+    opacity:var(--bo,0); transition:opacity .35s var(--mmg-ease);
+    background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(236,107,30,.18), transparent 72%); }
+  .glow-box.on-dark::before{ mix-blend-mode:screen;
+    background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(244,136,63,.30), transparent 72%); }
+  @media (hover:none), (prefers-reduced-motion:reduce){ .hero-glow{ display:none; } .glow-box{ overflow:visible; } .glow-box::before{ display:none; } }
+  .hero .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center; padding:72px 24px 84px; }
+  .hero .eyebrow{ color:var(--mmg-orange-400); background:rgba(236,107,30,.12); border:1px solid rgba(236,107,30,.32); padding:7px 14px; border-radius:var(--mmg-radius-pill); }
+  .hero h1{ font-size:var(--mmg-text-6xl); font-weight:900; margin:22px 0 18px; }
+  .hero h1 em{ color:var(--mmg-orange-500); font-style:normal; }
+  .hero p{ font-size:var(--mmg-text-xl); color:#C2BEE6; max-width:52ch; }
+  .hero .cta{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .trust{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; }
+  .trust div{ background:rgba(255,255,255,.05); border:1px solid var(--mmg-navy-600); border-radius:var(--mmg-radius-md); padding:12px 16px; }
+  .trust div .k{ font-family:var(--mmg-font-display); font-weight:900; font-size:var(--mmg-text-xl); display:block; }
+  .trust div .k em{ color:var(--mmg-orange-500); font-style:normal; }
+  .trust div .l{ font-size:var(--mmg-text-xs); color:#9C97CC; }
+
+  .formcard{ background:#fff; border-radius:var(--mmg-radius-xl); padding:30px; box-shadow:var(--mmg-shadow-lg); color:var(--mmg-gray-900); }
+  .formcard h3{ font-size:var(--mmg-text-xl); font-weight:800; }
+  .formcard .sub{ color:var(--mmg-gray-500); font-size:var(--mmg-text-sm); margin:6px 0 20px; }
+  .field{ margin-bottom:13px; }
+  .field label{ display:block; font-size:var(--mmg-text-sm); font-weight:600; margin-bottom:6px; }
+  .input,.select{ width:100%; padding:13px 14px; border:1.5px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-sm); font-size:var(--mmg-text-base); font-family:inherit; transition:border-color var(--mmg-dur-fast), box-shadow var(--mmg-dur-fast); background:#fff; }
+  .input:focus,.select:focus{ outline:none; border-color:var(--mmg-orange-500); box-shadow:0 0 0 4px rgba(236,107,30,.15); }
+  .formcard .note{ font-size:var(--mmg-text-xs); color:var(--mmg-gray-400); text-align:center; margin-top:12px; }
+
+  /* CLIENTES */
+  .clientes{ background:var(--mmg-navy-950); padding:30px 0; }
+  .clientes .wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .clientes .lbl{ color:#7B74CE; font-size:var(--mmg-text-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+  .cli-row{ display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
+  .cli-chip{ background:#fff; border-radius:var(--mmg-radius-md); height:60px; padding:0 22px; display:flex; align-items:center; justify-content:center; box-shadow:var(--mmg-shadow-sm); transition:transform var(--mmg-dur) var(--mmg-ease); }
+  .cli-chip:hover{ transform:translateY(-3px); }
+  .cli-chip img{ height:34px; width:auto; max-width:150px; object-fit:contain; display:block; }
+  @media(max-width:430px){ .cli-chip{ height:50px; padding:0 16px; } .cli-chip img{ height:27px; max-width:120px; } }
+
+  /* SECTION base */
+  section{ padding:80px 0; }
+  .sechead{ text-align:center; max-width:60ch; margin:0 auto 46px; }
+  .sechead .eyebrow{ color:var(--mmg-orange-600); justify-content:center; margin-bottom:12px; }
+  .sechead h2{ font-size:var(--mmg-text-4xl); font-weight:800; }
+  .sechead p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-lg); margin-top:14px; }
+
+  .grid{ display:grid; gap:20px; }
+  .g3{ grid-template-columns:repeat(3,1fr); } .g2{ grid-template-columns:repeat(2,1fr); }
+
+  .svc{ background:#fff; border:1px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-lg); padding:28px; transition:transform var(--mmg-dur) var(--mmg-ease), box-shadow var(--mmg-dur) var(--mmg-ease), border-color var(--mmg-dur) var(--mmg-ease); }
+  .svc:hover{ transform:translateY(-4px); box-shadow:var(--mmg-shadow-lg); border-color:var(--mmg-orange-300); }
+  .svc .ic{ width:54px; height:54px; border-radius:var(--mmg-radius-md); background:var(--mmg-grad-navy); display:flex; align-items:center; justify-content:center; margin-bottom:18px; box-shadow:var(--mmg-shadow-md); }
+  .svc h4{ font-size:var(--mmg-text-lg); font-weight:800; margin-bottom:9px; }
+  .svc p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-sm); }
+
+  /* ABRANGÊNCIA (split full-height) */
+  .cobertura{ display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
+  .cob-text{ background:var(--mmg-grad-navy); color:#fff; display:flex; flex-direction:column; justify-content:center; padding:80px 6%; position:relative; overflow:hidden; }
+  .cob-text::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:46px 46px; mask:radial-gradient(70% 60% at 20% 90%,#000,transparent); pointer-events:none; }
+  .cob-text>*{ position:relative; z-index:2; }
+  .cob-text .eyebrow{ color:var(--mmg-orange-400); }
+  .cob-text h2{ font-size:var(--mmg-text-4xl); font-weight:900; margin:16px 0 16px; max-width:16ch; }
+  .cob-text h2 em{ color:var(--mmg-orange-500); font-style:normal; }
+  .cob-text p{ color:#C2BEE6; font-size:var(--mmg-text-lg); max-width:46ch; }
+  .chips{ display:flex; flex-wrap:wrap; gap:9px; margin:26px 0 30px; }
+  .chips span{ background:rgba(255,255,255,.07); border:1px solid var(--mmg-navy-500); color:#E5E2F6; font-size:var(--mmg-text-sm); font-weight:500; padding:7px 13px; border-radius:var(--mmg-radius-pill); }
+  .chips span.is-hub{ background:var(--mmg-orange-500); border-color:var(--mmg-orange-500); color:#fff; font-weight:700; }
+  .cob-map{ background:#F7F7FB; display:flex; align-items:center; justify-content:center; padding:48px 40px; }
+  .cob-map svg{ width:100%; max-width:540px; height:auto; }
+
+  /* VANTAGENS (dark) */
+  .why{ background:var(--mmg-navy-900); color:#fff; }
+  .why .sechead h2{ color:#fff; } .why .sechead p{ color:#C2BEE6; }
+  .why .item{ background:rgba(255,255,255,.04); border:1px solid var(--mmg-navy-600); border-radius:var(--mmg-radius-lg); padding:24px; }
+  .why .item .ic{ width:44px; height:44px; border-radius:var(--mmg-radius-sm); background:rgba(236,107,30,.14); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .why .item h4{ font-size:var(--mmg-text-base); margin-bottom:7px; color:#fff; }
+  .why .item p{ color:#A7A2D0; font-size:var(--mmg-text-sm); }
+
+  /* COMO */
+  .step{ position:relative; padding:26px; background:#fff; border:1px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-lg); }
+  .step .num{ position:absolute; top:-16px; left:26px; width:40px; height:40px; border-radius:50%; background:var(--mmg-grad-orange); color:#fff; font-family:var(--mmg-font-display); font-weight:900; display:flex; align-items:center; justify-content:center; box-shadow:var(--mmg-shadow-orange); }
+  .step h4{ font-size:var(--mmg-text-lg); margin:18px 0 8px; }
+  .step p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-sm); }
+
+  /* CTA FINAL */
+  .ctafinal{ background:var(--mmg-grad-orange); color:#fff; text-align:center; }
+  .ctafinal h2{ font-size:var(--mmg-text-5xl); font-weight:900; }
+  .ctafinal p{ font-size:var(--mmg-text-xl); margin:16px auto 28px; max-width:46ch; opacity:.96; }
+  .ctafinal .btn{ background:var(--mmg-navy-800); color:#fff; box-shadow:var(--mmg-shadow-lg); }
+  .ctafinal .btn:hover{ background:var(--mmg-navy-900); transform:translateY(-2px); }
+
+  /* FOOTER */
+  footer{ background:var(--mmg-navy-950); color:#8E89BE; padding:54px 0 92px; }
+  footer .cols{ display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:30px; }
+  footer h5{ color:#fff; font-family:var(--mmg-font-display); font-weight:700; font-size:var(--mmg-text-sm); letter-spacing:.05em; text-transform:uppercase; margin-bottom:14px; }
+  footer a{ color:#8E89BE; display:block; padding:5px 0; font-size:var(--mmg-text-sm); }
+  footer a:hover{ color:var(--mmg-orange-400); }
+  footer p{ font-size:var(--mmg-text-sm); }
+  footer .bottom{ border-top:1px solid var(--mmg-navy-700); margin-top:38px; padding-top:22px; text-align:center; font-size:var(--mmg-text-xs); }
+
+  /* MOBILE STICKY CTA */
+  .mcta{ display:none; }
+
+  @media(max-width:880px){
+    section{ padding:56px 0; }
+    .hero .wrap{ grid-template-columns:1fr; padding:48px 24px 56px; gap:34px; }
+    .hero h1{ font-size:var(--mmg-text-4xl); }
+    .hero p{ font-size:var(--mmg-text-lg); }
+    .g3,.g2{ grid-template-columns:1fr; }
+    .navlinks{ display:none; }
+    .sechead h2{ font-size:var(--mmg-text-3xl); }
+    .ctafinal h2{ font-size:var(--mmg-text-3xl); }
+    .ctafinal{ padding-bottom:64px; }
+    footer .cols{ grid-template-columns:1fr 1fr; }
+    /* abrangência empilha */
+    .cobertura{ grid-template-columns:1fr; min-height:auto; }
+    .cob-text{ padding:52px 24px; }
+    .cob-text h2{ font-size:var(--mmg-text-3xl); }
+    .cob-map{ padding:32px 20px 44px; }
+    /* barra fixa de conversão */
+    .mcta{ display:flex; position:fixed; bottom:0; left:0; right:0; z-index:60; gap:10px; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(36,30,97,.97); backdrop-filter:blur(8px); border-top:1px solid var(--mmg-navy-600); }
+    .mcta .btn{ flex:1; padding:13px 12px; font-size:var(--mmg-text-base); }
+  }
+  @media(max-width:430px){
+    .wrap{ padding:0 18px; }
+    .hero h1{ font-size:var(--mmg-text-3xl); }
+    .trust{ gap:10px; } .trust div{ flex:1 1 44%; }
+    .formcard{ padding:22px; }
+    .clientes .wrap{ gap:10px 20px; } .clientes .nome{ font-size:var(--mmg-text-base); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap">
+    <a href="#topo" class="logo" aria-label="MMG — página inicial">
+      <img src="assets/mmg-mark-negativo.png" height="32" alt="MMG" width="98">
+    </a>
+    <nav class="navlinks">
+      <a href="#servicos">Serviços</a>
+      <a href="#abrangencia">Abrangência</a>
+      <a href="#vantagens">Vantagens</a>
+      <a href="MMG_design-system.html">Manual da marca</a>
+      <a href="#contato" class="btn btn-primary" style="padding:10px 18px;">Solicitar equipe</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="topo">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Trabalho avulso · Logística · Desde 1975</span>
+      <h1>Mão de obra avulsa para sua operação <em>não parar.</em></h1>
+      <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
+      <div class="cta">
+        <a href="#contato" class="btn btn-primary">Solicitar equipe agora</a>
+        <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
+      </div>
+      <div class="trust">
+        <div class="glow-box on-dark"><span class="k">Desde <em>1975</em></span><span class="l">5 décadas de operação</span></div>
+        <div class="glow-box on-dark"><span class="k"><em>0</em> vínculo</span><span class="l">sem burocracia trabalhista</span></div>
+        <div class="glow-box on-dark"><span class="k"><em>NR33 · NR35</em></span><span class="l">EPI e exames inclusos</span></div>
+      </div>
+    </div>
+
+    <div class="formcard glow-box">
+      <h3>Receba uma proposta</h3>
+      <p class="sub">Resposta rápida. Sem compromisso.</p>
+      <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" class="input" placeholder="Razão social" autocomplete="organization"></div>
+      <div class="field"><label for="f-dem">Demanda</label>
+        <select id="f-dem" class="select">
+          <option>Carga e descarga</option>
+          <option>Operação de empilhadeira / paletização</option>
+          <option>Movimentação e logística interna</option>
+          <option>Ova e desova de vagões</option>
+          <option>Equipe avulsa dedicada</option>
+        </select></div>
+      <div class="field"><label for="f-wa">WhatsApp corporativo</label><input id="f-wa" class="input" type="tel" inputmode="tel" placeholder="(44) 9 0000-0000" autocomplete="tel"></div>
+      <button class="btn btn-primary" style="width:100%;">Solicitar proposta</button>
+      <p class="note">🔒 Seus dados estão seguros e não serão compartilhados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<div class="clientes">
+  <div class="wrap">
+    <span class="lbl">Empresas que confiam na MMG</span>
+    <div class="cli-row">
+      <div class="cli-chip"><img src="assets/clientes/coamo.png" alt="Coamo" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/cvale.png" alt="C.Vale" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> O que fazemos</span>
+      <h2>Profissionais preparados para todas as etapas logísticas</h2>
+      <p>Mão de obra qualificada para movimentação de mercadorias — manual, mecânica ou eletrônica — sob demanda ou em regime contínuo.</p>
+    </div>
+    <div class="grid g3">
+      <div class="svc glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18V7l9-3v17"/><path d="M5 18H3l2-5h9"/><circle cx="7" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/></svg></div>
+        <h4>Carga & Descarga</h4>
+        <p>Operação em docas, feiras livres e linha de produção — manual, mecânica ou eletrônica, com agilidade e segurança.</p>
+      </div>
+      <div class="svc glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="13" height="7" rx="1"/><path d="M16 13h3l2 3v2h-5"/><circle cx="7" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M6 11V7h7v4"/></svg></div>
+        <h4>Empilhadeira & Paletização</h4>
+        <p>Operadores para transporte com empilhadeiras, paletização, posicionamento e acomodação de carga.</p>
+      </div>
+      <div class="svc glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+        <h4>Movimentação Interna</h4>
+        <p>Arrumação, classificação, empilhamento, reordenamento e organização de estoque dentro da sua planta.</p>
+      </div>
+      <div class="svc glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="14" height="10" rx="1"/><path d="M16 12h4l2 2v4h-6"/><circle cx="6" cy="20" r="1.5"/><circle cx="12" cy="20" r="1.5"/><circle cx="19" cy="20" r="1.5"/></svg></div>
+        <h4>Ova & Desova de Vagões</h4>
+        <p>Carga e descarga ferroviária, arrasto, remoção e reparação de carga a granel ou ensacada.</p>
+      </div>
+      <div class="svc glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="M7 9h10l2 11H5z"/><path d="M9 14h6"/></svg></div>
+        <h4>Pesagem, Ensaque & Embalagem</h4>
+        <p>Pesagem, embalagem, ensaque, enlonamento, costura e amostragem de produtos a granel.</p>
+      </div>
+      <div class="svc glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 8l-1 12H6L5 8"/><path d="M3 8h18"/><path d="M8 8V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/></svg></div>
+        <h4>Limpeza & Conservação</h4>
+        <p>Pré-limpeza, preparo, preservação e conservação do ambiente para viabilizar e dar continuidade às operações.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABRANGÊNCIA -->
+<section id="abrangencia" style="padding:0;">
+  <div class="cobertura">
+    <div class="cob-text">
+      <span class="eyebrow"><span class="dot"></span> Abrangência</span>
+      <h2>Atendemos Campo Mourão e <em>toda a região</em></h2>
+      <p>Cinco décadas servindo a operação logística do Centro-Oeste do Paraná. Onde a sua mercadoria precisa se mover, a equipe avulsa da MMG chega.</p>
+      <div class="chips">
+        <span class="is-hub">Campo Mourão</span>
+        <span>Luiziana</span>
+        <span>Araruna</span>
+        <span>Peabiru</span>
+        <span>Engenheiro Beltrão</span>
+        <span>Barbosa Ferraz</span>
+        <span>Farol</span>
+        <span>Mamborê</span>
+        <span>Corumbataí do Sul</span>
+        <span>Quinta do Sol</span>
+        <span>Iretama</span>
+      </div>
+      <div>
+        <a href="#contato" class="btn btn-primary">Sua cidade está na cobertura? Fale conosco</a>
+      </div>
+    </div>
+    <div class="cob-map">
+      <svg viewBox="0 0 560 600" role="img" aria-label="Mapa de cobertura: Campo Mourão e cidades vizinhas no Paraná">
+        <title>Cobertura MMG — Campo Mourão e região</title>
+        <!-- área de cobertura -->
+        <circle cx="280" cy="300" r="232" fill="#EC6B1E" opacity="0.06"/>
+        <circle cx="280" cy="300" r="232" fill="none" stroke="#EC6B1E" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.5"/>
+        <circle cx="280" cy="300" r="150" fill="none" stroke="#241E61" stroke-width="1" stroke-dasharray="3 7" opacity="0.25"/>
+        <!-- linhas de conexão -->
+        <g stroke="#241E61" stroke-width="1.2" opacity="0.22">
+          <line x1="280" y1="300" x2="345" y2="158"/>
+          <line x1="280" y1="300" x2="215" y2="168"/>
+          <line x1="280" y1="300" x2="438" y2="150"/>
+          <line x1="280" y1="300" x2="150" y2="195"/>
+          <line x1="280" y1="300" x2="448" y2="240"/>
+          <line x1="280" y1="300" x2="452" y2="320"/>
+          <line x1="280" y1="300" x2="430" y2="402"/>
+          <line x1="280" y1="300" x2="118" y2="300"/>
+          <line x1="280" y1="300" x2="158" y2="392"/>
+          <line x1="280" y1="300" x2="248" y2="452"/>
+        </g>
+        <!-- cidades vizinhas -->
+        <g font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#241E61">
+          <g><circle cx="345" cy="158" r="6" fill="#241E61"/><text x="345" y="146" text-anchor="middle">Barbosa Ferraz</text></g>
+          <g><circle cx="215" cy="168" r="6" fill="#241E61"/><text x="208" y="156" text-anchor="middle">Corumbataí</text></g>
+          <g><circle cx="438" cy="150" r="6" fill="#241E61"/><text x="438" y="138" text-anchor="middle">Quinta do Sol</text></g>
+          <g><circle cx="150" cy="195" r="6" fill="#241E61"/><text x="150" y="183" text-anchor="middle">Iretama</text></g>
+          <g><circle cx="448" cy="240" r="6" fill="#241E61"/><text x="458" y="244" text-anchor="start">Araruna</text></g>
+          <g><circle cx="452" cy="320" r="6" fill="#241E61"/><text x="462" y="324" text-anchor="start">Peabiru</text></g>
+          <g><circle cx="430" cy="402" r="6" fill="#241E61"/><text x="440" y="406" text-anchor="start">Eng. Beltrão</text></g>
+          <g><circle cx="118" cy="300" r="6" fill="#241E61"/><text x="108" y="304" text-anchor="end">Farol</text></g>
+          <g><circle cx="158" cy="392" r="6" fill="#241E61"/><text x="148" y="396" text-anchor="end">Luiziana</text></g>
+          <g><circle cx="248" cy="452" r="6" fill="#241E61"/><text x="248" y="474" text-anchor="middle">Mamborê</text></g>
+        </g>
+        <!-- Campo Mourão (hub) -->
+        <g>
+          <path d="M280 250 C310 250 332 272 332 300 C332 335 280 366 280 366 C280 366 228 335 228 300 C228 272 250 250 280 250 Z" fill="#EC6B1E"/>
+          <circle cx="280" cy="300" r="17" fill="#fff"/>
+          <circle cx="280" cy="300" r="8" fill="#EC6B1E"/>
+          <text x="280" y="396" text-anchor="middle" font-family="Archivo, sans-serif" font-size="20" font-weight="800" fill="#241E61">Campo Mourão</text>
+          <text x="280" y="416" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#EC6B1E">SEDE · PARANÁ</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- VANTAGENS -->
+<section id="vantagens" class="why">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow" style="color:var(--mmg-orange-400);"><span class="dot"></span> Por que a MMG</span>
+      <h2>Trabalho avulso com zero burocracia para você</h2>
+      <p>Contrate mão de obra pontual sem formar vínculo empregatício — ideal para atender picos de demanda com flexibilidade total.</p>
+    </div>
+    <div class="grid g3">
+      <div class="item glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11l2 2 4-4"/><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <h4>Recrutamento e exames por nossa conta</h4>
+        <p>Exame admissional, periódico e demissional são responsabilidade da MMG. Você só recebe a equipe pronta.</p>
+      </div>
+      <div class="item glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>NR33 e NR35 sempre atualizados</h4>
+        <p>Todos os trabalhadores possuem certificados vigentes de espaço confinado (NR33) e trabalho em altura (NR35).</p>
+      </div>
+      <div class="item glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z"/><path d="M9 7V5h6v2"/></svg></div>
+        <h4>EPI, transporte e alimentação inclusos</h4>
+        <p>Botina, uniforme, transporte, alimentação, seguro de vida e exames laboratoriais — tudo por conta da MMG.</p>
+      </div>
+      <div class="item glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h4>Pague só pelo serviço realizado</h4>
+        <p>Em caso de falta ou ociosidade, o trabalhador é substituído imediatamente. Você paga apenas o que foi executado.</p>
+      </div>
+      <div class="item glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h4>Valor flexível por demanda</h4>
+        <p>Por unidade de tempo (hora ou diária), por produção (unidade, kg ou tonelada) ou pela combinação de ambos.</p>
+      </div>
+      <div class="item glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h4>Zero burocracia trabalhista</h4>
+        <p>Como intermediária, a MMG recebe e repassa a remuneração e calcula todos os direitos e encargos dos avulsos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Como funciona</span>
+      <h2>Da solicitação à operação em 3 passos</h2>
+    </div>
+    <div class="grid g3" style="margin-top:34px;">
+      <div class="step"><div class="num">1</div><h4>Você descreve a demanda</h4><p>Conte o tipo de operação, o volume e o prazo — pelo WhatsApp ou pelo formulário, em minutos.</p></div>
+      <div class="step"><div class="num">2</div><h4>Dimensionamos a equipe</h4><p>Definimos o número de avulsos e a forma de cobrança ideal, e enviamos uma proposta clara e sem compromisso.</p></div>
+      <div class="step"><div class="num">3</div><h4>A equipe entra em ação</h4><p>Profissionais com EPI, certificações e supervisão na sua operação, prontos para produzir.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contato" class="ctafinal">
+  <div class="wrap">
+    <h2>Precisa de mão de obra avulsa agora?</h2>
+    <p>Fale com a MMG e receba uma proposta sob medida para a sua operação em Campo Mourão e região.</p>
+    <a href="https://wa.me/5544900000000" class="btn">Falar no WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a href="#topo" class="logo" style="margin-bottom:14px; display:inline-block;" aria-label="MMG">
+          <img src="assets/mmg-mark-negativo.png" height="34" alt="MMG" width="104">
+        </a>
+        <p style="max-width:36ch;">MMG — Logística e Movimentação de Mercadorias de Campo Mourão. Intermediação de mão de obra avulsa desde 1975.</p>
+      </div>
+      <div><h5>Serviços</h5><a href="#servicos">Carga & Descarga</a><a href="#servicos">Empilhadeira</a><a href="#servicos">Movimentação interna</a><a href="#servicos">Ova & desova</a></div>
+      <div><h5>Empresa</h5><a href="#abrangencia">Abrangência</a><a href="#vantagens">Vantagens</a><a href="#vantagens">Conformidade NR</a></div>
+      <div><h5>Contato</h5><a href="https://wa.me/5544900000000">WhatsApp (44) 9 0000-0000</a><a href="mailto:contato@mmg.com.br">contato@mmg.com.br</a><a href="#contato">Solicitar proposta</a></div>
+    </div>
+    <div class="bottom">© 2026 MMG — Logística e Movimentação de Mercadorias de Campo Mourão · Trabalho avulso · Criação Idéia Comunicação</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var hero = document.querySelector('.hero');
+  var glow = document.querySelector('.hero-glow');
+  var boxes = document.querySelectorAll('.glow-box');
+  var mx=0, my=0, ticking=false;
+  function update(){
+    ticking=false;
+    var hr=hero.getBoundingClientRect();
+    if(my>hr.top-300 && my<hr.bottom+300){
+      glow.style.setProperty('--gx',(mx-hr.left)+'px');
+      glow.style.setProperty('--gy',(my-hr.top)+'px');
+      glow.style.opacity='1';
+    } else { glow.style.opacity='0'; }
+    for(var i=0;i<boxes.length;i++){
+      var b=boxes[i], r=b.getBoundingClientRect();
+      var near = mx>r.left-180 && mx<r.right+180 && my>r.top-180 && my<r.bottom+180;
+      if(near){
+        b.style.setProperty('--bx',(mx-r.left)+'px');
+        b.style.setProperty('--by',(my-r.top)+'px');
+        b.style.setProperty('--bo','1');
+      } else { b.style.setProperty('--bo','0'); }
+    }
+  }
+  window.addEventListener('mousemove', function(e){
+    mx=e.clientX; my=e.clientY;
+    if(!ticking){ ticking=true; requestAnimationFrame(update); }
+  }, {passive:true});
+})();
+</script>
+
+<!-- MOBILE STICKY CTA -->
+<div class="mcta">
+  <a href="https://wa.me/5544900000000" class="btn btn-wa">WhatsApp</a>
+  <a href="#contato" class="btn btn-primary">Solicitar equipe</a>
+</div>
+
+</body>
+</html>

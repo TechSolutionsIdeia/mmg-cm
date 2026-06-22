@@ -1,0 +1,112 @@
+/* ============================================================
+   MMG — Movimentação de Mercadorias em Geral
+   Design Tokens (single source of truth)
+   v1.0 — 2026
+   ============================================================ */
+
+:root {
+  /* ---------- BRAND • NAVY/ÍNDIGO (azul escuro da logo) ---------- */
+  --mmg-navy-950: #0C0930;  /* fundos extremos / footer */
+  --mmg-navy-900: #15103F;  /* fundo escuro base */
+  --mmg-navy-800: #241E61;  /* AZUL DA MARCA (primary) — logo */
+  --mmg-navy-700: #2F2877;  /* superfícies elevadas no escuro */
+  --mmg-navy-600: #3C3590;  /* bordas / dividers no escuro */
+  --mmg-navy-500: #524BB0;  /* estados hover sobre navy */
+  --mmg-navy-400: #7B74CE;  /* textos/ícones suaves sobre escuro */
+
+  /* ---------- BRAND • LARANJA (accent / movimento — logo) ---------- */
+  --mmg-orange-700: #B9480B; /* pressed */
+  --mmg-orange-600: #D45810; /* hover */
+  --mmg-orange-500: #EC6B1E; /* LARANJA DA MARCA (accent) — logo */
+  --mmg-orange-400: #F4883F; /* destaques claros */
+  --mmg-orange-300: #F9AB73; /* tints / badges suaves */
+  --mmg-orange-100: #FCE7D6; /* fundos de selo claro */
+
+  /* ---------- NEUTROS ---------- */
+  --mmg-white:   #FFFFFF;
+  --mmg-gray-50:  #F5F7FA;  /* fundo claro de página */
+  --mmg-gray-100: #ECF0F5;  /* superfícies claras */
+  --mmg-gray-200: #DCE3EC;  /* bordas claras */
+  --mmg-gray-300: #C2CCD9;
+  --mmg-gray-400: #94A3B8;  /* texto muted (claro) */
+  --mmg-gray-500: #64748B;
+  --mmg-gray-600: #475569;  /* texto secundário (claro) */
+  --mmg-gray-800: #1E293B;
+  --mmg-gray-900: #0F172A;  /* texto principal (claro) */
+
+  /* ---------- SEMÂNTICOS ---------- */
+  --mmg-success: #16A34A;
+  --mmg-warning: #F59E0B;
+  --mmg-danger:  #DC2626;
+  --mmg-info:    #2563EB;
+
+  /* ---------- GRADIENTES ---------- */
+  --mmg-grad-orange: linear-gradient(135deg, #F4883F 0%, #EC6B1E 45%, #D45810 100%);
+  --mmg-grad-navy:   linear-gradient(160deg, #2F2877 0%, #241E61 55%, #15103F 100%);
+  --mmg-grad-hero:   radial-gradient(120% 120% at 80% 0%, #3C3590 0%, #241E61 42%, #0C0930 100%);
+  --mmg-grad-text:   linear-gradient(90deg, #FFFFFF 0%, #F9AB73 100%);
+
+  /* ---------- TIPOGRAFIA ---------- */
+  --mmg-font-display: "Archivo", "Inter", system-ui, sans-serif; /* títulos */
+  --mmg-font-body:    "Inter", system-ui, -apple-system, sans-serif; /* corpo/UI */
+
+  --mmg-text-xs:   0.75rem;   /* 12 */
+  --mmg-text-sm:   0.875rem;  /* 14 */
+  --mmg-text-base: 1rem;      /* 16 */
+  --mmg-text-lg:   1.125rem;  /* 18 */
+  --mmg-text-xl:   1.375rem;  /* 22 */
+  --mmg-text-2xl:  1.75rem;   /* 28 */
+  --mmg-text-3xl:  2.25rem;   /* 36 */
+  --mmg-text-4xl:  3rem;      /* 48 */
+  --mmg-text-5xl:  3.75rem;   /* 60 */
+  --mmg-text-6xl:  4.75rem;   /* 76 */
+
+  --mmg-weight-regular: 400;
+  --mmg-weight-medium:  500;
+  --mmg-weight-semibold:600;
+  --mmg-weight-bold:    700;
+  --mmg-weight-extra:   800;
+  --mmg-weight-black:   900;
+
+  --mmg-leading-tight: 1.05;
+  --mmg-leading-snug:  1.25;
+  --mmg-leading-normal:1.55;
+
+  /* ---------- ESPAÇAMENTO (base 4px) ---------- */
+  --mmg-space-1: 4px;
+  --mmg-space-2: 8px;
+  --mmg-space-3: 12px;
+  --mmg-space-4: 16px;
+  --mmg-space-5: 24px;
+  --mmg-space-6: 32px;
+  --mmg-space-7: 48px;
+  --mmg-space-8: 64px;
+  --mmg-space-9: 96px;
+  --mmg-space-10:128px;
+
+  /* ---------- RAIO ---------- */
+  --mmg-radius-xs: 6px;
+  --mmg-radius-sm: 10px;
+  --mmg-radius-md: 14px;
+  --mmg-radius-lg: 20px;
+  --mmg-radius-xl: 28px;
+  --mmg-radius-pill: 999px;
+
+  /* ---------- ELEVAÇÃO ---------- */
+  --mmg-shadow-sm: 0 1px 2px rgba(4,16,31,.08), 0 1px 3px rgba(4,16,31,.10);
+  --mmg-shadow-md: 0 6px 16px rgba(4,16,31,.12), 0 2px 6px rgba(4,16,31,.08);
+  --mmg-shadow-lg: 0 18px 40px rgba(4,16,31,.18), 0 6px 14px rgba(4,16,31,.10);
+  --mmg-shadow-orange: 0 12px 30px rgba(236,107,30,.35);
+  --mmg-shadow-inset: inset 0 1px 0 rgba(255,255,255,.06);
+
+  /* ---------- MOVIMENTO ---------- */
+  --mmg-ease: cubic-bezier(.22,.61,.36,1);
+  --mmg-ease-out: cubic-bezier(.16,1,.3,1);
+  --mmg-dur-fast: .15s;
+  --mmg-dur: .28s;
+  --mmg-dur-slow: .5s;
+
+  /* ---------- LAYOUT ---------- */
+  --mmg-container: 1200px;
+  --mmg-container-narrow: 920px;
+}
