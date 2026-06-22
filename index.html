@@ -71,6 +71,14 @@
   .input,.select{ width:100%; padding:13px 14px; border:1.5px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-sm); font-size:var(--mmg-text-base); font-family:inherit; transition:border-color var(--mmg-dur-fast), box-shadow var(--mmg-dur-fast); background:#fff; }
   .input:focus,.select:focus{ outline:none; border-color:var(--mmg-orange-500); box-shadow:0 0 0 4px rgba(236,107,30,.15); }
   .formcard .note{ font-size:var(--mmg-text-xs); color:var(--mmg-gray-400); text-align:center; margin-top:12px; }
+  /* status do formulário */
+  #mmg-form-status{ font-size:var(--mmg-text-sm); margin-top:10px; min-height:1.1em; font-weight:600; }
+  #mmg-form-status.ok{ color:#1f9d57; }
+  #mmg-form-status.err{ color:#d23b3b; }
+  .btn .spinner{ width:18px; height:18px; border:2px solid rgba(255,255,255,.35); border-top-color:#fff; border-radius:50%; animation:mmgspin .7s linear infinite; display:none; }
+  .btn.loading .spinner{ display:inline-block; }
+  .btn.loading .btn-text{ opacity:.7; }
+  @keyframes mmgspin{ to{ transform:rotate(360deg); } }
 
   /* CLIENTES */
   .clientes{ background:var(--mmg-navy-950); padding:30px 0; }
@@ -215,17 +223,24 @@
     <div class="formcard glow-box">
       <h3>Receba uma proposta</h3>
       <p class="sub">Resposta rápida. Sem compromisso.</p>
-      <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" class="input" placeholder="Razão social" autocomplete="organization"></div>
-      <div class="field"><label for="f-dem">Demanda</label>
-        <select id="f-dem" class="select">
-          <option>Carga e descarga</option>
-          <option>Operação de empilhadeira / paletização</option>
-          <option>Movimentação e logística interna</option>
-          <option>Ova e desova de vagões</option>
-          <option>Equipe avulsa dedicada</option>
-        </select></div>
-      <div class="field"><label for="f-wa">WhatsApp corporativo</label><input id="f-wa" class="input" type="tel" inputmode="tel" placeholder="(44) 9 0000-0000" autocomplete="tel"></div>
-      <button class="btn btn-primary" style="width:100%;">Solicitar proposta</button>
+      <form id="mmg-form" novalidate>
+        <div class="field"><label for="f-nome">Nome do responsável</label><input id="f-nome" class="input" placeholder="Seu nome" autocomplete="name" required></div>
+        <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" class="input" placeholder="Razão social" autocomplete="organization"></div>
+        <div class="field"><label for="f-dem">Demanda</label>
+          <select id="f-dem" class="select">
+            <option>Carga e descarga</option>
+            <option>Operação de empilhadeira / paletização</option>
+            <option>Movimentação e logística interna</option>
+            <option>Ova e desova de vagões</option>
+            <option>Equipe avulsa dedicada</option>
+          </select></div>
+        <div class="field"><label for="f-wa">WhatsApp corporativo</label><input id="f-wa" class="input" type="tel" inputmode="tel" placeholder="(44) 9 0000-0000" autocomplete="tel" required></div>
+        <button type="submit" class="btn btn-primary" id="mmg-btn" style="width:100%;">
+          <span class="btn-text">Solicitar proposta</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+        <p id="mmg-form-status" aria-live="polite"></p>
+      </form>
       <p class="note">🔒 Seus dados estão seguros e não serão compartilhados.</p>
     </div>
   </div>
@@ -472,6 +487,78 @@
     mx=e.clientX; my=e.clientY;
     if(!ticking){ ticking=true; requestAnimationFrame(update); }
   }, {passive:true});
+})();
+</script>
+
+<!-- ENVIO DO FORMULÁRIO → n8n (MMG) -->
+<script>
+(function(){
+  'use strict';
+  var N8N_WEBHOOK = 'https://n8n.paessolucoes.com/webhook/lead-site-mmg';
+  var WA_FALLBACK = '44988092670 ';
+
+  var form   = document.getElementById('mmg-form');
+  var btn    = document.getElementById('mmg-btn');
+  var status = document.getElementById('mmg-form-status');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var nome     = document.getElementById('f-nome').value.trim();
+    var empresa  = document.getElementById('f-emp').value.trim();
+    var demanda  = document.getElementById('f-dem').value;
+    var whatsapp = document.getElementById('f-wa').value.trim();
+
+    if(!nome || !whatsapp){
+      status.className = 'err';
+      status.textContent = 'Por favor, preencha seu nome e o WhatsApp.';
+      return;
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+    status.className = '';
+    status.textContent = 'Enviando…';
+
+    var payload = {
+      nome: nome,
+      empresa: empresa,
+      demanda: demanda,
+      whatsapp: whatsapp,
+      origem: 'site-mmg',
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(N8N_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(resp){
+      if(!resp.ok) throw new Error('err');
+      return resp;
+    }).then(function(){
+      status.className = 'ok';
+      status.textContent = '✓ Recebido! Você vai receber uma mensagem nossa no WhatsApp em instantes.';
+      form.reset();
+    }).catch(function(){
+      status.className = 'err';
+      status.textContent = 'Não foi possível enviar. Abrindo o WhatsApp…';
+      setTimeout(function(){
+        var msg = encodeURIComponent(
+          'Olá! Vim pelo site e gostaria de uma proposta de mão de obra avulsa.\n\n' +
+          '*Nome:* ' + nome + '\n' +
+          (empresa ? '*Empresa:* ' + empresa + '\n' : '') +
+          '*Demanda:* ' + demanda + '\n' +
+          '*WhatsApp:* ' + whatsapp
+        );
+        window.open('https://wa.me/' + WA_FALLBACK + '?text=' + msg, '_blank');
+      }, 1200);
+    }).finally(function(){
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    });
+  });
 })();
 </script>
 
