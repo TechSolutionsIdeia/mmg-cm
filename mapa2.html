@@ -12,7 +12,7 @@
     --laranja2:#F6843A;
     --texto-claro:#e8e6f5;
     --texto-suave:#b7b3d6;
-    --mapa-bg:#f5f2ef;
+    --mapa-bg:#F1ECE9;
     --cidade-fill:#EFE7E2;
     --cidade-stroke:#ab5a588c;
   }
@@ -21,7 +21,7 @@
 
   .abrangencia{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:0.85fr 1.15fr;  /* mapa ganha mais espaço que o texto */
     min-height:100vh;
   }
 
@@ -124,14 +124,14 @@
   .lado-mapa{
     background:linear-gradient(160deg,#f7f5f3,#efeae6);
     display:flex;align-items:center;justify-content:center;
-    padding:40px;
+    padding:16px;
   }
-  .mapa-wrap{
-    width:100%;max-width:760px;
-    background:var(--mapa-bg);
+.mapa-wrap{
+    width:100%;max-width:1100px;
+    background:linear-gradient(160deg,#f7f5f3,#efeae6);
     border-radius:18px;
     box-shadow:0 20px 60px rgba(40,30,90,.10);
-    padding:24px;
+    padding:20px;
   }
   .mapa-wrap svg{width:100%;height:auto;display:block;}
 
@@ -146,7 +146,7 @@
   .cidade.ativa{fill:var(--laranja);filter:drop-shadow(0 4px 10px rgba(236,107,30,.45));}
 
   .label{
-    font:600 11px Inter,Arial,sans-serif;
+    font:700 15px Inter,Arial,sans-serif;
     text-anchor:middle;
     pointer-events:none;
     fill:#4a4458;
@@ -184,9 +184,7 @@
   <!-- DIREITA: MAPA -->
   <div class="lado-mapa">
     <div class="mapa-wrap">
-      <svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" id="mapa"></svg>
-    </div>
-  </div>
+<svg viewBox="-8 -8 970 916" xmlns="http://www.w3.org/2000/svg" id="mapa"></svg>  </div>
 
 </section>
 
