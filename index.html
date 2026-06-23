@@ -183,13 +183,13 @@
   }
 
 
-  .mapa-container{
+.mapa-container{
     width:100%;
 }
-
 .mapa-container iframe{
     width:100%;
-    height:800px;
+    border:0;
+    display:block;
 }
 @media (max-width: 768px){
     .mapa-container iframe{
@@ -198,6 +198,7 @@
 }
 </style>
 </head>
+
 <body>
 
 <!-- NAV -->
@@ -314,51 +315,17 @@
   </div>
 </section>
 
-<!-- ABRANGÊNCIA -->
-<section id="abrangencia" style="padding:0;">
-  <div class="cobertura">
-    <div class="cob-text">
-      <span class="eyebrow"><span class="dot"></span> Abrangência</span>
-      <h2>Atendemos Campo Mourão e <em>toda a região</em></h2>
-      <p>Cinco décadas servindo a operação logística do Centro-Oeste do Paraná. Onde a sua mercadoria precisa se mover, a equipe avulsa da MMG chega.</p>
-      <div class="chips">
-        <span class="is-hub">Campo Mourão</span>
-        <span>Luiziana</span>
-        <span>Araruna</span>
-        <span>Peabiru</span>
-        <span>Engenheiro Beltrão</span>
-        <span>Barbosa Ferraz</span>
-        <span>Farol</span>
-        <span>Mamborê</span>
-        <span>Corumbataí do Sul</span>
-        <span>Quinta do Sol</span>
-        <span>Iretama</span>
-        <span>Fênix</span>
-        <span>São João do Avai</span>
-        <span>Nova Tebas</span>
-        <span>Roncador</span>
-        <span>Juranda</span>
-        <span>Boa Esperança</span>
-        <span>Palmital</span>
-      </div>
-      <div>
-        <a href="#contato" class="btn btn-primary">Sua cidade está na cobertura? Fale conosco</a>
-      </div>
-    </div>
-    <div class="cob-map">
-
-       <div class="mapa-container">
+<div class="mapa-container">
     <iframe
-        src="mapa.html"
-        width="100%"
-        height="800"
-        frameborder="0">
+        id="mmg-mapa-iframe"
+        src="mapa2.html"
+        title="Mapa de abrangência MMG"
+        scrolling="no"
+        loading="lazy">
     </iframe>
 </div>
 
-    </div>
-  </div>
-</section>
+
 
 <!-- VANTAGENS -->
 <section id="vantagens" class="why">
@@ -554,6 +521,22 @@
   <a href="https://wa.me/5544988092670" class="btn btn-wa">WhatsApp</a>
   <a href="#contato" class="btn btn-primary">Solicitar equipe</a>
 </div>
+
+<script>
+(function(){
+  var iframe = document.getElementById('mmg-mapa-iframe');
+  if(!iframe) return;
+  window.addEventListener('message', function(e){
+    if(e.data && e.data.mmgMapaHeight){
+      iframe.style.height = e.data.mmgMapaHeight + 'px';
+    }
+  });
+  // fallback se o filho não enviar mensagem
+  iframe.addEventListener('load', function(){
+    if(!iframe.style.height) iframe.style.height = '900px';
+  });
+})();
+</script>
 
 </body>
 </html>
