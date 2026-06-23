@@ -181,6 +181,16 @@
     .formcard{ padding:22px; }
     .clientes .wrap{ gap:10px 20px; } .clientes .nome{ font-size:var(--mmg-text-base); }
   }
+
+
+  .mapa-container{
+    width:100%;
+}
+
+.mapa-container iframe{
+    width:100%;
+    height:800px;
+}
 </style>
 </head>
 <body>
@@ -332,8 +342,14 @@
     </div>
     <div class="cob-map">
 
-        <!-- COlOCAR O MAPA -->
-
+       <div class="mapa-container">
+    <iframe
+        src="mapa.html"
+        width="100%"
+        height="800"
+        frameborder="0">
+    </iframe>
+</div>
 
     </div>
   </div>
