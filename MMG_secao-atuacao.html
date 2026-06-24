@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMG — Área de Atuação (componente)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/mmg-tokens.css">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--mmg-navy-900);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SECTION ──────────────────────────────────────────────── */
+#atuacao {
+  padding: 88px 0 96px;
+  background: linear-gradient(160deg, var(--mmg-navy-800) 0%, var(--mmg-navy-950) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* grade de fundo sutil */
+#atuacao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 30% 50%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+/* ── GRID DOS DOIS BLOCOS ─────────────────────────────────── */
+.atuacao-grid {
+  display: grid;
+  grid-template-columns: 0.58fr 1.42fr; /* lista (esq.) | mapa (dir.) */
+  gap: 0;
+  align-items: stretch;
+  min-height: 560px;
+}
+
+/* ── BLOCO MAPA (agora à DIREITA) ─────────────────────────── */
+.mapa-bloco {
+  order: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0 24px 32px;
+}
+
+.mapa-wrapper {
+  width: 100%;
+  max-width: 1040px;
+  position: relative;
+}
+
+#mmg-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* sem fundo/borda — mapa "solto" sobre a seção */
+  background: transparent;
+  /* brilho leve atrás do mapa */
+  filter: drop-shadow(0 0 40px rgba(236,107,30,.10));
+}
+
+/* estados do SVG */
+#mmg-map .mun-path {
+  cursor: default;
+  transition: fill .22s cubic-bezier(.22,.61,.36,1), stroke .22s;
+}
+
+/* município fora da cobertura MMG — cinza azulado escuro, bem visível */
+#mmg-map .mun-path.ctx {
+  fill: #1a1650;
+  stroke: #2f2877;
+  stroke-width: 0.4;
+}
+
+/* município na cobertura MMG (inativo) — azul médio com destaque */
+#mmg-map .mun-path.mmg {
+  fill: #3a3494;
+  stroke: #7b74ce;
+  stroke-width: 0.9;
+}
+
+/* Campo Mourão (hub) — laranja suave inativo */
+#mmg-map .mun-path.hub {
+  fill: #7a3610;
+  stroke: #EC6B1E;
+  stroke-width: 1.1;
+}
+
+/* hover / active: qualquer município MMG */
+#mmg-map .mun-path.mmg.active,
+#mmg-map .mun-path.mmg:hover {
+  fill: #EC6B1E;
+  stroke: #F4883F;
+  stroke-width: 1.2;
+  cursor: pointer;
+}
+
+/* hover / active: hub */
+#mmg-map .mun-path.hub.active,
+#mmg-map .mun-path.hub:hover {
+  fill: #F4883F;
+  stroke: #FCB97A;
+  stroke-width: 1.4;
+  cursor: pointer;
+}
+
+/* loading skeleton */
+.mapa-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 20px;
+  background: rgba(21, 16, 63, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  transition: opacity .4s ease;
+}
+.mapa-loading.hidden { opacity: 0; pointer-events: none; }
+
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(236, 107, 30, .2);
+  border-top-color: #EC6B1E;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.mapa-loading p {
+  font-size: .8rem;
+  color: var(--mmg-navy-400);
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+/* ── BLOCO LISTA (agora à ESQUERDA) ───────────────────────── */
+.lista-bloco {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 40px 24px 0;
+  border-right: 1px solid rgba(83, 75, 176, 0.25);
+}
+
+/* eyebrow */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mmg-orange-400);
+  background: rgba(236, 107, 30, .1);
+  border: 1px solid rgba(236, 107, 30, .28);
+  padding: 6px 13px;
+  border-radius: 999px;
+  width: fit-content;
+  margin-bottom: 18px;
+}
+.eyebrow .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--mmg-orange-500);
+  flex-shrink: 0;
+}
+
+.lista-bloco h2 {
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin-bottom: 10px;
+}
+.lista-bloco h2 em { color: var(--mmg-orange-500); font-style: normal; }
+
+.lista-bloco .subtitulo {
+  font-size: .9rem;
+  color: rgba(194, 190, 230, .75);
+  line-height: 1.55;
+  margin-bottom: 28px;
+  max-width: 38ch;
+}
+
+/* lista de cidades */
+.cidades-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cidade-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background .18s cubic-bezier(.22,.61,.36,1),
+    color .18s cubic-bezier(.22,.61,.36,1);
+  color: rgba(202, 198, 240, 0.85);
+  font-size: .925rem;
+  font-weight: 500;
+  user-select: none;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.cidade-item:hover,
+.cidade-item.active {
+  background: rgba(236, 107, 30, .1);
+  color: #fff;
+  border-color: rgba(236, 107, 30, .22);
+}
+
+/* ponto lateral colorido */
+.cidade-item .pip {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(123, 116, 206, 0.5);
+  flex-shrink: 0;
+  transition: background .18s ease, box-shadow .18s ease;
+}
+
+.cidade-item:hover .pip,
+.cidade-item.active .pip {
+  background: var(--mmg-orange-500);
+  box-shadow: 0 0 8px rgba(236, 107, 30, .7);
+}
+
+/* hub — Campo Mourão */
+.cidade-item.hub {
+  color: rgba(244, 136, 63, 0.9);
+  font-weight: 600;
+}
+.cidade-item.hub .pip {
+  background: var(--mmg-orange-500);
+  box-shadow: 0 0 6px rgba(236, 107, 30, .5);
+}
+.cidade-item.hub:hover,
+.cidade-item.hub.active {
+  background: rgba(236, 107, 30, .16);
+  color: #F4883F;
+  border-color: rgba(236, 107, 30, .35);
+}
+
+.hub-badge {
+  margin-left: auto;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: rgba(236, 107, 30, .2);
+  border: 1px solid rgba(236, 107, 30, .4);
+  color: var(--mmg-orange-400);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* rodapé da lista */
+.lista-footer {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(83, 75, 176, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .8rem;
+  color: rgba(155, 151, 204, 0.7);
+}
+.lista-footer svg { flex-shrink: 0; opacity: .6; }
+
+/* ── RESPONSIVO ───────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .atuacao-grid {
+    grid-template-columns: 1fr;
+  }
+  /* empilhado: mapa em cima, lista embaixo */
+  .mapa-bloco {
+    order: 1;
+    padding: 0 0 32px 0;
+  }
+  .mapa-wrapper { max-width: 420px; }
+  .lista-bloco {
+    order: 2;
+    padding: 24px 0 0 0;
+    border-right: none;
+    border-top: 1px solid rgba(83, 75, 176, 0.25);
+  }
+}
+
+@media (max-width: 480px) {
+  #atuacao { padding: 60px 0 72px; }
+  .lista-bloco h2 { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SEÇÃO: ÁREA DE ATUAÇÃO
+     Para integrar na landing: copie tudo dentro de <section>
+════════════════════════════════════════════════════════════ -->
+<section id="atuacao">
+  <div class="wrap">
+    <div class="atuacao-grid">
+
+      <!-- ── BLOCO ESQUERDO: MAPA ──────────────────────────── -->
+      <div class="mapa-bloco">
+        <div class="mapa-wrapper">
+          <!-- loading overlay -->
+          <div class="mapa-loading" id="mapa-loading">
+            <div class="spinner"></div>
+            <p>Carregando malha geográfica…</p>
+          </div>
+          <!-- SVG será injetado aqui -->
+          <svg id="mmg-map" viewBox="0 0 500 480" aria-label="Mapa de atuação MMG no Paraná"></svg>
+        </div>
+      </div>
+
+      <!-- ── BLOCO DIREITO: LISTA ──────────────────────────── -->
+      <div class="lista-bloco">
+        <span class="eyebrow"><span class="dot"></span> Área de Atuação</span>
+        <h2>Atendemos <em>Campo Mourão</em><br>e toda a região</h2>
+        <p class="subtitulo">
+          Cinco décadas servindo a operação logística do
+          Centro-Oeste do Paraná. Passe o cursor sobre
+          cada cidade para localizar no mapa.
+        </p>
+
+        <ul class="cidades-lista" id="cidades-lista">
+          <!-- preenchido pelo JS com a mesma ordem do array CITIES -->
+        </ul>
+
+        <div class="lista-footer">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8 5v3.5l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Malha geográfica: IBGE — Divisão Municipal do Paraná
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CONFIGURAÇÃO — municípios MMG
+// Código IBGE de 7 dígitos (sem dígito verificador)
+// ═══════════════════════════════════════════════════════════
+const CITIES = [
+  { code: '4104303', name: 'Campo Mourão',     hub: true  },
+  { code: '4101705', name: 'Araruna',           hub: false },
+  { code: '4102505', name: 'Barbosa Ferraz',    hub: false },
+  { code: '4106555', name: 'Corumbataí do Sul', hub: false },
+  { code: '4107504', name: 'Engenheiro Beltrão',hub: false },
+  { code: '4107553', name: 'Farol',             hub: false },
+  { code: '4110805', name: 'Iretama',           hub: false },
+  { code: '4113734', name: 'Luiziana',          hub: false },
+  { code: '4114005', name: 'Mamborê',           hub: false },
+  { code: '4118808', name: 'Peabiru',           hub: false },
+  { code: '4121109', name: 'Quinta do Sol',     hub: false },
+  { code: '4125001', name: 'São João do Ivaí', hub: false },
+  { code: '4117271', name: 'Nova Tebas',        hub: false },
+  { code: '4122503', name: 'Roncador',          hub: false },
+  { code: '4112959', name: 'Juranda',           hub: false },
+  { code: '4103008', name: 'Boa Esperança',     hub: false },
+  { code: '4117800', name: 'Palmital',          hub: false },
+];
+
+const cityIndex = Object.fromEntries(CITIES.map(c => [c.code, c]));
+const mmgCodes  = new Set(CITIES.map(c => c.code));
+
+// ═══════════════════════════════════════════════════════════
+// CONSTRÓI A LISTA de cidades no DOM
+// ═══════════════════════════════════════════════════════════
+const lista = document.getElementById('cidades-lista');
+CITIES.forEach(city => {
+  const li = document.createElement('li');
+  li.className = 'cidade-item' + (city.hub ? ' hub' : '');
+  li.dataset.code = city.code;
+  li.innerHTML = `
+    <span class="pip"></span>
+    <span class="name">${city.name}</span>
+    ${city.hub ? '<span class="hub-badge">Sede</span>' : ''}
+  `;
+  lista.appendChild(li);
+});
+
+// ═══════════════════════════════════════════════════════════
+// FETCH IBGE — malha municipal do Paraná (estado 41)
+// ═══════════════════════════════════════════════════════════
+const IBGE_URL =
+  'https://servicodados.ibge.gov.br/api/v4/malhas/estados/41' +
+  '?formato=application/vnd.geo+json' +
+  '&qualidade=minima' +
+  '&intrarregiao=municipio';
+
+(async () => {
+  try {
+    const res  = await fetch(IBGE_URL);
+    const data = await res.json();
+    renderMap(data);
+  } catch (e) {
+    console.error('Erro ao carregar malha IBGE:', e);
+    document.getElementById('mapa-loading').innerHTML =
+      '<p style="color:#F4883F;font-size:.8rem;text-align:center;">Não foi possível carregar o mapa.<br>Verifique a conexão.</p>';
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════
+// RENDER — D3 projection + paths
+// ═══════════════════════════════════════════════════════════
+function getCode(props) {
+  // IBGE GeoJSON pode retornar código em propriedades diferentes
+  return String(
+    props.codarea   ||
+    props.CD_MUN    ||
+    props.GEOCODIGO ||
+    props.geocodigo ||
+    props.id        ||
+    ''
+  ).slice(0, 7); // garante 7 dígitos
+}
+
+function renderMap(geojson) {
+  const svg    = d3.select('#mmg-map');
+  const W      = 500, H = 480;
+
+  // ── SEPARA municípios MMG do restante do estado ───────────
+  const mmgFeatures = geojson.features.filter(f => mmgCodes.has(getCode(f.properties)));
+  const mmgCollection = { type: 'FeatureCollection', features: mmgFeatures };
+
+  // ── PROJEÇÃO focada na microrregião MMG ───────────────────
+  // IMPORTANTE: usamos d3.geoIdentity (projeção PLANAR), não
+  // geoMercator. O GeoJSON do IBGE tem o winding dos anéis no
+  // sentido oposto à convenção esférica do D3 — com geoMercator
+  // cada polígono é interpretado como "a esfera inteira menos um
+  // furo" e renderiza como um retângulo cheio (todos sobrepostos).
+  // geoIdentity trata as coordenadas como cartesianas, ignorando
+  // o winding; em área pequena a distorção é desprezível.
+  // .reflectY(true) inverte o eixo Y (lat cresce p/ cima, SVG p/ baixo).
+  const padding = 48;
+  const projFocus = d3.geoIdentity()
+    .reflectY(true)
+    .fitExtent([[padding, padding], [W - padding, H - padding]], mmgCollection);
+
+  const path = d3.geoPath().projection(projFocus);
+
+  // ── MUNICÍPIOS MMG — apenas os municípios atendidos ───────
+  //    (sem camada de contexto: só as cidades da lista no mapa)
+  const mmgPaths = svg.selectAll('.mun-path.mmg')
+    .data(mmgFeatures)
+    .join('path')
+      .attr('class', d => {
+        const city = cityIndex[getCode(d.properties)];
+        return 'mun-path mmg' + (city && city.hub ? ' hub' : '');
+      })
+      .attr('d', path)
+      .attr('data-code', d => getCode(d.properties));
+
+  // ── INTERAÇÃO: hover no mapa ──────────────────────────────
+  mmgPaths
+    .on('mouseenter', function(event, d) {
+      const code = getCode(d.properties);
+      setActive(code);
+    })
+    .on('mouseleave', function() {
+      clearActive();
+    });
+
+  // ── REMOVE LOADING ────────────────────────────────────────
+  const overlay = document.getElementById('mapa-loading');
+  overlay.classList.add('hidden');
+  setTimeout(() => overlay.remove(), 500);
+}
+
+// ═══════════════════════════════════════════════════════════
+// ESTADO ATIVO — sincroniza mapa ↔ lista
+// ═══════════════════════════════════════════════════════════
+let currentActive = null;
+
+function setActive(code) {
+  if (currentActive === code) return;
+  clearActive(false);
+  currentActive = code;
+
+  // Destaca no mapa
+  document.querySelectorAll(`.mun-path[data-code="${code}"]`)
+    .forEach(el => el.classList.add('active'));
+
+  // Destaca na lista
+  document.querySelectorAll(`.cidade-item[data-code="${code}"]`)
+    .forEach(el => {
+      el.classList.add('active');
+      // scroll suave para o item na lista (mobile)
+      el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+}
+
+function clearActive(resetCode = true) {
+  if (resetCode) currentActive = null;
+  document.querySelectorAll('.mun-path.active')
+    .forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.cidade-item.active')
+    .forEach(el => el.classList.remove('active'));
+}
+
+// ── INTERAÇÃO: hover na lista ──────────────────────────────
+document.querySelectorAll('.cidade-item').forEach(li => {
+  li.addEventListener('mouseenter', () => setActive(li.dataset.code));
+  li.addEventListener('mouseleave', () => clearActive());
+});
+</script>
+
+</body>
+</html>
