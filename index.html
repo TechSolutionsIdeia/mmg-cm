@@ -94,7 +94,7 @@
 
   /* SECTION base */
   section{ padding:80px 0; }
-  .sechead{ text-align:center; max-width:60ch; margin:0 auto 46px; }
+  .sechead{ text-align:center; max-width:60ch; margin:0 auto 46px; background-color: #3A3494;}
   .sechead .eyebrow{ color:var(--mmg-orange-600); justify-content:center; margin-bottom:12px; }
   .sechead h2{ font-size:var(--mmg-text-4xl); font-weight:800; }
   .sechead p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-lg); margin-top:14px; }
@@ -198,6 +198,33 @@
         display: none;
     }
 }
+
+#servicos{
+    background:#221E62;
+    padding:80px 0 180px;
+}
+
+#servicos .sechead{
+    background:none;
+    max-width:900px;
+    margin:0 auto;
+}
+
+#servicos .sechead h2{
+    color:#fff;
+}
+
+#servicos .sechead p{
+    color:rgba(255,255,255,.85);
+}
+
+#servicos .grid{
+    margin-top:80px;
+}
+
+#como-funciona{
+  background-color: #ffff;
+}
 </style>
 </head>
 
@@ -221,7 +248,7 @@
 </header>
 
 <!-- SERVIÇOS -->
-<section id="servicos">
+<section id="servicos" class="servicos-section">
   <div class="wrap">
     <div class="sechead">
       <span class="eyebrow"><span class="dot"></span> O que fazemos</span>
@@ -330,7 +357,7 @@
 <!-- COMO FUNCIONA -->
 <section id="como">
   <div class="wrap">
-    <div class="sechead">
+    <div class="sechead" id="como-funciona">
       <span class="eyebrow"><span class="dot"></span> Como funciona</span>
       <h2>Da solicitação à operação em 3 passos</h2>
     </div>
