@@ -83,9 +83,9 @@
   @keyframes mmgspin{ to{ transform:rotate(360deg); } }
 
   /* CLIENTES */
-  .clientes{ background:var(--mmg-grad-orange); padding:30px 0; }
+  .clientes{ background:#221E62; padding:30px 0; }
   .clientes .wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
-  .clientes .lbl{ color:#FFFFFF; font-size:var(--mmg-text-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+  .clientes .lbl{ color:#7B74CE; font-size:var(--mmg-text-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
   .cli-row{ display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
   .cli-chip{ background:#fff; border-radius:var(--mmg-radius-md); height:60px; padding:0 22px; display:flex; align-items:center; justify-content:center; box-shadow:var(--mmg-shadow-sm); transition:transform var(--mmg-dur) var(--mmg-ease); }
   .cli-chip:hover{ transform:translateY(-3px); }
@@ -94,7 +94,7 @@
 
   /* SECTION base */
   section{ padding:80px 0; }
-  .sechead{ text-align:center; max-width:60ch; margin:0 auto 46px; background-color: #3A3494;}
+  .sechead{ text-align:center; max-width:60ch; margin:0 auto 46px; }
   .sechead .eyebrow{ color:var(--mmg-orange-600); justify-content:center; margin-bottom:12px; }
   .sechead h2{ font-size:var(--mmg-text-4xl); font-weight:800; }
   .sechead p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-lg); margin-top:14px; }
@@ -198,33 +198,6 @@
         display: none;
     }
 }
-
-#servicos{
-    background:#221E62;
-    padding:80px 0 180px;
-}
-
-#servicos .sechead{
-    background:none;
-    max-width:900px;
-    margin:0 auto;
-}
-
-#servicos .sechead h2{
-    color:#fff;
-}
-
-#servicos .sechead p{
-    color:rgba(255,255,255,.85);
-}
-
-#servicos .grid{
-    margin-top:80px;
-}
-
-#como-funciona{
-  background-color: #ffff;
-}
 </style>
 </head>
 
@@ -247,13 +220,72 @@
   </div>
 </header>
 
+
+<section class="hero" id="topo">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Trabalho avulso · Logística · Desde 1975</span>
+      <h1>Mão de obra avulsa para sua operação <em>não parar.</em></h1>
+      <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
+      <div class="cta">
+        <a href="#contato" class="btn btn-primary">Solicitar equipe agora</a>
+        <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
+      </div>
+      <div class="trust">
+        <div class="glow-box on-dark"><span class="k">Desde <em>1975</em></span><span class="l">5 décadas de operação</span></div>
+        <div class="glow-box on-dark"><span class="k"><em>0</em> vínculo</span><span class="l">sem burocracia trabalhista</span></div>
+        <div class="glow-box on-dark"><span class="k"><em>NR33 · NR35</em></span><span class="l">EPI e exames inclusos</span></div>
+      </div>
+    </div>
+
+    <div class="formcard glow-box">
+      <h3>Receba uma proposta</h3>
+      <p class="sub">Resposta rápida. Sem compromisso.</p>
+      <form id="mmg-form" novalidate>
+        <div class="field"><label for="f-nome">Nome do responsável</label><input id="f-nome" class="input" placeholder="Seu nome" autocomplete="name" required></div>
+        <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" class="input" placeholder="Razão social" autocomplete="organization"></div>
+        <div class="field"><label for="f-dem">Demanda</label>
+          <select id="f-dem" class="select">
+            <option>Carga e descarga</option>
+            <option>Operação de empilhadeira / paletização</option>
+            <option>Movimentação e logística interna</option>
+            <option>Ova e desova de vagões</option>
+            <option>Equipe avulsa dedicada</option>
+          </select></div>
+        <div class="field"><label for="f-wa">WhatsApp corporativo</label><input id="f-wa" class="input" type="tel" inputmode="tel" placeholder="(44) 9 0000-0000" autocomplete="tel" required></div>
+        <button type="submit" class="btn btn-primary" id="mmg-btn" style="width:100%;">
+          <span class="btn-text">Solicitar proposta</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+        <p id="mmg-form-status" aria-live="polite"></p>
+      </form>
+      <p class="note">🔒 Seus dados estão seguros e não serão compartilhados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<div class="clientes">
+  <div class="wrap">
+    <span class="lbl">Empresas que confiam na MMG</span>
+    <div class="cli-row">
+      <div class="cli-chip"><img src="assets/clientes/coamo.png" alt="Coamo" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/cvale.png" alt="C.Vale" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34"></div>
+    </div>
+  </div>
+</div>
+
 <!-- SERVIÇOS -->
-<section id="servicos" class="servicos-section">
+<section id="servicos">
   <div class="wrap">
     <div class="sechead">
       <span class="eyebrow"><span class="dot"></span> O que fazemos</span>
-      <h2>Movimentação de mercadorias com agilidade, segurança e mão de obra especializada.</h2>
-      <p>Profissionais preparados para operações de carga, descarga, armazenagem e movimentação logística em qualquer escala.</p>
+      <h2>Profissionais preparados para todas as etapas logísticas</h2>
+      <p>Mão de obra qualificada para movimentação de mercadorias — manual, mecânica ou eletrônica — sob demanda ou em regime contínuo.</p>
     </div>
     <div class="grid g3">
       <div class="svc glow-box">
@@ -293,21 +325,6 @@
         scrolling="no"
         loading="lazy">
     </iframe>
-</div>
-
-
-<!-- CLIENTES -->
-<div class="clientes">
-  <div class="wrap">
-    <span class="lbl">Empresas que confiam na MMG</span>
-    <div class="cli-row">
-      <div class="cli-chip"><img src="assets/clientes/coamo.png" alt="Coamo" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/cvale.png" alt="C.Vale" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34"></div>
-    </div>
-  </div>
 </div>
 
 
@@ -357,7 +374,7 @@
 <!-- COMO FUNCIONA -->
 <section id="como">
   <div class="wrap">
-    <div class="sechead" id="como-funciona">
+    <div class="sechead">
       <span class="eyebrow"><span class="dot"></span> Como funciona</span>
       <h2>Da solicitação à operação em 3 passos</h2>
     </div>
@@ -369,49 +386,6 @@
   </div>
 </section>
 
-<section class="hero" id="topo">
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="wrap">
-    <div>
-      <span class="eyebrow"><span class="dot"></span> Trabalho avulso · Logística · Desde 1975</span>
-      <h1>Mão de obra avulsa para sua operação <em>não parar.</em></h1>
-      <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
-      <div class="cta">
-        <a href="#contato" class="btn btn-primary">Solicitar equipe agora</a>
-        <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
-      </div>
-      <div class="trust">
-        <div class="glow-box on-dark"><span class="k">Desde <em>1975</em></span><span class="l">5 décadas de operação</span></div>
-        <div class="glow-box on-dark"><span class="k"><em>0</em> vínculo</span><span class="l">sem burocracia trabalhista</span></div>
-        <div class="glow-box on-dark"><span class="k"><em>NR33 · NR35</em></span><span class="l">EPI e exames inclusos</span></div>
-      </div>
-    </div>
-
-    <div class="formcard glow-box">
-      <h3>Receba uma proposta</h3>
-      <p class="sub">Resposta rápida. Sem compromisso.</p>
-      <form id="mmg-form" novalidate>
-        <div class="field"><label for="f-nome">Nome do responsável</label><input id="f-nome" class="input" placeholder="Seu nome" autocomplete="name" required></div>
-        <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" class="input" placeholder="Razão social" autocomplete="organization"></div>
-        <div class="field"><label for="f-dem">Demanda</label>
-          <select id="f-dem" class="select">
-            <option>Carga e descarga</option>
-            <option>Operação de empilhadeira / paletização</option>
-            <option>Movimentação e logística interna</option>
-            <option>Ova e desova de vagões</option>
-            <option>Equipe avulsa dedicada</option>
-          </select></div>
-        <div class="field"><label for="f-wa">WhatsApp corporativo</label><input id="f-wa" class="input" type="tel" inputmode="tel" placeholder="(44) 9 0000-0000" autocomplete="tel" required></div>
-        <button type="submit" class="btn btn-primary" id="mmg-btn" style="width:100%;">
-          <span class="btn-text">Solicitar proposta</span>
-          <span class="spinner" aria-hidden="true"></span>
-        </button>
-        <p id="mmg-form-status" aria-live="polite"></p>
-      </form>
-      <p class="note">🔒 Seus dados estão seguros e não serão compartilhados.</p>
-    </div>
-  </div>
-</section>
 
 
 <!-- CTA FINAL -->
