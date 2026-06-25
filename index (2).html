@@ -137,6 +137,19 @@
   .step h4{ font-size:var(--mmg-text-lg); margin:18px 0 8px; }
   .step p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-sm); }
 
+  /* SEÇÃO FORMULÁRIO (proposta) */
+  .proposta{ background:var(--mmg-grad-navy); color:#fff; position:relative; overflow:hidden; }
+  .proposta::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:52px 52px; mask:radial-gradient(70% 65% at 16% 12%,#000,transparent); pointer-events:none; }
+  .proposta .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:1fr .82fr; gap:56px; align-items:center; }
+  .proposta .lead .eyebrow{ color:var(--mmg-orange-400); }
+  .proposta .lead h2{ font-size:var(--mmg-text-4xl); font-weight:900; margin:14px 0 16px; max-width:18ch; }
+  .proposta .lead h2 em{ color:var(--mmg-orange-500); font-style:normal; }
+  .proposta .lead p{ color:#C2BEE6; font-size:var(--mmg-text-lg); max-width:44ch; }
+  .proposta .lead ul{ list-style:none; margin:28px 0 0; display:flex; flex-direction:column; gap:13px; }
+  .proposta .lead li{ display:flex; align-items:center; gap:12px; color:#E5E2F6; font-size:var(--mmg-text-base); font-weight:500; }
+  .proposta .lead li svg{ flex-shrink:0; }
+  .proposta .formcard{ margin:0; }
+
   /* CTA FINAL */
   .ctafinal{ background: #fff; color: var(--mmg-grad-orange); text-align:center; }
   .ctafinal h2{ font-size:var(--mmg-text-5xl); font-weight:900; }
@@ -172,6 +185,9 @@
     .cob-text{ padding:52px 24px; }
     .cob-text h2{ font-size:var(--mmg-text-3xl); }
     .cob-map{ padding:32px 20px 44px; }
+    /* proposta empilha */
+    .proposta .wrap{ grid-template-columns:1fr; gap:34px; }
+    .proposta .lead h2{ font-size:var(--mmg-text-3xl); }
     /* barra fixa de conversão */
     .mcta{ display:flex; position:fixed; bottom:0; left:0; right:0; z-index:60; gap:10px; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(36,30,97,.97); backdrop-filter:blur(8px); border-top:1px solid var(--mmg-navy-600); }
     .mcta .btn{ flex:1; padding:13px 12px; font-size:var(--mmg-text-base); }
@@ -217,20 +233,6 @@
   .trabalhador{ order:-1; }
   .trabalhador img{ max-width:380px; transform:none; }
 }
-
-
-/* SEÇÃO FORMULÁRIO (proposta) */
-  .proposta{ background:var(--mmg-grad-navy); color:#fff; position:relative; overflow:hidden; }
-  .proposta::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:52px 52px; mask:radial-gradient(70% 65% at 16% 12%,#000,transparent); pointer-events:none; }
-  .proposta .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:1fr .82fr; gap:56px; align-items:center; }
-  .proposta .lead .eyebrow{ color:var(--mmg-orange-400); }
-  .proposta .lead h2{ font-size:var(--mmg-text-4xl); font-weight:900; margin:14px 0 16px; max-width:18ch; }
-  .proposta .lead h2 em{ color:var(--mmg-orange-500); font-style:normal; }
-  .proposta .lead p{ color:#C2BEE6; font-size:var(--mmg-text-lg); max-width:44ch; }
-  .proposta .lead ul{ list-style:none; margin:28px 0 0; display:flex; flex-direction:column; gap:13px; }
-  .proposta .lead li{ display:flex; align-items:center; gap:12px; color:#E5E2F6; font-size:var(--mmg-text-base); font-weight:500; }
-  .proposta .lead li svg{ flex-shrink:0; }
-  .proposta .formcard{ margin:0; }
 </style>
 </head>
 
@@ -451,7 +453,7 @@
 </section>
 
 <!-- CTA FINAL -->
-<section id="contato" class="ctafinal">
+<section class="ctafinal">
   <div class="wrap">
     <h2>Precisa de mão de obra avulsa agora?</h2>
     <p>Fale com a MMG e receba uma proposta sob medida para a sua operação em Campo Mourão e região.</p>
