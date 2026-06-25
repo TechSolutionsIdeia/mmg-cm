@@ -83,9 +83,9 @@
   @keyframes mmgspin{ to{ transform:rotate(360deg); } }
 
   /* CLIENTES */
-  .clientes{ background:var(--mmg-navy-950); padding:30px 0; }
+  .clientes{ background:var(--mmg-grad-orange); padding:30px 0; }
   .clientes .wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
-  .clientes .lbl{ color:#7B74CE; font-size:var(--mmg-text-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+  .clientes .lbl{ color:#FFFFFF; font-size:var(--mmg-text-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
   .cli-row{ display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
   .cli-chip{ background:#fff; border-radius:var(--mmg-radius-md); height:60px; padding:0 22px; display:flex; align-items:center; justify-content:center; box-shadow:var(--mmg-shadow-sm); transition:transform var(--mmg-dur) var(--mmg-ease); }
   .cli-chip:hover{ transform:translateY(-3px); }
@@ -138,10 +138,10 @@
   .step p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-sm); }
 
   /* CTA FINAL */
-  .ctafinal{ background:var(--mmg-grad-orange); color:#fff; text-align:center; }
+  .ctafinal{ background: #fff; color: var(--mmg-grad-orange); text-align:center; }
   .ctafinal h2{ font-size:var(--mmg-text-5xl); font-weight:900; }
   .ctafinal p{ font-size:var(--mmg-text-xl); margin:16px auto 28px; max-width:46ch; opacity:.96; }
-  .ctafinal .btn{ background:var(--mmg-navy-800); color:#fff; box-shadow:var(--mmg-shadow-lg); }
+  .ctafinal .btn{ background:var(--mmg-grad-orange); color:#fff; box-shadow:var(--mmg-shadow-lg); }
   .ctafinal .btn:hover{ background:var(--mmg-navy-900); transform:translateY(-2px); }
 
   /* FOOTER */
@@ -220,65 +220,6 @@
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="topo">
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="wrap">
-    <div>
-      <span class="eyebrow"><span class="dot"></span> Trabalho avulso · Logística · Desde 1975</span>
-      <h1>Mão de obra avulsa para sua operação <em>não parar.</em></h1>
-      <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
-      <div class="cta">
-        <a href="#contato" class="btn btn-primary">Solicitar equipe agora</a>
-        <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
-      </div>
-      <div class="trust">
-        <div class="glow-box on-dark"><span class="k">Desde <em>1975</em></span><span class="l">5 décadas de operação</span></div>
-        <div class="glow-box on-dark"><span class="k"><em>0</em> vínculo</span><span class="l">sem burocracia trabalhista</span></div>
-        <div class="glow-box on-dark"><span class="k"><em>NR33 · NR35</em></span><span class="l">EPI e exames inclusos</span></div>
-      </div>
-    </div>
-
-    <div class="formcard glow-box">
-      <h3>Receba uma proposta</h3>
-      <p class="sub">Resposta rápida. Sem compromisso.</p>
-      <form id="mmg-form" novalidate>
-        <div class="field"><label for="f-nome">Nome do responsável</label><input id="f-nome" class="input" placeholder="Seu nome" autocomplete="name" required></div>
-        <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" class="input" placeholder="Razão social" autocomplete="organization"></div>
-        <div class="field"><label for="f-dem">Demanda</label>
-          <select id="f-dem" class="select">
-            <option>Carga e descarga</option>
-            <option>Operação de empilhadeira / paletização</option>
-            <option>Movimentação e logística interna</option>
-            <option>Ova e desova de vagões</option>
-            <option>Equipe avulsa dedicada</option>
-          </select></div>
-        <div class="field"><label for="f-wa">WhatsApp corporativo</label><input id="f-wa" class="input" type="tel" inputmode="tel" placeholder="(44) 9 0000-0000" autocomplete="tel" required></div>
-        <button type="submit" class="btn btn-primary" id="mmg-btn" style="width:100%;">
-          <span class="btn-text">Solicitar proposta</span>
-          <span class="spinner" aria-hidden="true"></span>
-        </button>
-        <p id="mmg-form-status" aria-live="polite"></p>
-      </form>
-      <p class="note">🔒 Seus dados estão seguros e não serão compartilhados.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CLIENTES -->
-<div class="clientes">
-  <div class="wrap">
-    <span class="lbl">Empresas que confiam na MMG</span>
-    <div class="cli-row">
-      <div class="cli-chip"><img src="assets/clientes/coamo.png" alt="Coamo" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/cvale.png" alt="C.Vale" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34"></div>
-    </div>
-  </div>
-</div>
-
 <!-- SERVIÇOS -->
 <section id="servicos">
   <div class="wrap">
@@ -327,6 +268,20 @@
     </iframe>
 </div>
 
+
+<!-- CLIENTES -->
+<div class="clientes">
+  <div class="wrap">
+    <span class="lbl">Empresas que confiam na MMG</span>
+    <div class="cli-row">
+      <div class="cli-chip"><img src="assets/clientes/coamo.png" alt="Coamo" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/cvale.png" alt="C.Vale" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34"></div>
+    </div>
+  </div>
+</div>
 
 
 <!-- VANTAGENS -->
@@ -386,6 +341,51 @@
     </div>
   </div>
 </section>
+
+<section class="hero" id="topo">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Trabalho avulso · Logística · Desde 1975</span>
+      <h1>Mão de obra avulsa para sua operação <em>não parar.</em></h1>
+      <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
+      <div class="cta">
+        <a href="#contato" class="btn btn-primary">Solicitar equipe agora</a>
+        <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
+      </div>
+      <div class="trust">
+        <div class="glow-box on-dark"><span class="k">Desde <em>1975</em></span><span class="l">5 décadas de operação</span></div>
+        <div class="glow-box on-dark"><span class="k"><em>0</em> vínculo</span><span class="l">sem burocracia trabalhista</span></div>
+        <div class="glow-box on-dark"><span class="k"><em>NR33 · NR35</em></span><span class="l">EPI e exames inclusos</span></div>
+      </div>
+    </div>
+
+    <div class="formcard glow-box">
+      <h3>Receba uma proposta</h3>
+      <p class="sub">Resposta rápida. Sem compromisso.</p>
+      <form id="mmg-form" novalidate>
+        <div class="field"><label for="f-nome">Nome do responsável</label><input id="f-nome" class="input" placeholder="Seu nome" autocomplete="name" required></div>
+        <div class="field"><label for="f-emp">Empresa</label><input id="f-emp" class="input" placeholder="Razão social" autocomplete="organization"></div>
+        <div class="field"><label for="f-dem">Demanda</label>
+          <select id="f-dem" class="select">
+            <option>Carga e descarga</option>
+            <option>Operação de empilhadeira / paletização</option>
+            <option>Movimentação e logística interna</option>
+            <option>Ova e desova de vagões</option>
+            <option>Equipe avulsa dedicada</option>
+          </select></div>
+        <div class="field"><label for="f-wa">WhatsApp corporativo</label><input id="f-wa" class="input" type="tel" inputmode="tel" placeholder="(44) 9 0000-0000" autocomplete="tel" required></div>
+        <button type="submit" class="btn btn-primary" id="mmg-btn" style="width:100%;">
+          <span class="btn-text">Solicitar proposta</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+        <p id="mmg-form-status" aria-live="polite"></p>
+      </form>
+      <p class="note">🔒 Seus dados estão seguros e não serão compartilhados.</p>
+    </div>
+  </div>
+</section>
+
 
 <!-- CTA FINAL -->
 <section id="contato" class="ctafinal">
