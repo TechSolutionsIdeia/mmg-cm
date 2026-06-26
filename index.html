@@ -53,7 +53,7 @@
   .glow-box.on-dark::before{ mix-blend-mode:screen;
     background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(244,136,63,.30), transparent 72%); }
   @media (hover:none), (prefers-reduced-motion:reduce){ .hero-glow{ display:none; } .glow-box{ overflow:visible; } .glow-box::before{ display:none; } }
-  .hero .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center; padding:72px 24px 84px; }
+  .hero .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center;}
   .hero .eyebrow{ color:var(--mmg-orange-400); background:rgba(236,107,30,.12); border:1px solid rgba(236,107,30,.32); padding:7px 14px; border-radius:var(--mmg-radius-pill); }
   .hero h1{ font-size:var(--mmg-text-6xl); font-weight:900; margin:22px 0 18px; }
   .hero h1 em{ color:var(--mmg-orange-500); font-style:normal; }
@@ -99,7 +99,7 @@
   .sechead h2{ font-size:var(--mmg-text-4xl); font-weight:800; }
   .sechead p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-lg); margin-top:14px; }
 
-  .grid{ display:grid; gap:20px; }
+  .grid{ display:flex; gap:20px; }
   .g3{ grid-template-columns:repeat(3,1fr); } .g2{ grid-template-columns:repeat(2,1fr); }
 
   .svc{ background:#fff; border:1px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-lg); padding:28px; transition:transform var(--mmg-dur) var(--mmg-ease), box-shadow var(--mmg-dur) var(--mmg-ease), border-color var(--mmg-dur) var(--mmg-ease); }
@@ -301,11 +301,6 @@
       <p>Mão de obra qualificada para movimentação de mercadorias — manual, mecânica ou eletrônica — sob demanda ou em regime contínuo.</p>
     </div>
     <div class="grid g3">
-      <div class="svc glow-box">
-        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18V7l9-3v17"/><path d="M5 18H3l2-5h9"/><circle cx="7" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/></svg></div>
-        <h4>Carga & Descarga</h4>
-        <p>Operação em docas, feiras livres e linha de produção — manual, mecânica ou eletrônica, com agilidade e segurança.</p>
-      </div>
       <div class="svc glow-box">
         <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="13" height="7" rx="1"/><path d="M16 13h3l2 3v2h-5"/><circle cx="7" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M6 11V7h7v4"/></svg></div>
         <h4>Empilhadeira & Paletização</h4>
