@@ -40,8 +40,8 @@
   }
   /* HERO */
   .hero{ background:var(--mmg-grad-hero); color:#fff; position:relative; overflow:hidden; }
-  .hero::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:52px 52px; mask:radial-gradient(75% 70% at 78% 12%,#000,transparent); pointer-events:none; }
-  .hero-glow{ position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0; transition:opacity .5s var(--mmg-ease); mix-blend-mode:screen;
+  .hero::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:52px 52px; mask:radial-gradient(75% 70% at 78% 12%,#000,transparent); pointer-events:none; z-index:1; }
+  .hero-glow{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; transition:opacity .5s var(--mmg-ease); mix-blend-mode:screen;
     background:radial-gradient(600px circle at var(--gx,50%) var(--gy,28%), rgba(236,107,30,.22), rgba(123,116,206,.12) 38%, transparent 66%); }
 
   /* glow das boxes (spotlight seguindo o cursor) */
@@ -53,14 +53,42 @@
   .glow-box.on-dark::before{ mix-blend-mode:screen;
     background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(244,136,63,.30), transparent 72%); }
   @media (hover:none), (prefers-reduced-motion:reduce){ .hero-glow{ display:none; } .glow-box{ overflow:visible; } .glow-box::before{ display:none; } }
-  .hero .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center;}
+
+  /* imagem do trabalhador como background do hero */
+  .trabalhador{
+    position:absolute;
+    z-index:1;
+    top:0;
+    right:0;
+    bottom:0;
+    width:62%;
+    pointer-events:none;
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-end;
+    overflow:hidden;
+  }
+  .trabalhador img{
+    height:100%;
+    width:auto;
+    max-width:none;
+    object-fit:contain;
+    object-position:right bottom;
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,.35));
+    /* desvanece a borda esquerda da foto pra integrar com o fundo */
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
+    mask-image:linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
+  }
+
+  .hero .wrap{ position:relative; z-index:3; display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center; min-height:640px; padding-top:64px; padding-bottom:64px; }
+  .hero .hero-copy{ position:relative; z-index:3; }
   .hero .eyebrow{ color:var(--mmg-orange-400); background:rgba(236,107,30,.12); border:1px solid rgba(236,107,30,.32); padding:7px 14px; border-radius:var(--mmg-radius-pill); }
   .hero h1{ font-size:var(--mmg-text-6xl); font-weight:900; margin:22px 0 18px; }
   .hero h1 em{ color:var(--mmg-orange-500); font-style:normal; }
   .hero p{ font-size:var(--mmg-text-xl); color:#C2BEE6; max-width:52ch; }
   .hero .cta{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
   .trust{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; }
-  .trust div{ background:rgba(255,255,255,.05); border:1px solid var(--mmg-navy-600); border-radius:var(--mmg-radius-md); padding:12px 16px; }
+  .trust div{ background:rgba(255,255,255,.05); border:1px solid var(--mmg-navy-600); border-radius:var(--mmg-radius-md); padding:12px 16px; backdrop-filter:blur(4px); }
   .trust div .k{ font-family:var(--mmg-font-display); font-weight:900; font-size:var(--mmg-text-xl); display:block; }
   .trust div .k em{ color:var(--mmg-orange-500); font-style:normal; }
   .trust div .l{ font-size:var(--mmg-text-xs); color:#9C97CC; }
@@ -163,9 +191,24 @@
 
   @media(max-width:880px){
     section{ padding:56px 0; }
-    .hero .wrap{ grid-template-columns:1fr; padding:48px 24px 56px; gap:34px; }
+
+    /* HERO mobile: imagem sai do background e vira topo do conteúdo */
+    .hero .wrap{ grid-template-columns:1fr; padding:40px 24px 56px; gap:28px; min-height:auto; }
     .hero h1{ font-size:var(--mmg-text-4xl); }
     .hero p{ font-size:var(--mmg-text-lg); }
+    .trabalhador{
+      position:relative;
+      width:auto;
+      order:-1;
+      align-items:center;
+      justify-content:center;
+      z-index:3;
+      overflow:visible;
+    }
+    .trabalhador img{
+      display: none;
+    }
+
     .g3,.g2{ grid-template-columns:1fr; }
     .navlinks{ display:none; }
     .sechead h2{ font-size:var(--mmg-text-3xl); }
@@ -184,9 +227,12 @@
       display: flex;
       flex-direction: column;
     }
-    .trabalhador img{
-      display: none;
-    }
+
+    /* FORMULÁRIO / PROPOSTA responsivo */
+    .proposta .wrap{ grid-template-columns:1fr; gap:32px; }
+    .proposta .lead h2{ font-size:var(--mmg-text-3xl); max-width:none; }
+    .proposta .lead p{ max-width:none; }
+    .proposta::after{ mask:radial-gradient(80% 40% at 16% 6%,#000,transparent); }
   }
   @media(max-width:430px){
     .wrap{ padding:0 18px; }
@@ -194,6 +240,8 @@
     .trust{ gap:10px; } .trust div{ flex:1 1 44%; }
     .formcard{ padding:22px; }
     .clientes .wrap{ gap:10px 20px; } .clientes .nome{ font-size:var(--mmg-text-base); }
+    .trabalhador img{ max-width:280px; }
+    .proposta .lead ul{ margin-top:20px; }
   }
 
 
@@ -209,25 +257,6 @@
     .mapa-container iframe{
         display: none;
     }
-}
-
-.trabalhador{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  align-self:stretch;
-}
-.trabalhador img{
-  width:100%;
-  max-width:620px;
-  height:auto;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,.35));
-  transform:scale(1.08);
-  transform-origin:center bottom;
-}
-@media(max-width:880px){
-  .trabalhador{ order:-1; }
-  .trabalhador img{ max-width:380px; transform:none; }
 }
 
 
@@ -268,10 +297,15 @@
 
 <section class="hero" id="topo">
   <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="trabalhador" aria-hidden="true">
+    <img src="./assets/trab.png" alt="">
+  </div>
+
   <div class="wrap">
-    <div>
+    <div class="hero-copy">
       <span class="eyebrow"><span class="dot"></span> Movimentação de Mercadorias em Geral · Desde 1975 </span>
-      <h1>A gente move o que a sua empresa precisa entregar.</h1>
+      <h1>A gente move o que a sua empresa precisa entregar.</h1>
       <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
       <div class="cta">
         <a href="#contato" class="btn btn-primary">Solicitar equipe agora</a>
@@ -282,10 +316,6 @@
         <div class="glow-box on-dark"><span class="k"><em>0</em> vínculo</span><span class="l">sem burocracia trabalhista</span></div>
         <div class="glow-box on-dark"><span class="k"><em>NR33 · NR35</em></span><span class="l">EPI e exames inclusos</span></div>
       </div>
-    </div>
-
-    <div class="trabalhador">
-      <img src="./assets/trab.png">
     </div>
   </div>
 </section>
