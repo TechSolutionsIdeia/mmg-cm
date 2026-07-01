@@ -18,7 +18,7 @@
   h1,h2,h3,h4{ font-family:var(--mmg-font-display); line-height:var(--mmg-leading-tight); letter-spacing:-.01em; }
   a{ text-decoration:none; }
   img{ display:block; max-width:100%; }
-  .wrap{ max-width:var(--mmg-container); margin:0; padding:0 24px; }
+  .wrap{ max-width:var(--mmg-container); margin:0 auto; padding:0 24px; }
   .btn{ font-weight:600; border:none; border-radius:var(--mmg-radius-sm); padding:14px 24px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px; transition:transform var(--mmg-dur) var(--mmg-ease), filter var(--mmg-dur) var(--mmg-ease), background var(--mmg-dur) var(--mmg-ease); font-size:var(--mmg-text-base); font-family:inherit; line-height:1.2; }
   .btn-primary{ background:var(--mmg-grad-orange); color:#fff; box-shadow:var(--mmg-shadow-orange); }
   .btn-primary:hover{ transform:translateY(-2px); filter:brightness(1.05); }
@@ -44,7 +44,6 @@
     color:#fff; 
     position:relative; 
     overflow:hidden; 
-    margin: 0;
   }
   .hero::after{ 
     content:""; 
@@ -55,13 +54,7 @@
     mask:radial-gradient(75% 70% at 78% 12%,#000,transparent); 
     pointer-events:none; 
     z-index:1; }
-  .hero-glow{ 
-    position:absolute; 
-    inset:0; z-index:2; 
-    pointer-events:none; 
-    opacity:0; 
-    transition:opacity .5s var(--mmg-ease); 
-    mix-blend-mode:screen;
+  .hero-glow{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; transition:opacity .5s var(--mmg-ease); mix-blend-mode:screen;
     background:radial-gradient(600px circle at var(--gx,50%) var(--gy,28%), rgba(236,107,30,.22), rgba(123,116,206,.12) 38%, transparent 66%); }
 
   /* glow das boxes (spotlight seguindo o cursor) */
@@ -324,7 +317,7 @@
   <div class="hero-glow" aria-hidden="true"></div>
 
   <div class="trabalhador" aria-hidden="true">
-    <img src="./assets/traba.png" alt="">
+    <img src="./assets/b2078cbf-6aed-451d-8a67-cbc71696d407.png" alt="">
   </div>
 
   <div class="wrap">
