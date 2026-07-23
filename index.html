@@ -29,6 +29,17 @@
   .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:var(--mmg-text-sm); font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
   .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--mmg-orange-500); flex-shrink:0; }
 
+
+.logo{ display:flex; align-items:center; gap:14px; }
+.logo p{
+  font-family:var(--mmg-font-display);
+  font-size:var(--mmg-text-sm);
+  font-weight:600;
+  color:var(--mmg-orange-500);
+  line-height:1.3;
+  margin:0;
+}
+@media(max-width:768px){ .logo p{ display:none; } }
   /* NAV */
   .nav{ position:sticky; top:0; z-index:50; background:#FFFFFF; backdrop-filter:blur(10px); border-bottom:1px solid var(--mmg-navy-600); }
   .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:66px; }
@@ -300,6 +311,7 @@
   <div class="wrap">
     <a href="#topo" class="logo" aria-label="MMG — página inicial">
       <img src="assets/mmg-mark.png" height="32" alt="MMG" width="98">
+        <p>Movimentação de Mercadorias em Geral · Desde 1975</p>
     </a>
     <nav class="navlinks">
       <a href="#servicos">Serviços</a>
@@ -320,7 +332,6 @@
 
   <div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow"><span class="dot"></span> Movimentação de Mercadorias em Geral · Desde 1975 </span>
       <h1>A gente move o que a sua empresa precisa entregar.</h1>
       <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
       <div class="cta">
