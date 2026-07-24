@@ -301,6 +301,10 @@
     .clientes .wrap{ gap:10px 20px; } .clientes .nome{ font-size:var(--mmg-text-base); }
     .proposta .lead ul{ margin-top:20px; }
   }
+
+  @media(max-width:500px){
+    .p-hero{display: none }
+  }
 </style>
 </head>
 
@@ -311,7 +315,7 @@
   <div class="wrap">
     <a href="#topo" class="logo" aria-label="MMG — página inicial">
       <img src="assets/mmg-mark.png" height="32" alt="MMG" width="98">
-        <p>Movimentação de Mercadorias em Geral · Desde 1975</p>
+        <p>Movimentação de Mercadorias em Geral</p>
     </a>
     <nav class="navlinks">
       <a href="#servicos">Serviços</a>
@@ -333,7 +337,7 @@
   <div class="wrap">
     <div class="hero-copy">
       <h1>A gente move o que a sua empresa precisa entregar.</h1>
-      <p>Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
+      <p class="p-hero">Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</p>
       <div class="cta">
         <a href="#contato" class="btn btn-primary">Solicitar equipe agora</a>
         <a href="#servicos" class="btn btn-ghost">Ver serviços</a>
@@ -644,11 +648,6 @@
   });
 })();
 </script>
-
-<div class="mcta">
-  <a href="https://wa.me/5544988092670" class="btn btn-wa">WhatsApp</a>
-  <a href="#contato" class="btn btn-primary">Solicitar equipe</a>
-</div>
 
 <script>
 (function(){
