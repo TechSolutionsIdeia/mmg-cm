@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#241E61">
+<meta name="description" content="MMG — intermediação de mão de obra avulsa em Campo Mourão e região desde 1975. Carga, descarga, empilhadeira e logística, sem vínculo empregatício. Rapidez, agilidade e redução de custos.">
+<title>MMG — Mão de obra avulsa em Campo Mourão e região | Desde 1975</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/mmg-mark.png">
+<link rel="stylesheet" href="assets/mmg-tokens.css">
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body{ font-family:var(--mmg-font-body); color:var(--mmg-gray-900); line-height:var(--mmg-leading-normal); background:#fff; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a{ text-decoration:none; }
+  img{ display:block; max-width:100%; }
+  .wrap{ max-width:var(--mmg-container); margin:0 auto; padding:0 24px; }
+  .btn{ font-weight:600; border:none; border-radius:var(--mmg-radius-sm); padding:14px 24px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px; transition:transform var(--mmg-dur) var(--mmg-ease), filter var(--mmg-dur) var(--mmg-ease), background var(--mmg-dur) var(--mmg-ease); font-size:var(--mmg-text-base); font-family:inherit; line-height:1.2; }
+  .btn-primary{ background:var(--mmg-grad-orange); color:#fff; box-shadow:var(--mmg-shadow-orange); }
+  .btn-primary:hover{ transform:translateY(-2px); filter:brightness(1.05); }
+
+  /* elementos exclusivos do mobile — escondidos por padrão */
+  .mnav, .mnav-menu{ display:none; }
+
+  .logo{ display:flex; align-items:center; gap:14px; }
+  .logo p{
+    font-family:var(--mmg-font-display);
+    font-size:var(--mmg-text-sm);
+    font-weight:600;
+    color:var(--mmg-orange-500);
+    line-height:1.3;
+    margin:0;
+  }
+
+  /* NAV */
+  .nav{ position:sticky; top:0; z-index:50; background:#FFFFFF; backdrop-filter:blur(10px); border-bottom:1px solid var(--mmg-navy-600); }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:66px; }
+  .navlinks{ display:flex; gap:4px; align-items:center; }
+  .navlinks a{ color:#3A3494; font-size:var(--mmg-text-sm); font-weight:500; padding:9px 13px; border-radius:var(--mmg-radius-pill); transition:color var(--mmg-dur-fast), background var(--mmg-dur-fast); }
+  .navlinks a:hover{ color:#fff; background:var(--mmg-navy-700); }
+  #btn-equipe{ color:#FFFFFF; }
+
+  /* FAQ */
+  .faq{ padding:88px 0 96px; background:#fff; border-top:1px solid var(--mmg-gray-100, #F1F1F6); }
+  .faq-head{ max-width:760px; margin:0 auto 30px; text-align:center; }
+  .faq-eyebrow{
+    display:inline-block;
+    font-family:var(--mmg-font-display);
+    font-size:var(--mmg-text-xs);
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--mmg-orange-500);
+    background:var(--mmg-gray-100, #F1F1F6);
+    padding:7px 14px;
+    border-radius:var(--mmg-radius-pill, 999px);
+  }
+  .faq-head h2{
+    font-family:var(--mmg-font-display);
+    font-size:clamp(1.75rem, 3.4vw, 2.5rem);
+    font-weight:800;
+    line-height:1.14;
+    letter-spacing:-.02em;
+    color:var(--mmg-navy-950);
+    margin:18px 0 14px;
+  }
+  .faq-head h2 em{ font-style:normal; color:var(--mmg-orange-500); }
+  .faq-head p{ color:var(--mmg-gray-600, #5C5C70); font-size:var(--mmg-text-base); max-width:56ch; margin:0 auto; }
+
+  .faq-filters{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:30px; }
+  .faq-chip{
+    font-family:inherit;
+    font-size:var(--mmg-text-sm);
+    font-weight:600;
+    color:#3A3494;
+    background:#fff;
+    border:1px solid var(--mmg-gray-200, #E5E5EE);
+    border-radius:var(--mmg-radius-pill, 999px);
+    padding:9px 16px;
+    cursor:pointer;
+    line-height:1.2;
+    transition:color var(--mmg-dur-fast), background var(--mmg-dur-fast), border-color var(--mmg-dur-fast);
+  }
+  .faq-chip:hover{ color:#fff; background:var(--mmg-navy-700); border-color:var(--mmg-navy-700); }
+  .faq-chip[aria-pressed="true"]{ color:#fff; background:var(--mmg-navy-800); border-color:var(--mmg-navy-800); }
+
+  .faq-list{ max-width:880px; margin:0 auto; display:flex; flex-direction:column; gap:10px; }
+  .faq-item{
+    border:1px solid var(--mmg-gray-200, #E5E5EE);
+    border-radius:var(--mmg-radius-md, 14px);
+    background:#fff;
+    transition:border-color var(--mmg-dur) var(--mmg-ease), box-shadow var(--mmg-dur) var(--mmg-ease);
+  }
+  .faq-item:hover{ border-color:var(--mmg-navy-600); }
+  .faq-item[open]{ border-color:var(--mmg-navy-600); box-shadow:var(--mmg-shadow-lg); }
+  .faq-item[hidden]{ display:none; }
+  .faq-q{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    padding:19px 22px;
+    font-family:var(--mmg-font-display);
+    font-weight:600;
+    font-size:var(--mmg-text-base);
+    line-height:1.4;
+    color:var(--mmg-navy-950);
+  }
+  .faq-q::-webkit-details-marker{ display:none; }
+  .faq-q:focus-visible{ outline:2px solid var(--mmg-orange-500); outline-offset:-2px; border-radius:var(--mmg-radius-md, 14px); }
+  .faq-item[open] .faq-q{ color:var(--mmg-navy-800); }
+  .faq-ico{
+    flex:0 0 26px; width:26px; height:26px; margin-top:2px;
+    border-radius:50%;
+    background:var(--mmg-gray-100, #F1F1F6);
+    position:relative;
+    transition:background var(--mmg-dur) var(--mmg-ease);
+  }
+  .faq-ico::before, .faq-ico::after{
+    content:""; position:absolute; left:50%; top:50%;
+    width:11px; height:2px; border-radius:2px;
+    background:var(--mmg-navy-800);
+    transform:translate(-50%,-50%);
+    transition:transform var(--mmg-dur) var(--mmg-ease), background var(--mmg-dur) var(--mmg-ease);
+  }
+  .faq-ico::after{ transform:translate(-50%,-50%) rotate(90deg); }
+  .faq-item[open] .faq-ico{ background:var(--mmg-grad-orange); }
+  .faq-item[open] .faq-ico::before, .faq-item[open] .faq-ico::after{ background:#fff; }
+  .faq-item[open] .faq-ico::after{ transform:translate(-50%,-50%) rotate(0deg); }
+
+  .faq-a{ padding:0 22px 22px; color:var(--mmg-gray-700, #4C4C60); font-size:var(--mmg-text-base); line-height:1.7; max-width:72ch; }
+  .faq-a p + p{ margin-top:10px; }
+  .faq-a strong{ color:var(--mmg-navy-800); font-weight:600; }
+  .faq-item[open] .faq-a{ animation:faqIn .26s var(--mmg-ease) both; }
+  @keyframes faqIn{ from{ opacity:0; transform:translateY(-6px); } to{ opacity:1; transform:none; } }
+
+  .faq-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; list-style:none; }
+  .faq-tags li{
+    font-size:var(--mmg-text-xs);
+    font-weight:500;
+    color:#3A3494;
+    background:var(--mmg-gray-100, #F1F1F6);
+    border-radius:var(--mmg-radius-pill, 999px);
+    padding:5px 11px;
+    line-height:1.3;
+  }
+
+  .faq-empty{ text-align:center; color:var(--mmg-gray-600, #5C5C70); font-size:var(--mmg-text-sm); padding:26px 0; }
+
+  .faq-cta{
+    max-width:880px;
+    margin:34px auto 0;
+    background:var(--mmg-navy-950);
+    border-radius:var(--mmg-radius-md, 14px);
+    padding:30px 32px;
+    display:flex; align-items:center; justify-content:space-between; gap:22px;
+  }
+  .faq-cta h3{ font-family:var(--mmg-font-display); font-weight:700; font-size:var(--mmg-text-lg, 1.125rem); color:#fff; margin-bottom:6px; }
+  .faq-cta p{ color:#8E89BE; font-size:var(--mmg-text-sm); max-width:46ch; }
+  .faq-cta .btn{ flex:0 0 auto; }
+
+  /* FOOTER */
+  footer{ background:var(--mmg-navy-950); color:#8E89BE; padding:54px 0 92px; }
+  footer .cols{ display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:30px; }
+  footer h5{ color:#fff; font-family:var(--mmg-font-display); font-weight:700; font-size:var(--mmg-text-sm); letter-spacing:.05em; text-transform:uppercase; margin-bottom:14px; }
+  footer a{ color:#8E89BE; display:block; padding:5px 0; font-size:var(--mmg-text-sm); }
+  footer a:hover{ color:var(--mmg-orange-400); }
+  footer p{ font-size:var(--mmg-text-sm); }
+  footer .bottom{ border-top:1px solid var(--mmg-navy-700); margin-top:38px; padding-top:22px; text-align:center; font-size:var(--mmg-text-xs); }
+
+  /* ===== RESPONSIVO (<= 980px): nav mobile ===== */
+  @media(max-width:980px){
+    .navlinks{ display:none; }
+    footer .cols{ grid-template-columns:1fr 1fr; }
+
+    .logo p{ display:none; }
+    .mnav{ display:flex; align-items:center; gap:4px; }
+    .mnav-burger{ background:none; border:0; padding:10px 4px 10px 10px; cursor:pointer; display:flex; flex-direction:column; gap:5px; }
+    .mnav-burger span{ width:24px; height:2.5px; border-radius:2px; background:var(--mmg-navy-800); display:block; transition:transform var(--mmg-dur) var(--mmg-ease), opacity var(--mmg-dur-fast); }
+    .mnav-burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7.5px) rotate(45deg); }
+    .mnav-burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+    .mnav-burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7.5px) rotate(-45deg); }
+    .mnav-menu{ background:#fff; border-bottom:1px solid var(--mmg-gray-200); box-shadow:var(--mmg-shadow-lg); }
+    .mnav-menu.open{ display:block; }
+    .mnav-menu a{ display:block; padding:14px 24px; color:var(--mmg-navy-800); font-weight:600; font-size:var(--mmg-text-base); border-top:1px solid var(--mmg-gray-100); }
+    .mnav-menu a.btn{ display:flex; margin:12px 24px 18px; color:#fff; border-top:0; }
+
+    .faq{ padding:66px 0 74px; }
+    .faq-cta{ flex-direction:column; align-items:flex-start; padding:26px 24px; }
+    .faq-cta .btn{ width:100%; }
+  }
+
+  @media(max-width:430px){
+    .wrap{ padding:0 18px; }
+    .faq-q{ padding:17px 16px; gap:12px; }
+    .faq-a{ padding:0 16px 18px; }
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .faq-item[open] .faq-a{ animation:none; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap">
+    <a href="#topo" class="logo" aria-label="MMG — página inicial">
+      <img src="assets/mmg-mark.png" height="32" alt="MMG" width="98">
+        <p>Movimentação de Mercadorias em Geral</p>
+    </a>
+    <nav class="navlinks">
+      <a href="#servicos">Serviços</a>
+      <a href="#abrangencia">Abrangência</a>
+      <a href="#vantagens">Vantagens</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contato" id="btn-equipe" class="btn btn-primary" style="padding:10px 18px;">Solicitar equipe</a>
+    </nav>
+    <div class="mnav">
+      <button type="button" class="mnav-burger" id="mnav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mnav-menu" id="mnav-menu" aria-label="Menu">
+    <a href="#servicos">Serviços</a>
+    <a href="#abrangencia">Abrangência</a>
+    <a href="#vantagens">Vantagens</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contato" class="btn btn-primary">Solicitar equipe</a>
+  </nav>
+</header>
+
+
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <div class="wrap">
+
+    <div class="faq-head">
+      <span class="faq-eyebrow">Perguntas frequentes</span>
+      <h2>Tudo sobre <em>trabalho avulso</em>, sem letras miúdas</h2>
+      <p>As dúvidas que mais recebemos de quem contrata movimentação de mercadorias. Escolha um tema ou percorra a lista.</p>
+    </div>
+
+    <div class="faq-filters" id="faq-filters">
+      <button type="button" class="faq-chip" data-filtro="todas" aria-pressed="true">Todas</button>
+      <button type="button" class="faq-chip" data-filtro="funciona" aria-pressed="false">Como funciona</button>
+      <button type="button" class="faq-chip" data-filtro="custos" aria-pressed="false">Custos e pagamento</button>
+      <button type="button" class="faq-chip" data-filtro="seguranca" aria-pressed="false">Segurança e treinamento</button>
+      <button type="button" class="faq-chip" data-filtro="equipe" aria-pressed="false">Equipe e substituições</button>
+      <button type="button" class="faq-chip" data-filtro="contratar" aria-pressed="false">Contratação</button>
+    </div>
+
+    <div class="faq-list" id="faq-list">
+
+      <!-- Como funciona -->
+      <details class="faq-item" data-cat="funciona">
+        <summary class="faq-q">O que é o trabalho avulso na movimentação de mercadorias?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>É uma modalidade de contratação regulamentada pela <strong>Lei 12.023/2009</strong>, em que o trabalhador presta serviços a empresas tomadoras sem vínculo empregatício direto. A <strong>MMG</strong> atua como intermediária e faz toda a gestão da mão de obra, da escala ao repasse da remuneração.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="funciona">
+        <summary class="faq-q">O trabalhador avulso tem vínculo empregatício com a empresa tomadora?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Não. O movimentador de mercadorias sob regime de trabalho avulso <strong>não estabelece vínculo empregatício</strong> com a empresa tomadora de serviços. A relação de trabalho é intermediada pela <strong>MMG</strong>, o que garante segurança jurídica para o contratante.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="funciona">
+        <summary class="faq-q">Quais atividades são consideradas movimentação de mercadorias?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>A lei é bastante abrangente. São atividades de movimentação de mercadorias em geral as operações feitas de forma manual, mecânica ou eletrônica, além dos eventos que antecedem e que indicam o processo de deslocamento de produtos, bens ou coisas:</p>
+          <ul class="faq-tags">
+            <li>Carga e descarga</li><li>Costura</li><li>Pesagem</li><li>Embalagem</li><li>Enlonamento</li><li>Ensaque</li><li>Arrasto</li><li>Posicionamento</li><li>Acomodação</li><li>Reordenamento</li><li>Reparação da carga</li><li>Amostragem</li><li>Arrumação</li><li>Remoção</li><li>Classificação</li><li>Empilhamento</li><li>Transporte com empilhadeiras</li><li>Paletização</li><li>Ova e desova de vagões</li><li>Carga e descarga em feiras livres</li><li>Abastecimento de lenha em secadores e caldeiras</li><li>Operação de equipamentos de carga e descarga</li><li>Pré-limpeza e limpeza</li><li>Preparo, preservação e conservação do local</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="funciona">
+        <summary class="faq-q">Pode contratar o mesmo trabalhador por tempo indeterminado?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Sim. O mesmo trabalhador avulso pode ser colocado à disposição da empresa tomadora sem limite de tempo em relação ao término da contratação anterior. Não há prazo máximo para manter o mesmo profissional.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="funciona">
+        <summary class="faq-q">Após o término, precisa esperar para solicitar o mesmo trabalhador novamente?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Não. Depois do término da prestação de serviços não existe tempo mínimo de espera para solicitar o mesmo trabalhador avulso. Pode contratar quantas vezes precisar, sem burocracia.</p>
+        </div>
+      </details>
+
+      <!-- Custos e pagamento -->
+      <details class="faq-item" data-cat="custos">
+        <summary class="faq-q">Como é definido o valor dos serviços?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>O valor é variável, porque considera a natureza e as características operacionais de cada serviço. Pode ser fixado por unidade de tempo (diária ou hora), por produção (unidade, kg ou tonelada) ou pela combinação das duas formas.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="custos">
+        <summary class="faq-q">A empresa paga pelo serviço não realizado?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Não. A tomadora paga somente o serviço efetivamente realizado. Se o trabalhador faltar, ele é substituído imediatamente, sem custo adicional para a empresa.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="custos">
+        <summary class="faq-q">O que está incluso no custo final?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Estão inclusos: férias mais um terço constitucional proporcional, décimo terceiro proporcional, taxa administrativa da <strong>MMG</strong>, <strong>FGTS</strong>, encargos trabalhistas e previdenciários. Tudo já embutido no valor, sem surpresas.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="custos">
+        <summary class="faq-q">A empresa paga verbas rescisórias ao final do serviço?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Não. Ao término do serviço, a empresa pode dispensar o trabalhador avulso sem pagar verbas rescisórias como aviso prévio, multa de <strong>40% do FGTS</strong>, décimo terceiro ou férias proporcionais. Esses encargos já são provisionados e pagos mensalmente no custo da diária ou da produção.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="custos">
+        <summary class="faq-q">Como funciona o fechamento e o pagamento?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>As prestações de serviço são fechadas quinzenalmente. A primeira quinzena compreende os dias <strong>01 a 15</strong> do mês e a segunda os dias <strong>16 a 30/31</strong>, com fechamento no último dia de cada quinzena.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="custos">
+        <summary class="faq-q">É permitido trabalhar mais de 8 horas diárias?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Sim. Em períodos de safras agrícolas, conforme Acordo Coletivo de Trabalho, é permitida a jornada de até <strong>12 horas diárias</strong>, com a devida remuneração do adicional legal ou convencionado para as horas que excederem a 8ª hora diária.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="custos">
+        <summary class="faq-q">A MMG é responsável pelo repasse ao trabalhador?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Sim. Na qualidade de intermediária, a <strong>MMG</strong> responde pelo recebimento e pelo repasse da remuneração dos trabalhadores avulsos, em contrapartida ao trabalho executado. A empresa paga à <strong>MMG</strong>, e a <strong>MMG</strong> paga o trabalhador.</p>
+        </div>
+      </details>
+
+      <!-- Segurança e treinamento -->
+      <details class="faq-item" data-cat="seguranca">
+        <summary class="faq-q">Quem é responsável pelo recrutamento e pelos exames dos trabalhadores?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>A <strong>MMG</strong> cuida de todo o processo: recrutamento, exame admissional, exames periódicos e exames demissionais, incluindo o <strong>Atestado de Saúde Ocupacional (ASO)</strong>. A empresa tomadora não precisa se preocupar com essa parte.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="seguranca">
+        <summary class="faq-q">A MMG possui programas de saúde e segurança do trabalho?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Sim. A <strong>MMG</strong> mantém todos os programas obrigatórios atualizados: <strong>PGR</strong> (Programa de Gerenciamento de Riscos), <strong>PCMSO</strong> (Programa de Controle Médico de Saúde Ocupacional) e <strong>LTCAT</strong> (Laudo Técnico das Condições Ambientais de Trabalho).</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="seguranca">
+        <summary class="faq-q">Quais certificações os trabalhadores possuem?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Todos os trabalhadores avulsos têm certificados atualizados dos cursos de <strong>NR33</strong> (espaço confinado) e <strong>NR35</strong> (trabalho em altura), o que garante que estão aptos a atuar com segurança.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="seguranca">
+        <summary class="faq-q">A MMG faz visitas técnicas nas empresas?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Sim. A <strong>MMG</strong> tem um técnico de segurança do trabalho responsável por visitas técnicas mensais em todas as unidades das empresas tomadoras, para verificar o uso correto de EPIs e demais assuntos da área.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="seguranca">
+        <summary class="faq-q">Que treinamentos os trabalhadores recebem ao se cadastrar?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Ao se cadastrar na <strong>MMG</strong>, o trabalhador avulso recebe treinamento de capacitação profissional e sobre o processo produtivo dos tomadores de serviço, além de treinamento nas Normas Regulamentadoras (NR) relativas à segurança e à medicina do trabalho.</p>
+        </div>
+      </details>
+
+      <!-- Equipe e substituições -->
+      <details class="faq-item" data-cat="equipe">
+        <summary class="faq-q">Quantos trabalhadores a MMG possui cadastrados?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Atualmente a <strong>MMG</strong> conta com aproximadamente <strong>300 movimentadores</strong> de mercadorias cadastrados sob regime de trabalho avulso, todos qualificados e treinados para atender sua empresa.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="equipe">
+        <summary class="faq-q">Quais benefícios os trabalhadores recebem?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Os trabalhadores avulsos recebem gratuitamente botinas, uniforme, seguro de vida, <strong>30% de desconto</strong> em receitas médicas e exames laboratoriais e acompanhamento médico — com benefícios estendidos ao cônjuge e aos filhos até 18 anos.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="equipe">
+        <summary class="faq-q">O que acontece quando um trabalhador entra de férias?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Ele é substituído por outro trabalhador, sem custo adicional para a empresa contratante, porque as férias já foram pagas na fatura mensal.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="equipe">
+        <summary class="faq-q">Quem paga o atestado médico do trabalhador?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>O atestado médico do trabalhador avulso é pago pelo <strong>INSS</strong> desde o 1º dia do afastamento, seja por auxílio-doença ou por acidente de trabalho. O trabalhador afastado também é substituído por outro, sem custo para a empresa.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="equipe">
+        <summary class="faq-q">O que acontece em caso de falta ou ociosidade?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>O trabalhador é substituído imediatamente por outro, o que garante a continuidade do serviço sem custo adicional para a empresa contratante.</p>
+        </div>
+      </details>
+
+      <!-- Contratação -->
+      <details class="faq-item" data-cat="contratar">
+        <summary class="faq-q">Quem pode contratar a MMG?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Qualquer empresa que precise de movimentação de mercadorias: comércio, indústria, supermercados, centros de distribuição, agronegócio e outros segmentos. O regime não se limita a grandes galpões logísticos.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="contratar">
+        <summary class="faq-q">Quais as vantagens de contratar pelo regime avulso?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>As principais vantagens são <strong>redução de custos</strong> e <strong>zero risco trabalhista</strong>, com mão de obra qualificada e treinada, sem burocracia de folha de pagamento, flexibilidade para ajustar o quadro conforme a demanda, substituição imediata em caso de falta ou férias e gestão completa realizada pela <strong>MMG</strong>.</p>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="contratar">
+        <summary class="faq-q">Como contratar os serviços da MMG?<span class="faq-ico" aria-hidden="true"></span></summary>
+        <div class="faq-a">
+          <p>Basta entrar em contato e informar a demanda: quantidade de trabalhadores, horário, local e tipo de serviço. Nós escalamos os trabalhadores pelo sistema de rodízio e administramos toda a parte operacional. A empresa recebe mão de obra pronta para atuar.</p>
+        </div>
+      </details>
+
+    </div>
+
+    <p class="faq-empty" id="faq-empty" hidden>Nenhuma pergunta neste tema. Toque em “Todas” para ver a lista completa.</p>
+
+    <div class="faq-cta">
+      <div>
+        <h3>Ficou alguma dúvida?</h3>
+        <p>Conte o que sua operação precisa e montamos a equipe — carga, descarga, empilhadeira ou movimentação interna.</p>
+      </div>
+      <a href="#contato" class="btn btn-primary">Solicitar equipe</a>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a href="#topo" class="logo" style="margin-bottom:14px; display:inline-block;" aria-label="MMG">
+          <img src="assets/mmg-mark-negativo.png" height="34" alt="MMG" width="104">
+        </a>
+        <p style="max-width:36ch;">MMG — Logística e Movimentação de Mercadorias de Campo Mourão. Intermediação de mão de obra avulsa desde 1975.</p>
+      </div>
+      <div>
+        <h5>Serviços</h5>
+        <a href="#servicos">Carga & Descarga</a>
+        <a href="#servicos">Empilhadeira</a>
+        <a href="#servicos">Movimentação interna</a>
+      </div>
+      <div>
+        <h5>Empresa</h5>
+        <a href="#abrangencia">Abrangência</a>
+        <a href="#vantagens">Vantagens</a>
+        <a href="#vantagens">Conformidade NR</a>
+      </div>
+      <div>
+        <h5>FAQ</h5>
+        <a href="#faq">Perguntas Frequentes</a>
+      </div>
+    </div>
+    <div class="bottom">© 2026 MMG — Logística e Movimentação de Mercadorias de Campo Mourão · Trabalho avulso · Criação Idéia Comunicação</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger = document.getElementById('mnav-burger');
+  var menu = document.getElementById('mnav-menu');
+  if(!burger || !menu) return;
+  burger.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  });
+  menu.addEventListener('click', function(e){
+    if(e.target.closest('a')){
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      burger.setAttribute('aria-label','Abrir menu');
+    }
+  });
+})();
+</script>
+
+<script>
+/* FAQ — filtro por tema e abertura de um item por vez */
+(function(){
+  var filtros = document.getElementById('faq-filters');
+  var lista   = document.getElementById('faq-list');
+  var vazio   = document.getElementById('faq-empty');
+  if(!filtros || !lista) return;
+
+  var itens = Array.prototype.slice.call(lista.querySelectorAll('.faq-item'));
+
+  filtros.addEventListener('click', function(e){
+    var chip = e.target.closest('.faq-chip');
+    if(!chip) return;
+
+    var cat = chip.getAttribute('data-filtro');
+    filtros.querySelectorAll('.faq-chip').forEach(function(c){
+      c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
+    });
+
+    var visiveis = 0;
+    itens.forEach(function(item){
+      var mostra = (cat === 'todas') || (item.getAttribute('data-cat') === cat);
+      item.hidden = !mostra;
+      if(!mostra) item.open = false;
+      if(mostra) visiveis++;
+    });
+    if(vazio) vazio.hidden = visiveis > 0;
+  });
+
+  itens.forEach(function(item){
+    item.addEventListener('toggle', function(){
+      if(!item.open) return;
+      itens.forEach(function(outro){
+        if(outro !== item) outro.open = false;
+      });
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  if (window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var hero = document.querySelector('.hero');
+  var glow = document.querySelector('.hero-glow');
+  var boxes = document.querySelectorAll('.glow-box');
+  if(!hero || !glow) return;
+  var mx=0, my=0, ticking=false;
+  function update(){
+    ticking=false;
+    var hr=hero.getBoundingClientRect();
+    if(my>hr.top-300 && my<hr.bottom+300){
+      glow.style.setProperty('--gx',(mx-hr.left)+'px');
+      glow.style.setProperty('--gy',(my-hr.top)+'px');
+      glow.style.opacity='1';
+    } else { glow.style.opacity='0'; }
+    for(var i=0;i<boxes.length;i++){
+      var b=boxes[i], r=b.getBoundingClientRect();
+      var near = mx>r.left-180 && mx<r.right+180 && my>r.top-180 && my<r.bottom+180;
+      if(near){
+        b.style.setProperty('--bx',(mx-r.left)+'px');
+        b.style.setProperty('--by',(my-r.top)+'px');
+        b.style.setProperty('--bo','1');
+      } else { b.style.setProperty('--bo','0'); }
+    }
+  }
+  window.addEventListener('mousemove', function(e){
+    mx=e.clientX; my=e.clientY;
+    if(!ticking){ ticking=true; requestAnimationFrame(update); }
+  }, {passive:true});
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+  var N8N_WEBHOOK = '';
+  var WA_FALLBACK = '';
+
+  var form   = document.getElementById('mmg-form');
+  var btn    = document.getElementById('mmg-btn');
+  var status = document.getElementById('mmg-form-status');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var nome     = document.getElementById('f-nome').value.trim();
+    var empresa  = document.getElementById('f-emp').value.trim();
+    var demanda  = document.getElementById('f-dem').value;
+    var whatsapp = document.getElementById('f-wa').value.trim();
+
+    if(!nome || !whatsapp){
+      status.className = 'err';
+      status.textContent = 'Por favor, preencha seu nome e o WhatsApp.';
+      return;
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+    status.className = '';
+    status.textContent = 'Enviando…';
+
+    var payload = {
+      nome: nome,
+      empresa: empresa,
+      demanda: demanda,
+      whatsapp: whatsapp,
+      origem: 'site-mmg',
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(N8N_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(resp){
+      if(!resp.ok) throw new Error('err');
+      return resp;
+    }).then(function(){
+      status.className = 'ok';
+      status.textContent = '✓ Recebido! Você vai receber uma mensagem nossa no WhatsApp em instantes.';
+      form.reset();
+    }).catch(function(){
+      status.className = 'err';
+      status.textContent = 'Não foi possível enviar. Abrindo o WhatsApp…';
+      setTimeout(function(){
+        var msg = encodeURIComponent(
+          'Olá! Vim pelo site e gostaria de uma proposta de mão de obra avulsa.\n\n' +
+          '*Nome:* ' + nome + '\n' +
+          (empresa ? '*Empresa:* ' + empresa + '\n' : '') +
+          '*Demanda:* ' + demanda + '\n' +
+          '*WhatsApp:* ' + whatsapp
+        );
+        window.open('https://wa.me/' + WA_FALLBACK + '?text=' + msg, '_blank');
+      }, 1200);
+    }).finally(function(){
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var iframe = document.getElementById('mmg-mapa-iframe');
+  if(!iframe) return;
+  window.addEventListener('message', function(e){
+    if(e.data && e.data.mmgMapaHeight){
+      iframe.style.height = e.data.mmgMapaHeight + 'px';
+    }
+  });
+  iframe.addEventListener('load', function(){
+    if(!iframe.style.height) iframe.style.height = '900px';
+  });
+})();
+</script>
+
+</body>
+</html>
