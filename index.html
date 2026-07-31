@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#241E61">
 <meta name="description" content="MMG — intermediação de mão de obra avulsa em Campo Mourão e região desde 1975. Carga, descarga, empilhadeira e logística, sem vínculo empregatício. Rapidez, agilidade e redução de custos.">
 <title>MMG — Mão de obra avulsa em Campo Mourão e região | Desde 1975</title>
@@ -12,160 +12,329 @@
 <link rel="icon" type="image/svg+xml" href="assets/mmg-mark.png">
 <link rel="stylesheet" href="assets/mmg-tokens.css">
 <style>
+  /* ==========================================================================
+     BASE
+     ========================================================================== */
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
-  body{ font-family:var(--mmg-font-body); color:var(--mmg-gray-900); line-height:var(--mmg-leading-normal); background:#fff; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  h1,h2,h3,h4{ font-family:var(--mmg-font-display); line-height:var(--mmg-leading-tight); letter-spacing:-.01em; }
-  a{ text-decoration:none; }
+  body{
+    font-family:var(--mmg-font-body, 'Inter', system-ui, sans-serif);
+    color:var(--mmg-gray-900,#101828);
+    line-height:var(--mmg-leading-normal,1.6);
+    background:#fff;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,h5{
+    font-family:var(--mmg-font-display, 'Archivo', system-ui, sans-serif);
+    line-height:var(--mmg-leading-tight,1.15);
+    letter-spacing:-.01em;
+  }
+  a{ text-decoration:none; color:inherit; }
   img{ display:block; max-width:100%; }
-  .wrap{ max-width:var(--mmg-container); margin:0 auto; padding:0 24px; }
-  .btn{ font-weight:600; border:none; border-radius:var(--mmg-radius-sm); padding:14px 24px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px; transition:transform var(--mmg-dur) var(--mmg-ease), filter var(--mmg-dur) var(--mmg-ease), background var(--mmg-dur) var(--mmg-ease); font-size:var(--mmg-text-base); font-family:inherit; line-height:1.2; }
-  .btn-primary{ background:var(--mmg-grad-orange); color:#fff; box-shadow:var(--mmg-shadow-orange); }
+  ul{ list-style:none; }
+  :focus-visible{ outline:3px solid var(--mmg-orange-500,#EC6B1E); outline-offset:3px; border-radius:6px; }
+  [id]{ scroll-margin-top:86px; }
+
+  .wrap{ width:100%; max-width:var(--mmg-container,1200px); margin:0 auto; padding:0 24px; }
+  section{ padding:clamp(48px,6.5vw,84px) 0; }
+
+  /* ==========================================================================
+     BOTÕES
+     ========================================================================== */
+  .btn{
+    font-family:inherit; font-weight:600; font-size:var(--mmg-text-base,1rem); line-height:1.2;
+    border:none; border-radius:var(--mmg-radius-sm,10px);
+    padding:14px 24px; min-height:50px;
+    cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    text-align:center;
+    transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease), filter var(--mmg-dur,.25s) var(--mmg-ease,ease), background var(--mmg-dur,.25s) var(--mmg-ease,ease);
+  }
+  .btn-primary{ background:var(--mmg-grad-orange,linear-gradient(135deg,#F4883F,#EC6B1E)); color:#fff; box-shadow:var(--mmg-shadow-orange,0 10px 24px rgba(236,107,30,.3)); }
   .btn-primary:hover{ transform:translateY(-2px); filter:brightness(1.05); }
   .btn-wa{ background:#22a44d; color:#fff; }
   .btn-wa:hover{ transform:translateY(-2px); filter:brightness(1.05); }
   .btn-ghost{ background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.24); }
   .btn-ghost:hover{ background:rgba(255,255,255,.16); }
-  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-size:var(--mmg-text-sm); font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
-  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--mmg-orange-500); flex-shrink:0; }
 
-  /* elementos exclusivos do mobile — escondidos por padrão */
-  .m-txt, .m-arrow{ display:none; }
-  .m-cta-wa{ display:none; }
-  .hero-eyebrow-m{ display:none; }
-  .mnav, .mnav-menu{ display:none; }
-
-
-.logo{ display:flex; align-items:center; gap:14px; }
-.logo p{
-  font-family:var(--mmg-font-display);
-  font-size:var(--mmg-text-sm);
-  font-weight:600;
-  color:var(--mmg-orange-500);
-  line-height:1.3;
-  margin:0;
-}
-@media(max-width:768px){ }
-  /* NAV */
-  .nav{ position:sticky; top:0; z-index:50; background:#FFFFFF; backdrop-filter:blur(10px); border-bottom:1px solid var(--mmg-navy-600); }
-  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:66px; }
-  .navlinks{ display:flex; gap:4px; align-items:center; }
-  .navlinks a{ color:#3A3494; font-size:var(--mmg-text-sm); font-weight:500; padding:9px 13px; border-radius:var(--mmg-radius-pill); transition:color var(--mmg-dur-fast), background var(--mmg-dur-fast); }
-  .navlinks a:hover{ color:#fff; background:var(--mmg-navy-700); }
-  #btn-equipe{
-    color: #FFFFFF;
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:var(--mmg-text-sm,.9rem); font-weight:600;
+    letter-spacing:.12em; text-transform:uppercase;
   }
-  /* HERO */
-  .hero{
-    background:var(--mmg-grad-hero); 
-    color:#fff; 
-    position:relative; 
-    overflow:hidden; 
-  }
-  .hero::after{ 
-    content:""; 
-    position:absolute; 
-    inset:0; 
-    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); 
-    background-size:52px 52px; 
-    mask:radial-gradient(75% 70% at 78% 12%,#000,transparent); 
-    pointer-events:none; 
-    z-index:1; }
-  .hero-glow{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0; transition:opacity .5s var(--mmg-ease); mix-blend-mode:screen;
-    background:radial-gradient(600px circle at var(--gx,50%) var(--gy,28%), rgba(236,107,30,.22), rgba(123,116,206,.12) 38%, transparent 66%); }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--mmg-orange-500,#EC6B1E); flex-shrink:0; }
 
-  /* glow das boxes (spotlight seguindo o cursor) */
+  /* elementos exclusivos de mobile — ocultos por padrão
+     CORREÇÃO: .mobile-img foi incluída aqui. Antes ela ficava visível no
+     desktop e era renderizada lado a lado com a imagem .desktop dentro do
+     mesmo flex container, o que empurrava e cortava as duas. */
+  .m-txt, .m-arrow, .m-cta-wa, .hero-eyebrow-m, .mnav, .mnav-menu, .mobile-img{ display:none; }
+
+  /* ==========================================================================
+     GLOW (spotlight seguindo o cursor)
+     ========================================================================== */
   .glow-box{ position:relative; overflow:hidden; }
   .glow-box>*{ position:relative; z-index:1; }
-  .glow-box::before{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0;
-    opacity:var(--bo,0); transition:opacity .35s var(--mmg-ease);
-    background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(236,107,30,.18), transparent 72%); }
-  .glow-box.on-dark::before{ mix-blend-mode:screen;
-    background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(244,136,63,.30), transparent 72%); }
-  @media (hover:none), (prefers-reduced-motion:reduce){ .hero-glow{ display:none; } .glow-box{ overflow:visible; } .glow-box::before{ display:none; } }
+  .glow-box::before{
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0;
+    opacity:var(--bo,0); transition:opacity .35s var(--mmg-ease,ease);
+    background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(236,107,30,.18), transparent 72%);
+  }
+  .glow-box.on-dark::before{
+    mix-blend-mode:screen;
+    background:radial-gradient(220px circle at var(--bx,50%) var(--by,50%), rgba(244,136,63,.30), transparent 72%);
+  }
+  @media (hover:none), (prefers-reduced-motion:reduce){
+    .hero-glow{ display:none; }
+    .glow-box{ overflow:visible; }
+    .glow-box::before{ display:none; }
+  }
 
+  /* ==========================================================================
+     NAV
+     ========================================================================== */
+  .nav{ position:sticky; top:0; z-index:50; background:#fff; backdrop-filter:blur(10px); border-bottom:1px solid var(--mmg-gray-200,#E4E7EC); }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:16px; min-height:66px; }
+  .logo{ display:flex; align-items:center; gap:14px; min-width:0; }
+  .logo img{ height:32px; width:auto; flex-shrink:0; }
+  .logo p{
+    font-family:var(--mmg-font-display,'Archivo',sans-serif);
+    font-size:var(--mmg-text-sm,.9rem); font-weight:600;
+    color:var(--mmg-orange-500,#EC6B1E); line-height:1.3; margin:0;
+  }
+  .navlinks{ display:flex; gap:4px; align-items:center; }
+  .navlinks a{
+    color:var(--mmg-navy-600,#3A3494); font-size:var(--mmg-text-sm,.9rem); font-weight:500;
+    padding:9px 13px; border-radius:var(--mmg-radius-pill,999px);
+    transition:color var(--mmg-dur-fast,.15s), background var(--mmg-dur-fast,.15s);
+    white-space:nowrap;
+  }
+  .navlinks a:hover{ color:#fff; background:var(--mmg-navy-700,#2F2878); }
+  #btn-equipe{ color:#fff; }
+  #btn-equipe:hover{ color:#fff; background:var(--mmg-grad-orange,linear-gradient(135deg,#F4883F,#EC6B1E)); }
+
+  /* ==========================================================================
+     HERO
+     ========================================================================== */
+  .hero{ background:var(--mmg-grad-hero,linear-gradient(135deg,#241E61,#16114A)); color:#fff; position:relative; overflow:hidden; }
+  .hero::after{
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:52px 52px;
+    mask:radial-gradient(75% 70% at 78% 12%,#000,transparent);
+    -webkit-mask:radial-gradient(75% 70% at 78% 12%,#000,transparent);
+  }
+  .hero-glow{
+    position:absolute; inset:0; z-index:2; pointer-events:none; opacity:0;
+    transition:opacity .5s var(--mmg-ease,ease); mix-blend-mode:screen;
+    background:radial-gradient(600px circle at var(--gx,50%) var(--gy,28%), rgba(236,107,30,.22), rgba(123,116,206,.12) 38%, transparent 66%);
+  }
+
+  /* CORREÇÃO: a imagem agora é ancorada à direita e a borda esquerda se
+     dissolve no fundo navy por máscara em gradiente, em vez de terminar
+     num corte reto. */
   .trabalhador{
-    position:absolute;
-    z-index:1;
-    top:0;
-    right:0;
-    bottom:0;
-    width: 70%;
-    pointer-events:none;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    overflow:hidden;
+    position:absolute; z-index:1; top:0; right:0; bottom:0; width:min(62%,860px);
+    pointer-events:none; display:flex; align-items:flex-end; justify-content:flex-end; overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 20%, #000 100%);
+            mask-image:linear-gradient(90deg, transparent 0%, #000 20%, #000 100%);
   }
   .trabalhador img{
-    height:100%;
-    width:auto;
-    max-width:none;
-    object-fit:contain;
-    object-position:center bottom;
+    height:100%; width:auto; max-width:none;
+    object-fit:contain; object-position:right bottom;
     filter:drop-shadow(0 30px 60px rgba(0,0,0,.35));
-    -webkit-mask-image:none;
-    mask-image:none;
   }
+  .hero .wrap{
+    position:relative; z-index:3;
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px;
+    align-items:center; min-height:min(640px,86vh); padding-top:56px; padding-bottom:56px;
+  }
+  .hero-copy{ display:flex; flex-direction:column; align-items:flex-start; }
+  .hero .eyebrow{
+    color:var(--mmg-orange-400,#F4883F); background:rgba(236,107,30,.12);
+    border:1px solid rgba(236,107,30,.32); padding:7px 14px; border-radius:var(--mmg-radius-pill,999px);
+  }
+  .hero h1{ font-size:clamp(2.1rem,4.4vw,3.5rem); font-weight:900; margin:0 0 18px; }
+  .hero h1 em{ color:var(--mmg-orange-500,#EC6B1E); font-style:normal; }
+  .hero p{ font-size:clamp(1rem,1.4vw,1.25rem); color:#E5E2F6; max-width:52ch; }
+  .hero .cta{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; width:100%; }
 
-  .hero .wrap{ 
-    position:relative; 
-    z-index:3; 
-    display:grid; 
-    grid-template-columns:1fr 1fr; 
-    gap:48px; 
-    align-items:center; 
-    min-height:640px; 
-  }
-  .hero .hero-copy{ 
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    position:relative;
-  }
-  .hero .eyebrow{ color:var(--mmg-orange-400); background:rgba(236,107,30,.12); border:1px solid rgba(236,107,30,.32); padding:7px 14px; border-radius:var(--mmg-radius-pill); }
-  .hero h1{ font-size:var(--mmg-text-6xl); font-weight:900; margin:22px 0 18px; }
-  .hero h1 em{ color:var(--mmg-orange-500); font-style:normal; }
-  .hero p{ font-size:var(--mmg-text-xl); color:#ffffff; max-width:52ch; }
-  .hero .cta{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .trust{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; }
+  .trust div{ background:#241E61; border:1px solid var(--mmg-navy-600,#3A3494); border-radius:var(--mmg-radius-md,14px); padding:12px 16px; backdrop-filter:blur(4px); }
+  .trust div .k{ font-family:var(--mmg-font-display,'Archivo',sans-serif); font-weight:900; font-size:var(--mmg-text-xl,1.25rem); display:block; }
+  .trust div .k em{ color:var(--mmg-orange-500,#EC6B1E); font-style:normal; }
+  .trust div .l{ font-size:var(--mmg-text-xs,.78rem); color:#fff; }
 
-  .trust{ 
-    display:flex; 
-    gap:14px; 
-    margin-top:38px; 
-    flex-wrap:wrap; 
+  /* ==========================================================================
+     CLIENTES
+     ========================================================================== */
+  .clientes{ background:#221E62; padding:34px 0; }
+  .clientes .wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .clientes .lbl{ color:#9E98DD; font-size:var(--mmg-text-xs,.78rem); font-weight:600; letter-spacing:.14em; text-transform:uppercase; text-align:center; }
+  .cli-row{ display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
+  .cli-chip{
+    background:#fff; border-radius:var(--mmg-radius-md,14px); height:60px; padding:0 22px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--mmg-shadow-sm,0 2px 8px rgba(0,0,0,.08));
+    transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease);
   }
-  .trust div{ 
-     background:#241E61; 
-    border:1px solid var(--mmg-navy-600);
-     border-radius:var(--mmg-radius-md); 
-     padding:12px 16px; 
-     backdrop-filter:blur(4px); 
-    }
-  .trust div .k{ 
-    font-family:var(--mmg-font-display); 
-    font-weight:900; 
-    font-size:var(--mmg-text-xl);
-    display:block; 
-  }
-  .trust div .k em{ 
-    color:var(--mmg-orange-500); 
-    font-style:normal; 
-  }
-  .trust div .l{ 
-    font-size:var(--mmg-text-xs); 
-    color:#ffffff; 
-  }
+  .cli-chip:hover{ transform:translateY(-3px); }
+  .cli-chip img{ height:34px; width:auto; max-width:150px; object-fit:contain; }
 
-  .formcard{ background:#fff; border-radius:var(--mmg-radius-xl); padding:30px; box-shadow:var(--mmg-shadow-lg); color:var(--mmg-gray-900); }
-  .formcard h3{ font-size:var(--mmg-text-xl); font-weight:800; }
-  .formcard .sub{ color:var(--mmg-gray-500); font-size:var(--mmg-text-sm); margin:6px 0 20px; }
+  /* ==========================================================================
+     CABEÇALHO DE SEÇÃO
+     ========================================================================== */
+  .sechead{ text-align:center; max-width:62ch; margin:0 auto clamp(32px,4vw,46px); }
+  .sechead .eyebrow{ color:var(--mmg-orange-600,#D45D14); justify-content:center; margin-bottom:12px; }
+  .sechead h2{ font-size:clamp(1.55rem,3.2vw,2.4rem); font-weight:800; }
+  .sechead p{ color:var(--mmg-gray-600,#475467); font-size:clamp(.98rem,1.2vw,1.125rem); margin-top:14px; }
+
+  /* ==========================================================================
+     SISTEMA DE CARDS — mesma grade para todas as seções
+     ========================================================================== */
+  .cards{
+    --cols:3; --gap:20px;
+    display:flex; flex-wrap:wrap; justify-content:center;
+    gap:var(--gap);
+  }
+  .cards > *{
+    flex:1 1 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+    max-width:calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+    min-width:0;
+    display:flex; flex-direction:column;
+  }
+  .cards--4{ --cols:4; }
+
+  /* card claro */
+  .card{
+    background:#fff; border:1px solid var(--mmg-gray-200,#E4E7EC);
+    border-radius:var(--mmg-radius-lg,18px); padding:28px;
+    transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease), box-shadow var(--mmg-dur,.25s) var(--mmg-ease,ease), border-color var(--mmg-dur,.25s) var(--mmg-ease,ease);
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(16,24,40,.12)); border-color:var(--mmg-orange-300,#F8B382); }
+  .card .ic{
+    width:54px; height:54px; border-radius:var(--mmg-radius-md,14px);
+    background:var(--mmg-grad-navy,linear-gradient(135deg,#2F2878,#16114A));
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px; box-shadow:var(--mmg-shadow-md,0 8px 20px rgba(16,17,74,.2)); flex-shrink:0;
+  }
+  .card h4{ font-size:var(--mmg-text-lg,1.075rem); font-weight:800; margin-bottom:9px; }
+  .card p{ color:var(--mmg-gray-600,#475467); font-size:var(--mmg-text-sm,.925rem); }
+
+  /* card escuro (Vantagens) */
+  .card-dark{
+    background:rgba(255,255,255,.04); border:1px solid var(--mmg-navy-600,#3A3494);
+    border-radius:var(--mmg-radius-lg,18px); padding:24px;
+    transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease), border-color var(--mmg-dur,.25s) var(--mmg-ease,ease);
+  }
+  .card-dark:hover{ transform:translateY(-4px); border-color:var(--mmg-orange-500,#EC6B1E); }
+  .card-dark .ic{
+    width:44px; height:44px; border-radius:var(--mmg-radius-sm,10px);
+    background:rgba(236,107,30,.14); display:flex; align-items:center; justify-content:center;
+    margin-bottom:14px; flex-shrink:0;
+  }
+  .card-dark h4{ font-size:var(--mmg-text-base,1rem); margin-bottom:7px; color:#fff; letter-spacing:.02em; }
+  .card-dark p{ color:#A7A2D0; font-size:var(--mmg-text-sm,.925rem); }
+
+  /* card numerado (Como funciona) */
+  .step{
+    position:relative; margin-top:16px; padding:34px 26px 26px;
+    background:#fff; border:1px solid var(--mmg-gray-200,#E4E7EC); border-radius:var(--mmg-radius-lg,18px);
+    transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease), box-shadow var(--mmg-dur,.25s) var(--mmg-ease,ease), border-color var(--mmg-dur,.25s) var(--mmg-ease,ease);
+  }
+  .step:hover{ transform:translateY(-4px); box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(16,24,40,.12)); border-color:var(--mmg-orange-300,#F8B382); }
+  .step .num{
+    position:absolute; top:-20px; left:26px; width:40px; height:40px; border-radius:50%;
+    background:var(--mmg-grad-orange,linear-gradient(135deg,#F4883F,#EC6B1E)); color:#fff;
+    font-family:var(--mmg-font-display,'Archivo',sans-serif); font-weight:900;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--mmg-shadow-orange,0 10px 24px rgba(236,107,30,.3));
+  }
+  .step h4{ font-size:var(--mmg-text-lg,1.075rem); margin:0 0 8px; }
+  .step p{ color:var(--mmg-gray-600,#475467); font-size:var(--mmg-text-sm,.925rem); }
+
+  /* ==========================================================================
+     ONDE ATUAMOS
+     ========================================================================== */
+  .atuacao{ background:var(--mmg-gray-50,#F7F7FB); }
+
+  /* ==========================================================================
+     ABRANGÊNCIA (mapa)
+     ========================================================================== */
+  .cobertura{ display:grid; grid-template-columns:1fr 1fr; }
+  .cob-text{
+    background:var(--mmg-grad-navy,linear-gradient(135deg,#2F2878,#16114A)); color:#fff;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:clamp(48px,6vw,80px) 6%; position:relative; overflow:hidden;
+  }
+  .cob-text::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:46px 46px;
+    mask:radial-gradient(70% 60% at 20% 90%,#000,transparent);
+    -webkit-mask:radial-gradient(70% 60% at 20% 90%,#000,transparent);
+  }
+  .cob-text>*{ position:relative; z-index:2; }
+  .cob-text .eyebrow{ color:var(--mmg-orange-400,#F4883F); }
+  .cob-text h2{ font-size:clamp(1.55rem,3.2vw,2.4rem); font-weight:900; margin:16px 0; max-width:16ch; }
+  .cob-text h2 em{ color:var(--mmg-orange-500,#EC6B1E); font-style:normal; }
+  .cob-text p{ color:#C2BEE6; font-size:clamp(.98rem,1.2vw,1.125rem); max-width:46ch; }
+  .chips{ display:flex; flex-wrap:wrap; gap:9px; margin:26px 0 30px; }
+  .chips span{
+    background:rgba(255,255,255,.07); border:1px solid var(--mmg-navy-500,#4A44A8); color:#E5E2F6;
+    font-size:var(--mmg-text-sm,.9rem); font-weight:500; padding:7px 13px; border-radius:var(--mmg-radius-pill,999px);
+  }
+  .chips span.is-hub{ background:var(--mmg-orange-500,#EC6B1E); border-color:var(--mmg-orange-500,#EC6B1E); color:#fff; font-weight:700; }
+  .cob-map{ background:#F7F7FB; display:flex; align-items:center; justify-content:center; padding:48px 40px; }
+  .cob-map svg{ width:100%; max-width:540px; height:auto; }
+
+  .mapa-container{ width:100%; }
+  .mapa-container iframe{ width:100%; border:0; display:block; min-height:640px; }
+
+  /* ==========================================================================
+     VANTAGENS (fundo escuro)
+     ========================================================================== */
+  .why{ background:var(--mmg-navy-900,#16114A); color:#fff; }
+  .why .sechead h2{ color:#fff; }
+  .why .sechead p{ color:#C2BEE6; }
+  .why .sechead .eyebrow{ color:var(--mmg-orange-400,#F4883F); }
+
+  /* ==========================================================================
+     PROPOSTA / FORMULÁRIO
+     ========================================================================== */
+  .proposta{ background:var(--mmg-grad-navy,linear-gradient(135deg,#2F2878,#16114A)); color:#fff; position:relative; overflow:hidden; }
+  .proposta::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:52px 52px;
+    mask:radial-gradient(70% 65% at 16% 12%,#000,transparent);
+    -webkit-mask:radial-gradient(70% 65% at 16% 12%,#000,transparent);
+  }
+  .proposta .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.82fr); gap:56px; align-items:center; }
+  .proposta .lead .eyebrow{ color:var(--mmg-orange-400,#F4883F); }
+  .proposta .lead h2{ font-size:clamp(1.55rem,3.2vw,2.4rem); font-weight:900; margin:14px 0 16px; max-width:18ch; }
+  .proposta .lead h2 em{ color:var(--mmg-orange-500,#EC6B1E); font-style:normal; }
+  .proposta .lead p{ color:#C2BEE6; font-size:clamp(.98rem,1.2vw,1.125rem); max-width:44ch; }
+  .proposta .lead ul{ margin:28px 0 0; display:flex; flex-direction:column; gap:13px; }
+  .proposta .lead li{ display:flex; align-items:flex-start; gap:12px; color:#E5E2F6; font-size:var(--mmg-text-base,1rem); font-weight:500; }
+  .proposta .lead li svg{ flex-shrink:0; margin-top:2px; }
+
+  .formcard{
+    background:#fff; border-radius:var(--mmg-radius-xl,22px); padding:clamp(22px,3vw,30px);
+    box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(16,24,40,.18)); color:var(--mmg-gray-900,#101828);
+  }
+  .formcard h3{ font-size:var(--mmg-text-xl,1.25rem); font-weight:800; }
+  .formcard .sub{ color:var(--mmg-gray-500,#667085); font-size:var(--mmg-text-sm,.9rem); margin:6px 0 20px; }
   .field{ margin-bottom:13px; }
-  .field label{ display:block; font-size:var(--mmg-text-sm); font-weight:600; margin-bottom:6px; }
-  .input,.select{ width:100%; padding:13px 14px; border:1.5px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-sm); font-size:var(--mmg-text-base); font-family:inherit; transition:border-color var(--mmg-dur-fast), box-shadow var(--mmg-dur-fast); background:#fff; }
-  .input:focus,.select:focus{ outline:none; border-color:var(--mmg-orange-500); box-shadow:0 0 0 4px rgba(236,107,30,.15); }
-  .formcard .note{ font-size:var(--mmg-text-xs); color:var(--mmg-gray-400); text-align:center; margin-top:12px; }
-  #mmg-form-status{ font-size:var(--mmg-text-sm); margin-top:10px; min-height:1.1em; font-weight:600; }
+  .field label{ display:block; font-size:var(--mmg-text-sm,.9rem); font-weight:600; margin-bottom:6px; }
+  .input,.select{
+    width:100%; padding:13px 14px; border:1.5px solid var(--mmg-gray-200,#E4E7EC);
+    border-radius:var(--mmg-radius-sm,10px); font-size:16px; font-family:inherit; background:#fff;
+    transition:border-color var(--mmg-dur-fast,.15s), box-shadow var(--mmg-dur-fast,.15s);
+  }
+  .input:focus,.select:focus{ outline:none; border-color:var(--mmg-orange-500,#EC6B1E); box-shadow:0 0 0 4px rgba(236,107,30,.15); }
+  .formcard .note{ font-size:var(--mmg-text-xs,.78rem); color:var(--mmg-gray-400,#98A2B3); text-align:center; margin-top:12px; }
+  #mmg-form-status{ font-size:var(--mmg-text-sm,.9rem); margin-top:10px; min-height:1.1em; font-weight:600; }
   #mmg-form-status.ok{ color:#1f9d57; }
   #mmg-form-status.err{ color:#d23b3b; }
   .btn .spinner{ width:18px; height:18px; border:2px solid rgba(255,255,255,.35); border-top-color:#fff; border-radius:50%; animation:mmgspin .7s linear infinite; display:none; }
@@ -173,183 +342,120 @@
   .btn.loading .btn-text{ opacity:.7; }
   @keyframes mmgspin{ to{ transform:rotate(360deg); } }
 
-  /* CLIENTES */
-  .clientes{ background:#221E62; padding:30px 0; }
-  .clientes .wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
-  .clientes .lbl{ color:#7B74CE; font-size:var(--mmg-text-xs); font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
-  .cli-row{ display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
-  .cli-chip{ background:#fff; border-radius:var(--mmg-radius-md); height:60px; padding:0 22px; display:flex; align-items:center; justify-content:center; box-shadow:var(--mmg-shadow-sm); transition:transform var(--mmg-dur) var(--mmg-ease); }
-  .cli-chip:hover{ transform:translateY(-3px); }
-  .cli-chip img{ height:34px; width:auto; max-width:150px; object-fit:contain; display:block; }
-  @media(max-width:430px){ .cli-chip{ height:50px; padding:0 16px; } .cli-chip img{ height:27px; max-width:120px; } }
+  /* ==========================================================================
+     CTA FINAL
+     ========================================================================== */
+  .ctafinal{ background:#fff; color:var(--mmg-gray-900,#101828); text-align:center; }
+  .ctafinal h2{ font-size:clamp(1.7rem,3.6vw,2.75rem); font-weight:900; }
+  .ctafinal p{ font-size:clamp(1rem,1.4vw,1.25rem); color:var(--mmg-gray-600,#475467); margin:16px auto 28px; max-width:46ch; }
+  .ctafinal .btn{ background:var(--mmg-grad-orange,linear-gradient(135deg,#F4883F,#EC6B1E)); color:#fff; box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(236,107,30,.28)); }
+  .ctafinal .btn:hover{ background:var(--mmg-navy-900,#16114A); transform:translateY(-2px); }
 
-  /* SECTION base */
-  section{ padding:80px 0; }
-  .sechead{ text-align:center; max-width:60ch; margin:0 auto 46px; }
-  .sechead .eyebrow{ color:var(--mmg-orange-600); justify-content:center; margin-bottom:12px; }
-  .sechead h2{ font-size:var(--mmg-text-4xl); font-weight:800; }
-  .sechead p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-lg); margin-top:14px; }
-
-  .grid{ display:grid; gap:20px; }
-  .g3{ grid-template-columns:repeat(3,1fr); } .g2{ grid-template-columns:repeat(2,1fr); }
-
-  .cards-serviços{ display:flex; gap:16px; }
-
-  .svc{ background:#fff; border:1px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-lg); padding:28px; transition:transform var(--mmg-dur) var(--mmg-ease), box-shadow var(--mmg-dur) var(--mmg-ease), border-color var(--mmg-dur) var(--mmg-ease); }
-  .svc:hover{ transform:translateY(-4px); box-shadow:var(--mmg-shadow-lg); border-color:var(--mmg-orange-300); }
-  .svc .ic{ width:54px; height:54px; border-radius:var(--mmg-radius-md); background:var(--mmg-grad-navy); display:flex; align-items:center; justify-content:center; margin-bottom:18px; box-shadow:var(--mmg-shadow-md); }
-  .svc h4{ font-size:var(--mmg-text-lg); font-weight:800; margin-bottom:9px; }
-  .svc p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-sm); }
-
-  /* ABRANGÊNCIA */
-  .cobertura{ display:grid; grid-template-columns:1fr 1fr; min-height:100vh; }
-  .cob-text{ background:var(--mmg-grad-navy); color:#fff; display:flex; flex-direction:column; justify-content:center; padding:80px 6%; position:relative; overflow:hidden; }
-  .cob-text::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:46px 46px; mask:radial-gradient(70% 60% at 20% 90%,#000,transparent); pointer-events:none; }
-  .cob-text>*{ position:relative; z-index:2; }
-  .cob-text .eyebrow{ color:var(--mmg-orange-400); }
-  .cob-text h2{ font-size:var(--mmg-text-4xl); font-weight:900; margin:16px 0 16px; max-width:16ch; }
-  .cob-text h2 em{ color:var(--mmg-orange-500); font-style:normal; }
-  .cob-text p{ color:#C2BEE6; font-size:var(--mmg-text-lg); max-width:46ch; }
-  .chips{ display:flex; flex-wrap:wrap; gap:9px; margin:26px 0 30px; }
-  .chips span{ background:rgba(255,255,255,.07); border:1px solid var(--mmg-navy-500); color:#E5E2F6; font-size:var(--mmg-text-sm); font-weight:500; padding:7px 13px; border-radius:var(--mmg-radius-pill); }
-  .chips span.is-hub{ background:var(--mmg-orange-500); border-color:var(--mmg-orange-500); color:#fff; font-weight:700; }
-  .cob-map{ background:#F7F7FB; display:flex; align-items:center; justify-content:center; padding:48px 40px; }
-  .cob-map svg{ width:100%; max-width:540px; height:auto; }
-
-  /* VANTAGENS (dark) */
-  .why{ background:var(--mmg-navy-900); color:#fff; }
-  .why .sechead h2{ color:#fff; } .why .sechead p{ color:#C2BEE6; }
-  .why .item{ background:rgba(255,255,255,.04); border:1px solid var(--mmg-navy-600); border-radius:var(--mmg-radius-lg); padding:24px; }
-  .why .item .ic{ width:44px; height:44px; border-radius:var(--mmg-radius-sm); background:rgba(236,107,30,.14); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
-  .why .item h4{ font-size:var(--mmg-text-base); margin-bottom:7px; color:#fff; }
-  .why .item p{ color:#A7A2D0; font-size:var(--mmg-text-sm); }
-
-  /* COMO */
-  .step{ position:relative; padding:26px; background:#fff; border:1px solid var(--mmg-gray-200); border-radius:var(--mmg-radius-lg); }
-  .step .num{ position:absolute; top:-16px; left:26px; width:40px; height:40px; border-radius:50%; background:var(--mmg-grad-orange); color:#fff; font-family:var(--mmg-font-display); font-weight:900; display:flex; align-items:center; justify-content:center; box-shadow:var(--mmg-shadow-orange); }
-  .step h4{ font-size:var(--mmg-text-lg); margin:18px 0 8px; }
-  .step p{ color:var(--mmg-gray-600); font-size:var(--mmg-text-sm); }
-
-  /* CTA FINAL */
-  .ctafinal{ background:#fff; color:var(--mmg-grad-orange); text-align:center; }
-  .ctafinal h2{ font-size:var(--mmg-text-5xl); font-weight:900; }
-  .ctafinal p{ font-size:var(--mmg-text-xl); margin:16px auto 28px; max-width:46ch; opacity:.96; }
-  .ctafinal .btn{ background:var(--mmg-grad-orange); color:#fff; box-shadow:var(--mmg-shadow-lg); }
-  .ctafinal .btn:hover{ background:var(--mmg-navy-900); transform:translateY(-2px); }
-
-  /* FOOTER */
-  footer{ background:var(--mmg-navy-950); color:#8E89BE; padding:54px 0 92px; }
+  /* ==========================================================================
+     FOOTER
+     ========================================================================== */
+  footer{ background:var(--mmg-navy-950,#0C0930); color:#8E89BE; padding:54px 0 44px; }
   footer .cols{ display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:30px; }
-  footer h5{ color:#fff; font-family:var(--mmg-font-display); font-weight:700; font-size:var(--mmg-text-sm); letter-spacing:.05em; text-transform:uppercase; margin-bottom:14px; }
-  footer a{ color:#8E89BE; display:block; padding:5px 0; font-size:var(--mmg-text-sm); }
-  footer a:hover{ color:var(--mmg-orange-400); }
-  footer p{ font-size:var(--mmg-text-sm); }
-  footer .bottom{ border-top:1px solid var(--mmg-navy-700); margin-top:38px; padding-top:22px; text-align:center; font-size:var(--mmg-text-xs); }
+  footer h5{ color:#fff; font-family:var(--mmg-font-display,'Archivo',sans-serif); font-weight:700; font-size:var(--mmg-text-sm,.9rem); letter-spacing:.05em; text-transform:uppercase; margin-bottom:14px; }
+  footer a{ color:#8E89BE; display:block; padding:5px 0; font-size:var(--mmg-text-sm,.9rem); }
+  footer a:hover{ color:var(--mmg-orange-400,#F4883F); }
+  footer p{ font-size:var(--mmg-text-sm,.9rem); }
+  footer .flogo{ display:inline-block; margin-bottom:14px; }
+  footer .bottom{ border-top:1px solid var(--mmg-navy-700,#2F2878); margin-top:38px; padding-top:22px; text-align:center; font-size:var(--mmg-text-xs,.78rem); }
 
+  /* barra fixa de ação no mobile */
   .mcta{ display:none; }
 
-  .mapa-container{ width:100%; }
-  .mapa-container iframe{ width:100%; border:0; display:block; }
-  @media (max-width: 768px){ .mapa-container iframe{ display:none; } }
-
-  .proposta{ background:var(--mmg-grad-navy); color:#fff; position:relative; overflow:hidden; }
-  .proposta::after{ content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:52px 52px; mask:radial-gradient(70% 65% at 16% 12%,#000,transparent); pointer-events:none; }
-  .proposta .wrap{ position:relative; z-index:2; display:grid; grid-template-columns:1fr .82fr; gap:56px; align-items:center; }
-  .proposta .lead .eyebrow{ color:var(--mmg-orange-400); }
-  .proposta .lead h2{ font-size:var(--mmg-text-4xl); font-weight:900; margin:14px 0 16px; max-width:18ch; }
-  .proposta .lead h2 em{ color:var(--mmg-orange-500); font-style:normal; }
-  .proposta .lead p{ color:#C2BEE6; font-size:var(--mmg-text-lg); max-width:44ch; }
-  .proposta .lead ul{ list-style:none; margin:28px 0 0; display:flex; flex-direction:column; gap:13px; }
-  .proposta .lead li{ display:flex; align-items:center; gap:12px; color:#E5E2F6; font-size:var(--mmg-text-base); font-weight:500; }
-  .proposta .lead li svg{ flex-shrink:0; }
-  .proposta .formcard{ margin:0; }
-
-  @media(min-width: 981px){
-    .desktop{ display:block; }
-  }
-  /* ===== RESPONSIVO GERAL (<= 980px) ===== */
-  @media(max-width:980px){
-    section{ padding:56px 0; }
-
-    .hero .wrap{ grid-template-columns:1fr; padding:40px 24px 56px; gap:28px; min-height:auto; }
-    .hero h1{ font-size:var(--mmg-text-4xl); }
-    .hero p{ font-size:var(--mmg-text-lg); }
-    .trabalhador{ position:relative; width:auto; order:-1; align-items:center; justify-content:center; z-index:3; overflow:visible; }
-    .desktop{ display:none; }
-    .mobile-img{ display:block; 
-    height:auto; width:100%; max-width:480px; object-fit:contain; object-position:center bottom; filter:drop-shadow(0 30px 60px rgba(0,0,0,.35)); }
-    .g3,.g2{ grid-template-columns:1fr; }
-    .navlinks{ display:none; }
-    .sechead h2{ font-size:var(--mmg-text-3xl); }
-    .ctafinal h2{ font-size:var(--mmg-text-3xl); }
-    .ctafinal{ padding-bottom:64px; }
-    footer .cols{ grid-template-columns:1fr 1fr; }
-
-    .cobertura{ grid-template-columns:1fr; min-height:auto; }
-    .cob-text{ padding:52px 24px; }
-    .cob-text h2{ font-size:var(--mmg-text-3xl); }
-    .cob-map{ padding:32px 20px 44px; }
-
-    .cards-serviços{ flex-direction:column; }
-
-    .mcta{ display:flex; position:fixed; bottom:0; left:0; right:0; z-index:60; gap:10px; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(36,30,97,.97); backdrop-filter:blur(8px); border-top:1px solid var(--mmg-navy-600); }
-    .mcta .btn{ flex:1; padding:13px 12px; font-size:var(--mmg-text-base); }
-
-    .proposta .wrap{ display:block; }
-    .proposta .lead{ margin-bottom:32px; }
-    .proposta .lead h2{ font-size:var(--mmg-text-3xl); max-width:none; }
-    .proposta .lead p{ max-width:none; }
-    .proposta .formcard{ width:100%; max-width:520px; margin:0 auto; }
-    .proposta::after{ mask:radial-gradient(90% 35% at 16% 4%,#000,transparent); }
+  /* ==========================================================================
+     BREAKPOINT — TABLET / DESKTOP MENOR (<= 1080px)
+     ========================================================================== */
+  @media(max-width:1080px){
+    .cards{ --cols:2; }
+    .proposta .wrap{ gap:40px; }
+    /* dá mais espaço para a imagem sem invadir o texto */
+    .trabalhador{ width:min(55%,640px); }
   }
 
-  @media(max-width:430px){
-    .wrap{ padding:0 18px; }
-    .hero h1{ font-size:var(--mmg-text-3xl); }
-    .trust{ gap:10px; } .trust div{ flex:1 1 44%; }
-    .formcard{ padding:22px; }
-    .clientes .wrap{ gap:10px 20px; } .clientes .nome{ font-size:var(--mmg-text-base); }
-    .proposta .lead ul{ margin-top:20px; }
-  }
-
-  @media(max-width:500px){
-    .p-hero{display: none }
-  }
-
-  @media(min-width: 981px){
-    .mobile-img{ display:none; }
-  }
-
-  /* ===== NAV MOBILE (<= 980px): Serviços + hambúrguer ===== */
+  /* ==========================================================================
+     BREAKPOINT — <= 980px  (nav mobile, hero empilhado, formulário abaixo)
+     ========================================================================== */
   @media(max-width:980px){
     .logo p{ display:none; }
+    .navlinks{ display:none; }
     .mnav{ display:flex; align-items:center; gap:4px; }
-    .mnav-link{ color:var(--mmg-navy-800); font-weight:600; font-size:var(--mmg-text-base); padding:8px 10px; }
     .mnav-burger{ background:none; border:0; padding:10px 4px 10px 10px; cursor:pointer; display:flex; flex-direction:column; gap:5px; }
-    .mnav-burger span{ width:24px; height:2.5px; border-radius:2px; background:var(--mmg-navy-800); display:block; transition:transform var(--mmg-dur) var(--mmg-ease), opacity var(--mmg-dur-fast); }
+    .mnav-burger span{ width:24px; height:2.5px; border-radius:2px; background:var(--mmg-navy-800,#241E61); display:block; transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease), opacity var(--mmg-dur-fast,.15s); }
     .mnav-burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7.5px) rotate(45deg); }
     .mnav-burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
     .mnav-burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-7.5px) rotate(-45deg); }
-    .mnav-menu{ background:#fff; border-bottom:1px solid var(--mmg-gray-200); box-shadow:var(--mmg-shadow-lg); }
+    .mnav-menu{ background:#fff; border-bottom:1px solid var(--mmg-gray-200,#E4E7EC); box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(16,24,40,.12)); }
     .mnav-menu.open{ display:block; }
-    .mnav-menu a{ display:block; padding:14px 24px; color:var(--mmg-navy-800); font-weight:600; font-size:var(--mmg-text-base); border-top:1px solid var(--mmg-gray-100); }
+    .mnav-menu a{ display:block; padding:14px 24px; color:var(--mmg-navy-800,#241E61); font-weight:600; font-size:var(--mmg-text-base,1rem); border-top:1px solid var(--mmg-gray-100,#F2F4F7); }
     .mnav-menu a.btn{ display:flex; margin:12px 24px 18px; color:#fff; border-top:0; }
+
+    .hero .wrap{ grid-template-columns:1fr; gap:28px; min-height:0; padding:40px 24px 56px; }
+    /* CORREÇÃO: máscara e ancoragem à direita são desfeitas no mobile */
+    .trabalhador{
+      position:relative; width:auto; order:-1; align-items:center; justify-content:center;
+      z-index:3; overflow:visible;
+      -webkit-mask-image:none; mask-image:none;
+    }
+    .desktop{ display:none; }
+    .mobile-img{ display:block; width:100%; max-width:460px; height:auto; object-fit:contain; object-position:center bottom; filter:drop-shadow(0 30px 60px rgba(0,0,0,.35)); }
+
+    .cobertura{ grid-template-columns:1fr; }
+    .cob-text{ padding:52px 24px; }
+    .cob-map{ padding:32px 20px 44px; }
+    .mapa-container iframe{ min-height:520px; }
+
+    .proposta .wrap{ display:block; }
+    .proposta .lead{ margin-bottom:32px; }
+    .proposta .lead h2, .proposta .lead p{ max-width:none; }
+    .proposta .formcard{ width:100%; max-width:520px; margin:0 auto; }
+    .proposta::after{ mask:radial-gradient(90% 35% at 16% 4%,#000,transparent); -webkit-mask:radial-gradient(90% 35% at 16% 4%,#000,transparent); }
+
+    footer{ padding-bottom:calc(96px + env(safe-area-inset-bottom)); }
+
+    .mcta{
+      display:flex; position:fixed; bottom:0; left:0; right:0; z-index:60; gap:10px;
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+      background:rgba(36,30,97,.97); backdrop-filter:blur(8px); border-top:1px solid var(--mmg-navy-600,#3A3494);
+    }
+    .mcta .btn{ flex:1 1 0; min-width:0; padding:13px 10px; font-size:var(--mmg-text-base,1rem); }
   }
 
-  /* ===== HERO MOBILE IMAGE-FORWARD (<= 768px) =====
-     Foto full-bleed ocupando a dobra inteira; texto vive sobre scrim escuro na base. */
+  /* ==========================================================================
+     BREAKPOINT — MOBILE (<= 760px): cards em coluna única
+     ========================================================================== */
+  @media(max-width:760px){
+    .cards{ --cols:1; --gap:16px; }
+    .card{ padding:24px; }
+    .cli-chip{ height:54px; padding:0 18px; }
+    .cli-chip img{ height:30px; max-width:130px; }
+    footer .cols{ grid-template-columns:1fr 1fr; gap:24px; }
+    footer .cols > :first-child{ grid-column:1 / -1; }
+  }
+
+  /* ==========================================================================
+     HERO MOBILE FULL-BLEED (<= 768px)
+     ========================================================================== */
   @media(max-width:768px){
     .hero{ display:flex; }
     .hero::after{ display:none; }
     .hero .wrap{
       display:flex; flex-direction:column; justify-content:flex-end;
       width:100%; gap:0;
-      min-height:calc(100vh - 66px);
-      min-height:calc(100svh - 66px);
-      padding:24px 20px 30px;
+      min-height:calc(94vh - 66px);
+      min-height:calc(94svh - 66px);
+      padding:24px 20px 34px;
     }
     .trabalhador{ position:absolute; inset:0; width:auto; order:0; z-index:1; overflow:hidden; display:block; }
-    .trabalhador .mobile-img{ width:100%; height:100%; max-width:none; object-fit:cover; object-position:center 18%; filter:none; }
+    .trabalhador .mobile-img{
+      height:90%;                       /* cria a sobra que faltava */
+      object-fit:cover;
+      object-position:center 35%;
+      transform:translateY(-6%);  
+    }
     .trabalhador::after{
       content:""; position:absolute; inset:0; pointer-events:none;
       background:linear-gradient(180deg,
@@ -359,20 +465,39 @@
         rgba(21,16,63,.64) 68%,
         rgba(12,9,48,.94) 100%);
     }
-    .hero-eyebrow-m{ display:inline-flex; position:absolute; top:22px; left:24px; z-index:4; color:#fff; text-shadow:0 1px 8px rgba(12,9,48,.5); }
-    .hero .hero-copy{ gap:0; }
-    .hero h1{ font-size:clamp(1.95rem, 8.4vw, 2.5rem); font-weight:800; margin:0 0 12px; letter-spacing:-.015em; }
-    .hero .p-hero{ display:block; font-size:var(--mmg-text-base); color:#E5E2F6; max-width:36ch; }
+    .hero-eyebrow-m{ display:inline-flex; position:absolute; top:22px; left:20px; z-index:4; color:#fff; text-shadow:0 1px 8px rgba(12,9,48,.5); }
+    .hero .eyebrow-d{ display:none; }
+    .hero h1{ font-size:clamp(1.95rem,8.4vw,2.5rem); font-weight:800; margin:0 0 12px; letter-spacing:-.015em; }
+    .hero .p-hero{ display:block; font-size:var(--mmg-text-base,1rem); color:#E5E2F6; max-width:36ch; }
     .d-txt{ display:none; }
-    .m-txt{ display:inline; }
-    .m-arrow{ display:inline; }
+    .m-txt, .m-arrow{ display:inline; }
     .d-cta{ display:none; }
     .m-cta-wa{ display:inline-flex; background:rgba(255,255,255,.10); color:#fff; border:1px solid rgba(255,255,255,.28); backdrop-filter:blur(6px); }
     .hero .cta{ margin-top:22px; gap:10px; flex-wrap:nowrap; }
-    .hero .cta .btn-primary{ flex:1; }
+    .hero .cta .btn{ flex:1 1 0; min-width:0; }
+  }
+
+  /* ==========================================================================
+     BREAKPOINT — CELULARES PEQUENOS (<= 430px)
+     ========================================================================== */
+  @media(max-width:430px){
+    .wrap{ padding:0 18px; }
+    .trust{ gap:10px; }
+    .trust div{ flex:1 1 44%; }
+    .clientes{ padding:26px 0; }
+    .cli-row{ gap:10px; }
+    .proposta .lead ul{ margin-top:20px; }
+    footer .cols{ grid-template-columns:1fr; }
+    footer .cols > :first-child{ grid-column:auto; }
+    .mapa-container iframe{ min-height:460px; }
   }
   @media(max-width:380px){
-    .hero .cta .btn{ padding:14px 14px; font-size:.95rem; }
+    .btn{ padding:14px 14px; font-size:.95rem; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   }
 </style>
 </head>
@@ -383,14 +508,14 @@
 <header class="nav">
   <div class="wrap">
     <a href="index.html" class="logo" aria-label="MMG — página inicial">
-      <img src="assets/mmg-mark.png" height="32" alt="MMG" width="98">
-        <p>Movimentação de Mercadorias em Geral</p>
+      <img src="assets/mmg-mark.png" height="32" width="98" alt="MMG">
+      <p>Movimentação de Mercadorias em Geral</p>
     </a>
-    <nav class="navlinks">
+    <nav class="navlinks" aria-label="Principal">
       <a href="#servicos">Serviços</a>
       <a href="#abrangencia">Abrangência</a>
       <a href="#vantagens">Vantagens</a>
-      <a href="#contato" id="btn-equipe" class="btn btn-primary" style="padding:10px 18px;">Solicitar equipe</a>
+      <a href="#contato" id="btn-equipe" class="btn btn-primary" style="padding:10px 18px; min-height:auto;">Solicitar equipe</a>
     </nav>
     <div class="mnav">
       <button type="button" class="mnav-burger" id="mnav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav-menu">
@@ -406,18 +531,17 @@
   </nav>
 </header>
 
-
+<!-- HERO -->
 <section class="hero" id="topo">
   <div class="hero-glow" aria-hidden="true"></div>
-
   <div class="trabalhador" aria-hidden="true">
-    <img class="desktop" src="./assets/PNG.png" alt="">
-    <img class="mobile-img" src="./assets/mobile.png" alt="">
+    <img class="desktop" src="./assets/desktop.png" alt="" loading="eager">
+    <img class="mobile-img" src="./assets/mobile1.png" alt="" loading="eager">
   </div>
 
   <div class="wrap">
     <div class="hero-copy">
-      <h1><span class="d-txt">A gente move o que a sua empresa precisa entregar.</span><span class="m-txt">Profissionais prontos para movimentar sua operação.</span></h1>
+      <h1><span class="d-txt">A Solução Completa em Mão de Obra para Movimentação de Mercadorias</span><span class="m-txt">A Solução Completa em Mão de Obra para Movimentação de Mercadorias</span></h1>
       <p class="p-hero"><span class="d-txt">Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</span><span class="m-txt">Recurso humano especializado, sem vínculo empregatício. Rapidez, agilidade e redução de custos.</span></p>
       <div class="cta">
         <a href="#contato" class="btn btn-primary">Solicitar equipe agora<span class="m-arrow" aria-hidden="true">&nbsp;→</span></a>
@@ -433,14 +557,42 @@
   <div class="wrap">
     <span class="lbl">Empresas que confiam na MMG</span>
     <div class="cli-row">
-      <div class="cli-chip"><img src="assets/clientes/coamo.png" alt="Coamo" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/cvale.png" alt="C.Vale" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34"></div>
-      <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34"></div>
+      <div class="cli-chip"><img src="assets/clientes/coamo.png" alt="Coamo" height="34" loading="lazy"></div>
+      <div class="cli-chip"><img src="assets/clientes/cvale.png" alt="C.Vale" height="34" loading="lazy"></div>
+      <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34" loading="lazy"></div>
+      <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34" loading="lazy"></div>
+      <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34" loading="lazy"></div>
     </div>
   </div>
 </div>
+
+<!-- ONDE ATUAMOS -->
+<section class="atuacao" id="atuacao">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Setores atendidos</span>
+      <h2>Onde Atuamos</h2>
+    </div>
+    <div class="cards cards--4">
+      <article class="card glow-box">
+        <h4>Centros de Distribuição</h4>
+        <p>Operações de alta rotatividade com equipes flexíveis escaladas conforme picos de demanda</p>
+      </article>
+      <article class="card glow-box">
+        <h4>Indústria e Manufatura</h4>
+        <p>Abastecimento de linhas de produção e movimentação interna de insumos e produtos acabados</p>
+      </article>
+      <article class="card glow-box">
+        <h4>Comércio e Varejo</h4>
+        <p>Recebimento, conferência e organização de mercadorias em lojas, depósitos e câmaras frias</p>
+      </article>
+      <article class="card glow-box">
+        <h4>Agronegócio</h4>
+        <p>Movimentação de sacarias, grãos e insumos com profissionais habituados ao trabalho rural e agroindustrial</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <!-- SERVIÇOS -->
 <section id="servicos">
@@ -448,83 +600,125 @@
     <div class="sechead">
       <span class="eyebrow"><span class="dot"></span> O que fazemos</span>
       <h2>Profissionais preparados para todas as etapas logísticas</h2>
-      <p>Mão de obra qualificada para movimentação de mercadorias — manual, mecânica ou eletrônica — sob demanda ou em regime contínuo.</p>
+      <p>Todos os trabalhadores avulsos escalados pela MMG chegam à sua empresa totalmente preparados: uniformizados, com EPIs completos e previamente treinados para a função. Sua empresa não precisa se preocupar com seleção, capacitação ou fornecimento de equipamentos de proteção.</p>
     </div>
-    <div class="cards-serviços">
-      <div class="svc glow-box">
-        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="13" height="7" rx="1"/><path d="M16 13h3l2 3v2h-5"/><circle cx="7" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M6 11V7h7v4"/></svg></div>
-        <h4>Empilhadeira e Paletização</h4>
-        <p>Operadores para transporte com empilhadeiras, paletização, posicionamento e acomodação de carga.</p>
-      </div>
-      <div class="svc glow-box">
-        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
-        <h4>Movimentação Interna</h4>
-        <p>Arrumação, classificação, empilhamento, reordenamento e organização de estoque dentro da sua planta.</p>
-      </div>
-      <div class="svc glow-box">
-        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="M7 9h10l2 11H5z"/><path d="M9 14h6"/></svg></div>
-        <h4>Pesagem, Ensaque e Embalagem</h4>
-        <p>Pesagem, embalagem, ensaque, enlonamento, costura e amostragem de produtos a granel.</p>
-      </div>
-      <div class="svc glow-box">
-        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 8l-1 12H6L5 8"/><path d="M3 8h18"/><path d="M8 8V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3"/></svg></div>
-        <h4>Limpeza e Conservação</h4>
-        <p>Pré-limpeza, preparo, preservação e conservação do ambiente para viabilizar e dar continuidade às operações.</p>
-      </div>
+    <div class="cards">
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="13" height="7" rx="1"/><path d="M16 13h3l2 3v2h-5"/><circle cx="7" cy="20" r="1.6"/><circle cx="17" cy="20" r="1.6"/><path d="M6 11V7h7v4"/></svg></div>
+        <h4>Uniforme azul padronizado</h4>
+        <p>Identidade visual profissional e reconhecível em qualquer operação</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+        <h4>EPIs completos fornecidos</h4>
+        <p>Capacete, colete, luvas e demais equipamentos de segurança inclusos</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6"/><path d="M7 9h10l2 11H5z"/><path d="M9 14h6"/></svg></div>
+        <h4>Zero custo de seleção</h4>
+        <p>A MMG recruta, seleciona e treina — sem ônus para a empresa tomadora</p>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- ABRANGÊNCIA / MAPA -->
 <div class="mapa-container" id="abrangencia">
-    <iframe
-        id="mmg-mapa-iframe"
-        src="mapa2.html"
-        title="Mapa de abrangência MMG"
-        scrolling="no"
-        loading="lazy">
-    </iframe>
+  <iframe
+      id="mmg-mapa-iframe"
+      src="mapa2.html"
+      title="Mapa de abrangência MMG"
+      scrolling="no"
+      loading="lazy">
+  </iframe>
 </div>
-
 
 <!-- VANTAGENS -->
 <section id="vantagens" class="why">
   <div class="wrap">
     <div class="sechead">
-      <span class="eyebrow" style="color:var(--mmg-orange-400);"><span class="dot"></span> Por que a MMG</span>
-      <h2>Trabalho avulso com zero burocracia para você</h2>
-      <p>Contrate mão de obra pontual sem formar vínculo empregatício — ideal para atender picos de demanda com flexibilidade total.</p>
+      <span class="eyebrow"><span class="dot"></span> Por que a MMG</span>
+      <h2>O Que É Movimentação de Mercadorias</h2>
+      <p>A movimentação de mercadorias é um serviço amplo que abrange toda a cadeia operacional interna de uma empresa. Conheça as principais atividades realizadas pelos profissionais da MMG:</p>
     </div>
-    <div class="grid g3">
-      <div class="item glow-box on-dark">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11l2 2 4-4"/><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-        <h4>RECRUTAMENTO E EXAMES POR NOSSA CONTA</h4>
-        <p>Exame admissional, periódico e demissional são responsabilidade da MMG. Você só recebe a equipe pronta.</p>
-      </div>
-      <div class="item glow-box on-dark">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h4>NR33 E NR35 SEMPRE ATUALIZADOS</h4>
-        <p>Todos os trabalhadores possuem certificados vigentes de espaço confinado (NR33) e trabalho em altura (NR35).</p>
-      </div>
-      <div class="item glow-box on-dark">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z"/><path d="M9 7V5h6v2"/></svg></div>
-        <h4>EPI, TRANSPORTE E ALIMENTAÇÃO INCLUSOS</h4>
-        <p>Botina, uniforme, transporte, alimentação, seguro de vida e exames laboratoriais — tudo por conta da MMG.</p>
-      </div>
-      <div class="item glow-box on-dark">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h4>PAGUE SÓ PELO SERVIÇO REALIZADO</h4>
-        <p>Em caso de falta ou ociosidade, o trabalhador é substituído imediatamente. Você paga apenas o que foi executado.</p>
-      </div>
-      <div class="item glow-box on-dark">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
-        <h4>VALOR FLEXÍVEL POR DEMANDA</h4>
-        <p>Por unidade de tempo (hora ou diária), por produção (unidade, kg ou tonelada) ou pela combinação de ambos.</p>
-      </div>
-      <div class="item glow-box on-dark">
-        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
-        <h4>ZERO BUROCRACIA TRABALHISTA</h4>
-        <p>Como intermediária, a MMG recebe e repassa a remuneração e calcula todos os direitos e encargos dos avulsos.</p>
-      </div>
+    <div class="cards cards--4">
+      <article class="card-dark glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 11l2 2 4-4"/><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <h4>CARGA E DESCARGA</h4>
+        <p>Recebimento e expedição de mercadorias com segurança e agilidade, respeitando normas de movimentação manual.</p>
+      </article>
+      <article class="card-dark glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>CONFERÊNCIA DE MERCADORIAS</h4>
+        <p>Verificação e registro de itens recebidos ou expedidos, garantindo acuracidade no controle de estoque.</p>
+      </article>
+      <article class="card-dark glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z"/><path d="M9 7V5h6v2"/></svg></div>
+        <h4>ORGANIZAÇÃO DE ESTOQUE</h4>
+        <p>Armazenagem correta de produtos em prateleiras e áreas de estoque, otimizando o espaço e o fluxo operacional.</p>
+      </article>
+      <article class="card-dark glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h4>PICKING E ABASTECIMENTO</h4>
+        <p>Separação de pedidos e abastecimento de linhas de produção com precisão e eficiência operacional.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS -->
+<section id="beneficios">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Benefícios</span>
+      <h2>Benefícios para a Empresa Tomadora</h2>
+    </div>
+    <div class="cards">
+      <article class="card glow-box">
+        <div class="ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v10"/>
+            <path d="M15 9.5c0-1.1-1.3-2-3-2s-3 .9-3 2 1.3 2 3 2 3 .9 3 2-1.3 2-3 2-3-.9-3-2"/>
+          </svg>
+        </div>
+        <h4>Redução de Custos</h4>
+        <p>Elimine gastos com seleção, treinamento, uniformes, EPIs e administração de pessoal.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+        <h4>Zero Risco Trabalhista</h4>
+        <p>Sem vínculo empregatício, sem passivo trabalhista e sem exposição a ações judiciais.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 13a7 7 0 0 1 14 0"/>
+            <path d="M4 13h16"/>
+            <path d="M7 13v4"/>
+            <path d="M17 13v4"/>
+            <path d="M5 17h14"/>
+          </svg>
+        </div>
+        <h4>Mão de Obra Pronta</h4>
+        <p>Profissionais treinados, uniformizados e com EPIs — prontos para operar desde o primeiro dia.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/>
+            <path d="M14 2v5h5"/>
+            <path d="M8 17l2-1 2 2 2-2 2 1"/>
+          </svg>
+        </div>
+        <h4>Sem Burocracia</h4>
+        <p>Esqueça a gestão de folha de pagamento, férias, FGTS e demais encargos administrativos.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6"/><path d="M7 9h10l2 11H5z"/><path d="M9 14h6"/></svg></div>
+        <h4>Flexibilidade Total</h4>
+        <p>Escale ou reduza a equipe conforme a demanda do seu negócio, sem contratos rígidos ou penalidades.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -534,12 +728,29 @@
   <div class="wrap">
     <div class="sechead">
       <span class="eyebrow"><span class="dot"></span> Como funciona</span>
-      <h2>Da solicitação à operação em 3 passos</h2>
+      <h2>Papel da MMG — Gestão Completa de Mão de Obra</h2>
     </div>
-    <div class="grid g3" style="margin-top:34px;">
-      <div class="step"><div class="num">1</div><h4>Você descreve a demanda</h4><p>Conte o tipo de operação, o volume e o prazo — pelo WhatsApp ou pelo formulário, em minutos.</p></div>
-      <div class="step"><div class="num">2</div><h4>Dimensionamos a equipe</h4><p>Definimos o número de avulsos e a forma de cobrança ideal, e enviamos uma proposta clara e sem compromisso.</p></div>
-      <div class="step"><div class="num">3</div><h4>A equipe entra em ação</h4><p>Profissionais com EPI, certificações e supervisão na sua operação, prontos para produzir.</p></div>
+    <div class="cards cards--4">
+      <article class="step">
+        <div class="num" aria-hidden="true">1</div>
+        <h4>Empresa informa</h4>
+        <p>Você nos passa a demanda: quantidade de profissionais, funções, turnos e período. Sem burocracia, sem processo seletivo do seu lado.</p>
+      </article>
+      <article class="step">
+        <div class="num" aria-hidden="true">2</div>
+        <h4>MMG escala</h4>
+        <p>Selecionamos e alocamos a equipe conforme o perfil solicitado, com toda a documentação e regularização trabalhista em dia.</p>
+      </article>
+      <article class="step">
+        <div class="num" aria-hidden="true">3</div>
+        <h4>MMG gerencia frequência</h4>
+        <p>Controlamos presença, jornada e produtividade diariamente, com relatórios claros para você acompanhar sem precisar fiscalizar.</p>
+      </article>
+      <article class="step">
+        <div class="num" aria-hidden="true">4</div>
+        <h4>MMG garante substituição</h4>
+        <p>Faltou alguém? Repomos o profissional rapidamente, sem custo extra e sem parar a sua operação.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -553,15 +764,15 @@
       <p>Conte sua demanda e a MMG dimensiona a equipe ideal para a sua operação em Campo Mourão e região. Resposta rápida, sem compromisso.</p>
       <ul>
         <li>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
           Sem vínculo empregatício e sem burocracia
         </li>
         <li>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
           EPI, exames e certificações NR33 / NR35 inclusos
         </li>
         <li>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
           Você paga apenas pelo serviço executado
         </li>
       </ul>
@@ -593,7 +804,7 @@
 </section>
 
 <!-- CTA FINAL -->
-<section id="contato" class="ctafinal">
+<section id="cta-final" class="ctafinal">
   <div class="wrap">
     <h2>Precisa de mão de obra avulsa agora?</h2>
     <p>Fale com a MMG e receba uma proposta sob medida para a sua operação em Campo Mourão e região.</p>
@@ -601,19 +812,18 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="cols">
       <div>
-        <a href="#topo" class="logo" style="margin-bottom:14px; display:inline-block;" aria-label="MMG">
-          <img src="assets/mmg-mark-negativo.png" height="34" alt="MMG" width="104">
+        <a href="#topo" class="logo flogo" aria-label="MMG">
+          <img src="assets/mmg-mark-negativo.png" height="34" width="104" alt="MMG" loading="lazy">
         </a>
-        <p style="max-width:36ch;">MMG — Logística e Movimentação de Mercadorias de Campo Mourão. Intermediação de mão de obra avulsa desde 1975.</p>
+        <p style="max-width:36ch;">MMG — Logística e Movimentação de Mercadorias de Campo Mourão. <br>Contato: (44) 3525-0254</p>
       </div>
       <div>
         <h5>Serviços</h5>
-        <a href="#servicos">Carga & Descarga</a>
+        <a href="#servicos">Carga &amp; Descarga</a>
         <a href="#servicos">Empilhadeira</a>
         <a href="#servicos">Movimentação interna</a>
       </div>
@@ -625,7 +835,9 @@
       </div>
       <div>
         <h5>FAQ</h5>
+        <a href="quemsomos.html">Quem Somos</a>
         <a href="faq.html">Perguntas Frequentes</a>
+        <a href="">Av. José Tadeus Nunes, 758 Campo Mourão — PR</a>
       </div>
     </div>
     <div class="bottom">© 2026 MMG — Logística e Movimentação de Mercadorias de Campo Mourão · Trabalho avulso · Criação Idéia Comunicação</div>
@@ -633,6 +845,7 @@
 </footer>
 
 <script>
+/* Menu mobile */
 (function(){
   var burger = document.getElementById('mnav-burger');
   var menu = document.getElementById('mnav-menu');
@@ -649,10 +862,18 @@
       burger.setAttribute('aria-label','Abrir menu');
     }
   });
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 980 && menu.classList.contains('open')){
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      burger.setAttribute('aria-label','Abrir menu');
+    }
+  });
 })();
 </script>
 
 <script>
+/* Spotlight do cursor (apenas em dispositivos com mouse) */
 (function(){
   if (window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var hero = document.querySelector('.hero');
@@ -661,12 +882,14 @@
   var mx=0, my=0, ticking=false;
   function update(){
     ticking=false;
-    var hr=hero.getBoundingClientRect();
-    if(my>hr.top-300 && my<hr.bottom+300){
-      glow.style.setProperty('--gx',(mx-hr.left)+'px');
-      glow.style.setProperty('--gy',(my-hr.top)+'px');
-      glow.style.opacity='1';
-    } else { glow.style.opacity='0'; }
+    if(hero && glow){
+      var hr=hero.getBoundingClientRect();
+      if(my>hr.top-300 && my<hr.bottom+300){
+        glow.style.setProperty('--gx',(mx-hr.left)+'px');
+        glow.style.setProperty('--gy',(my-hr.top)+'px');
+        glow.style.opacity='1';
+      } else { glow.style.opacity='0'; }
+    }
     for(var i=0;i<boxes.length;i++){
       var b=boxes[i], r=b.getBoundingClientRect();
       var near = mx>r.left-180 && mx<r.right+180 && my>r.top-180 && my<r.bottom+180;
@@ -685,6 +908,7 @@
 </script>
 
 <script>
+/* Envio do formulário */
 (function(){
   'use strict';
   var N8N_WEBHOOK = '';
@@ -756,6 +980,7 @@
 </script>
 
 <script>
+/* Altura dinâmica do mapa */
 (function(){
   var iframe = document.getElementById('mmg-mapa-iframe');
   if(!iframe) return;
@@ -763,9 +988,6 @@
     if(e.data && e.data.mmgMapaHeight){
       iframe.style.height = e.data.mmgMapaHeight + 'px';
     }
-  });
-  iframe.addEventListener('load', function(){
-    if(!iframe.style.height) iframe.style.height = '900px';
   });
 })();
 </script>
