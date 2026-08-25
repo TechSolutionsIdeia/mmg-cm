@@ -352,6 +352,63 @@
   .ctafinal .btn:hover{ background:var(--mmg-navy-900,#16114A); transform:translateY(-2px); }
 
   /* ==========================================================================
+     CALLOUT (Lei 12.023/2009)
+     ========================================================================== */
+  .lei-callout{
+    background:var(--mmg-gray-50,#F7F7FB); border:1px solid var(--mmg-gray-200,#E4E7EC);
+    border-left:4px solid var(--mmg-orange-500,#EC6B1E); border-radius:var(--mmg-radius-md,14px);
+    padding:24px 26px; margin-top:38px; display:flex; gap:16px; align-items:flex-start;
+  }
+  .lei-callout svg{ flex-shrink:0; margin-top:2px; }
+  .lei-callout p{ color:var(--mmg-gray-700,#344054); font-size:var(--mmg-text-sm,.95rem); }
+  .lei-callout p+p{ margin-top:10px; }
+  .lei-callout strong{ color:var(--mmg-navy-800,#241E61); }
+
+  /* ==========================================================================
+     ESTATÍSTICAS (MMG em Números)
+     ========================================================================== */
+  .stats{ background:var(--mmg-gray-50,#F7F7FB); }
+  .stat-card{
+    background:#fff; border:1px solid var(--mmg-gray-200,#E4E7EC); border-radius:var(--mmg-radius-lg,18px);
+    padding:30px 24px; text-align:center;
+    transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease), box-shadow var(--mmg-dur,.25s) var(--mmg-ease,ease), border-color var(--mmg-dur,.25s) var(--mmg-ease,ease);
+  }
+  .stat-card:hover{ transform:translateY(-4px); box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(16,24,40,.12)); border-color:var(--mmg-orange-300,#F8B382); }
+  .stat-card .num{ font-family:var(--mmg-font-display,'Archivo',sans-serif); font-weight:900; font-size:clamp(2rem,4vw,2.6rem); color:var(--mmg-orange-500,#EC6B1E); display:block; line-height:1; margin-bottom:10px; }
+  .stat-card .lbl{ font-weight:700; font-size:var(--mmg-text-base,1rem); margin-bottom:6px; }
+  .stat-card p{ color:var(--mmg-gray-600,#475467); font-size:var(--mmg-text-sm,.9rem); }
+  .stats .note{ text-align:center; color:var(--mmg-gray-400,#98A2B3); font-size:var(--mmg-text-xs,.78rem); margin-top:28px; }
+
+  /* ==========================================================================
+     COMPARAÇÃO — Contratação Direta vs. MMG
+     ========================================================================== */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .compare-col{ border-radius:var(--mmg-radius-lg,18px); padding:28px; }
+  .compare-col.is-bad{ background:var(--mmg-gray-50,#F7F7FB); border:1px solid var(--mmg-gray-200,#E4E7EC); }
+  .compare-col.is-good{ background:var(--mmg-navy-900,#16114A); color:#fff; }
+  .compare-col h4{ font-size:var(--mmg-text-lg,1.075rem); font-weight:800; margin-bottom:16px; }
+  .compare-col.is-good h4{ color:#fff; }
+  .compare-col ul{ display:flex; flex-direction:column; gap:12px; }
+  .compare-col li{ display:flex; align-items:flex-start; gap:10px; font-size:var(--mmg-text-sm,.925rem); font-weight:500; }
+  .compare-col.is-bad li{ color:var(--mmg-gray-600,#475467); }
+  .compare-col.is-good li{ color:#E5E2F6; }
+  .compare-col li svg{ flex-shrink:0; margin-top:2px; }
+  .compare-note{ text-align:center; max-width:64ch; margin:26px auto 0; color:var(--mmg-gray-600,#475467); font-size:var(--mmg-text-sm,.95rem); }
+  @media(max-width:760px){ .compare{ grid-template-columns:1fr; } }
+
+  /* ==========================================================================
+     DEPOIMENTOS
+     ========================================================================== */
+  .depoimentos{ background:var(--mmg-gray-50,#F7F7FB); }
+  .quote-card{
+    background:#fff; border:1px solid var(--mmg-gray-200,#E4E7EC); border-radius:var(--mmg-radius-lg,18px);
+    padding:28px; display:flex; flex-direction:column; gap:16px;
+  }
+  .quote-card p{ color:var(--mmg-gray-700,#344054); font-size:var(--mmg-text-sm,.95rem); font-style:italic; }
+  .quote-card .who strong{ display:block; font-size:var(--mmg-text-sm,.9rem); font-weight:800; font-style:normal; }
+  .quote-card .who span{ display:block; color:var(--mmg-gray-500,#667085); font-size:var(--mmg-text-xs,.8rem); }
+
+  /* ==========================================================================
      FOOTER
      ========================================================================== */
   footer{ background:var(--mmg-navy-950,#0C0930); color:#8E89BE; padding:54px 0 44px; }
@@ -513,6 +570,7 @@
     </a>
     <nav class="navlinks" aria-label="Principal">
       <a href="#servicos">Serviços</a>
+      <a href="#lei">Lei 12.023/2009</a>
       <a href="#abrangencia">Abrangência</a>
       <a href="#vantagens">Vantagens</a>
       <a href="#contato" id="btn-equipe" class="btn btn-primary" style="padding:10px 18px; min-height:auto;">Solicitar equipe</a>
@@ -525,6 +583,7 @@
   </div>
   <nav class="mnav-menu" id="mnav-menu" aria-label="Menu">
     <a href="#servicos">Serviços</a>
+    <a href="#lei">Lei 12.023/2009</a>
     <a href="#abrangencia">Abrangência</a>
     <a href="#vantagens">Vantagens</a>
     <a href="#contato" class="btn btn-primary">Solicitar equipe</a>
@@ -542,7 +601,7 @@
   <div class="wrap">
     <div class="hero-copy">
       <h1><span class="d-txt">A Solução Completa em Mão de Obra para Movimentação de Mercadorias</span><span class="m-txt">A Solução Completa em Mão de Obra para Movimentação de Mercadorias</span></h1>
-      <p class="p-hero"><span class="d-txt">Intermediação de mão de obra avulsa — sem vínculo empregatício — em Campo Mourão e região. Profissionais qualificados do recebimento à expedição, com rapidez, agilidade e redução de custos operacionais.</span><span class="m-txt">Recurso humano especializado, sem vínculo empregatício. Rapidez, agilidade e redução de custos.</span></p>
+      <p class="p-hero"><span class="d-txt">Está com dificuldade de encontrar mão de obra qualificada? Nossa solução tem a resposta!</span><span class="m-txt">Recurso humano especializado, sem vínculo empregatício. Rapidez, agilidade e redução de custos.</span></p>
       <div class="cta">
         <a href="#contato" class="btn btn-primary">Solicitar equipe agora<span class="m-arrow" aria-hidden="true">&nbsp;→</span></a>
         <a href="#servicos" class="btn btn-ghost d-cta">Ver serviços</a>
@@ -566,12 +625,46 @@
   </div>
 </div>
 
+<!-- DESAFIOS -->
+<section id="desafios">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Um problema comum</span>
+      <h2>O Problema Que Sua Empresa Enfrenta Hoje</h2>
+      <p>Se a sua empresa lida com movimentação de mercadorias, muito provavelmente reconhece pelo menos um desses desafios no dia a dia — problemas reais que afetam produtividade, rentabilidade e segurança do negócio.</p>
+    </div>
+    <div class="cards cards--4">
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h4>Dificuldade para encontrar mão de obra qualificada</h4>
+        <p>O mercado está cada vez mais competitivo e escasso para perfis operacionais especializados.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h4>Alto índice de turnover</h4>
+        <p>A rotatividade constante gera custos de rescisão, recontratação e perda de produtividade.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
+        <h4>Risco crescente de ações judiciais</h4>
+        <p>Cada admissão é uma exposição potencial a reclamações na Justiça do Trabalho.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div>
+        <h4>Falta de flexibilidade operacional</h4>
+        <p>Equipe fixa não acompanha picos e vales de demanda — gerando ociosidade ou sobrecarga.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ONDE ATUAMOS -->
 <section class="atuacao" id="atuacao">
   <div class="wrap">
     <div class="sechead">
       <span class="eyebrow"><span class="dot"></span> Setores atendidos</span>
       <h2>Onde Atuamos</h2>
+      <p>Muitas empresas acreditam que o trabalho avulso é exclusivo de grandes centros logísticos ou portos. É um mito: qualquer empresa que precisa movimentar mercadorias pode contratar pela Lei 12.023/2009.</p>
     </div>
     <div class="cards cards--4">
       <article class="card glow-box">
@@ -622,6 +715,41 @@
   </div>
 </section>
 
+<!-- LEI 12.023/2009 -->
+<section id="lei" class="atuacao">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Regime de Trabalho Avulso</span>
+      <h2>A Solução — Lei 12.023/2009</h2>
+      <p>A Lei Federal nº 12.023/2009 foi criada exatamente para resolver esse problema. Ela regulamenta o trabalho avulso na movimentação de mercadorias em todo o território nacional, oferecendo uma alternativa legal, segura e eficiente para as empresas que precisam de mão de obra qualificada.</p>
+    </div>
+    <div class="cards">
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Sem Vínculo</h4>
+        <p>Contrate mão de obra especializada sem estabelecer vínculo empregatício direto.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Sem Burocracia</h4>
+        <p>Toda a gestão trabalhista fica com a MMG. Sua empresa recebe o serviço, não o passivo.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>100% Legal</h4>
+        <p>Modalidade prevista e amparada por lei federal, com segurança jurídica total para a empresa tomadora.</p>
+      </article>
+    </div>
+    <div class="lei-callout">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16v-4"/><path d="M12 8h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      <div>
+        <p><strong>O que a lei diz:</strong> o trabalho avulso é uma modalidade de contratação intermediada por entidade representativa — no caso, a MMG. O trabalhador avulso tem todos os direitos trabalhistas e previdenciários garantidos, mas sem estabelecer vínculo com a empresa tomadora de serviços.</p>
+        <p>A empresa paga pelo serviço prestado — não pelo empregado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ABRANGÊNCIA / MAPA -->
 <div class="mapa-container" id="abrangencia">
   <iframe
@@ -661,6 +789,21 @@
         <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
         <h4>PICKING E ABASTECIMENTO</h4>
         <p>Separação de pedidos e abastecimento de linhas de produção com precisão e eficiência operacional.</p>
+      </article>
+      <article class="card-dark glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M3 12h18"/><path d="M8 7V4h8v3"/></svg></div>
+        <h4>PALETIZAÇÃO</h4>
+        <p>Organização e empilhamento de paletes conforme normas de segurança.</p>
+      </article>
+      <article class="card-dark glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h4>INVENTÁRIO ROTATIVO</h4>
+        <p>Contagens periódicas para garantir a acuracidade do estoque a qualquer momento.</p>
+      </article>
+      <article class="card-dark glow-box on-dark">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V9l7-6 7 6v12"/><path d="M9 21v-8h6v8"/></svg></div>
+        <h4>ABASTECIMENTO DE SILOS</h4>
+        <p>Operações em armazéns e silos com segurança e conformidade técnica.</p>
       </article>
     </div>
   </div>
@@ -723,6 +866,34 @@
   </div>
 </section>
 
+<!-- FLEXIBILIDADE -->
+<section id="flexibilidade" class="atuacao">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Sob medida</span>
+      <h2>Flexibilidade Que Sua Empresa Precisa</h2>
+      <p>O mercado não é constante. Demandas sazonais, campanhas comerciais, colheitas, datas especiais — sua operação precisa expandir e contrair sem que isso gere custos excessivos ou riscos jurídicos.</p>
+    </div>
+    <div class="cards">
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+        <h4>Pico de Demanda</h4>
+        <p>Precisa de mais trabalhadores? A MMG escala rapidamente, sem contratos adicionais ou processos de admissão.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M14 17h7v-7"/></svg></div>
+        <h4>Período de Baixa</h4>
+        <p>Precisa reduzir? A MMG ajusta o quadro sem rescisões, sem aviso prévio e sem multas para a sua empresa.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4>Operação Equilibrada</h4>
+        <p>Mão de obra sob medida para a sua demanda real — nem ociosa, nem insuficiente. Eficiência máxima no dia a dia.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- COMO FUNCIONA -->
 <section id="como">
   <div class="wrap">
@@ -750,6 +921,129 @@
         <div class="num" aria-hidden="true">4</div>
         <h4>MMG garante substituição</h4>
         <p>Faltou alguém? Repomos o profissional rapidamente, sem custo extra e sem parar a sua operação.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FLUXO FINANCEIRO -->
+<section id="fluxo">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Financeiro</span>
+      <h2>Fluxo Financeiro Simples e Transparente</h2>
+      <p>Chega de complexidade com folha de pagamento, múltiplos fornecedores e surpresas no fechamento do mês. Com a MMG, o processo financeiro é direto, transparente e sem burocracia.</p>
+    </div>
+    <div class="cards">
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/></svg></div>
+        <h4>Uma Única Fatura</h4>
+        <p>Sua empresa recebe uma fatura mensal da MMG — sem itens ocultos ou surpresas.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+        <h4>Zero Vínculo</h4>
+        <p>Nenhum trabalhador gera vínculo empregatício com a sua empresa. Garantido por lei.</p>
+      </article>
+      <article class="card glow-box">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EC6B1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M15 9.5c0-1.1-1.3-2-3-2s-3 .9-3 2 1.3 2 3 2 3 .9 3 2-1.3 2-3 2-3-.9-3-2"/></svg></div>
+        <h4>Encargos por Conta da MMG</h4>
+        <p>INSS, FGTS, férias, 13º — tudo gerenciado e recolhido pela MMG.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MMG EM NÚMEROS -->
+<section id="numeros" class="stats">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Resultados</span>
+      <h2>MMG em Números</h2>
+      <p>A MMG constrói sua reputação com resultados concretos. Cada número representa empresas que já descobriram uma forma mais inteligente, segura e econômica de operar a movimentação de mercadorias.</p>
+    </div>
+    <div class="cards cards--4">
+      <article class="stat-card">
+        <span class="num">100+</span>
+        <span class="lbl">Empresas Atendidas</span>
+        <p>Clientes em diferentes segmentos que confiam na MMG para sua operação.</p>
+      </article>
+      <article class="stat-card">
+        <span class="num">500+</span>
+        <span class="lbl">Trabalhadores Cadastrados</span>
+        <p>Profissionais qualificados e disponíveis para escalonamento imediato.</p>
+      </article>
+      <article class="stat-card">
+        <span class="num">15+</span>
+        <span class="lbl">Anos de Atuação</span>
+        <p>Experiência consolidada no mercado de movimentação de mercadorias.</p>
+      </article>
+      <article class="stat-card">
+        <span class="num">98%</span>
+        <span class="lbl">Satisfação dos Clientes</span>
+        <p>Índice que reflete a qualidade e confiabilidade dos nossos serviços.</p>
+      </article>
+    </div>
+    <p class="note">Dados representativos. Entre em contato para informações atualizadas sobre a operação da MMG.</p>
+  </div>
+</section>
+
+<!-- COMPARAÇÃO -->
+<section id="comparacao">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Compare</span>
+      <h2>Contratação Direta vs. MMG</h2>
+      <p>A comparação é direta e reveladora. Veja lado a lado o que sua empresa enfrenta com contratação direta — e o que passa a ter ao contratar pela MMG.</p>
+    </div>
+    <div class="compare">
+      <div class="compare-col is-bad">
+        <h4>Contratação Direta</h4>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D45D14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Vínculo empregatício direto</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D45D14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Encargos trabalhistas</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D45D14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Burocracia com folha de pagamento</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D45D14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Alto risco de ações judiciais</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D45D14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Custos com seleção</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D45D14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg> Dificuldade nos picos de demanda</li>
+        </ul>
+      </div>
+      <div class="compare-col is-good">
+        <h4>MMG — Regime Avulso</h4>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Sem vínculo empregatício</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Sem encargos</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Zero burocracia</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Zero risco trabalhista</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Mão de obra pronta</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4883F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Flexibilidade total</li>
+        </ul>
+      </div>
+    </div>
+    <p class="compare-note">Com a MMG, sua empresa elimina riscos, reduz custos e ganha flexibilidade — tudo isso com respaldo da Lei 12.023/2009.</p>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="depoimentos">
+  <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Depoimentos</span>
+      <h2>O Que Nossos Clientes Dizem</h2>
+      <p>Empresas de diferentes segmentos já experimentaram a transformação que a MMG proporciona. Redução de custos, eliminação de riscos e ganho real de eficiência operacional.</p>
+    </div>
+    <div class="cards">
+      <article class="quote-card glow-box">
+        <p>"Desde que migramos para o regime avulso com a MMG, eliminamos completamente as ações trabalhistas e reduzimos nosso custo operacional em mais de 20%. O processo é simples e os profissionais chegam prontos para trabalhar."</p>
+        <div class="who"><strong>Gestor de Logística</strong><span>Indústria de Alimentos</span></div>
+      </article>
+      <article class="quote-card glow-box">
+        <p>"A flexibilidade que a MMG oferece é incomparável. Na alta temporada, escalamos o time em dias. Na baixa, reduzimos sem nenhum custo. É exatamente o que nossa operação precisava."</p>
+        <div class="who"><strong>Diretor de Operações</strong><span>Centro de Distribuição</span></div>
+      </article>
+      <article class="quote-card glow-box">
+        <p>"Nunca mais precisei me preocupar com turnover, seleção ou encargos de funcionários de movimentação. A MMG resolve tudo e minha equipe foca no que importa: vender."</p>
+        <div class="who"><strong>Proprietário</strong><span>Rede de Supermercados</span></div>
       </article>
     </div>
   </div>
@@ -829,6 +1123,7 @@
       </div>
       <div>
         <h5>Empresa</h5>
+        <a href="#lei">Lei 12.023/2009</a>
         <a href="#abrangencia">Abrangência</a>
         <a href="#vantagens">Vantagens</a>
         <a href="#vantagens">Conformidade NR</a>
