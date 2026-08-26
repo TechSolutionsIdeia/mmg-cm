@@ -292,6 +292,23 @@
   .mapa-container iframe{ width:100%; border:0; display:block; min-height:640px; }
 
   /* ==========================================================================
+     FAIXA FOTOGRÁFICA — transição mapa → vantagens
+     ========================================================================== */
+  .transicao-foto{ position:relative; width:100%; height:clamp(220px,26vw,360px); overflow:hidden; background:var(--mmg-navy-900,#16114A); }
+  .transicao-foto img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .transicao-foto::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:64px; z-index:2; pointer-events:none;
+    background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,0) 100%);
+  }
+  .transicao-foto::after{
+    content:""; position:absolute; bottom:0; left:0; right:0; height:110px; z-index:2; pointer-events:none;
+    background:linear-gradient(180deg,rgba(22,17,74,0) 0%,var(--mmg-navy-900,#16114A) 100%);
+  }
+  @media(max-width:760px){
+    .transicao-foto{ display:none; }
+  }
+
+  /* ==========================================================================
      VANTAGENS (fundo escuro)
      ========================================================================== */
   .why{ background:var(--mmg-navy-900,#16114A); color:#fff; }
@@ -345,11 +362,32 @@
   /* ==========================================================================
      CTA FINAL
      ========================================================================== */
-  .ctafinal{ background:#fff; color:var(--mmg-gray-900,#101828); text-align:center; }
-  .ctafinal h2{ font-size:clamp(1.7rem,3.6vw,2.75rem); font-weight:900; }
-  .ctafinal p{ font-size:clamp(1rem,1.4vw,1.25rem); color:var(--mmg-gray-600,#475467); margin:16px auto 28px; max-width:46ch; }
+  .ctafinal{
+    position:relative; overflow:hidden; color:#fff; text-align:left;
+    min-height:clamp(340px,42vw,480px); display:flex; align-items:center; padding:56px 0;
+  }
+  .ctafinal::before{
+    content:""; position:absolute; inset:0; z-index:0;
+    background-image:url('assets/img3.jpg');
+    background-size:cover; background-position:center;
+  }
+  .ctafinal::after{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(90deg,rgba(12,9,48,.88) 0%,rgba(12,9,48,.74) 32%,rgba(12,9,48,.42) 58%,rgba(12,9,48,.12) 100%);
+  }
+  .ctafinal .wrap{ position:relative; z-index:2; }
+  .ctafinal-content{ max-width:38ch; }
+  .ctafinal h2{ font-size:clamp(1.7rem,3.6vw,2.75rem); font-weight:900; color:#fff; }
+  .ctafinal p{ font-size:clamp(1rem,1.4vw,1.25rem); color:#E5E2F6; margin:16px 0 28px; max-width:46ch; }
   .ctafinal .btn{ background:var(--mmg-grad-orange,linear-gradient(135deg,#F4883F,#EC6B1E)); color:#fff; box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(236,107,30,.28)); }
   .ctafinal .btn:hover{ background:var(--mmg-navy-900,#16114A); transform:translateY(-2px); }
+  @media(max-width:760px){
+    .ctafinal{ text-align:center; min-height:0; padding:64px 0; background:var(--mmg-navy-900,#16114A); }
+    .ctafinal::before{ display:none; }
+    .ctafinal::after{ display:none; }
+    .ctafinal-content{ max-width:none; margin:0 auto; }
+    .ctafinal p{ margin-left:auto; margin-right:auto; }
+  }
 
   /* ==========================================================================
      CALLOUT (Lei 12.023/2009)
@@ -761,6 +799,11 @@
   </iframe>
 </div>
 
+<!-- FAIXA FOTOGRÁFICA -->
+<div class="transicao-foto">
+  <img src="assets/img2.png" alt="Equipe MMG em operação de movimentação de mercadorias" loading="lazy">
+</div>
+
 <!-- VANTAGENS -->
 <section id="vantagens" class="why">
   <div class="wrap">
@@ -1100,9 +1143,14 @@
 <!-- CTA FINAL -->
 <section id="cta-final" class="ctafinal">
   <div class="wrap">
-    <h2>Precisa de mão de obra avulsa agora?</h2>
-    <p>Fale com a MMG e receba uma proposta sob medida para a sua operação em Campo Mourão e região.</p>
-    <a href="https://wa.me/5544999311635" class="btn">Falar no WhatsApp</a>
+    <div class="ctafinal-content">
+      <h2>Precisa de mão de obra avulsa agora?</h2>
+      <p>Fale com a MMG e receba uma proposta sob medida para a sua operação em Campo Mourão e região.</p>
+      <a href="https://wa.me/5544999311635" class="btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.95A9 9 0 1 1 8.5 19.5z"/><path d="M8.5 12.5c0 2.5 3 5 5.5 5"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
   </div>
 </section>
 
