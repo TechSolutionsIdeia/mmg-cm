@@ -309,6 +309,46 @@
   }
 
   /* ==========================================================================
+     FOTO — Realidade do gestor (após "O Problema")
+     ========================================================================== */
+  .problema-foto{
+    position:relative; width:100%; overflow:hidden;
+    height:clamp(360px,52vw,620px);
+    background:var(--mmg-navy-900,#16114A);
+    padding:0;
+  }
+  .problema-foto img{
+    width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block;
+  }
+  .problema-foto::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(12,9,48,.05) 0%,
+      rgba(12,9,48,0) 30%,
+      rgba(12,9,48,.55) 78%,
+      rgba(12,9,48,.92) 100%);
+  }
+  .problema-foto-caption{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:0 24px clamp(28px,4vw,48px);
+    max-width:var(--mmg-container,1200px); margin:0 auto;
+  }
+  .problema-foto-caption .eyebrow{
+    color:var(--mmg-orange-400,#F4883F); background:rgba(236,107,30,.14);
+    border:1px solid rgba(236,107,30,.34); padding:7px 14px; border-radius:var(--mmg-radius-pill,999px);
+    margin-bottom:14px;
+  }
+  .problema-foto-caption p{
+    color:#fff; font-size:clamp(1.05rem,2vw,1.4rem); font-weight:600;
+    max-width:38ch; line-height:1.35;
+  }
+  @media(max-width:760px){
+    .problema-foto{ height:clamp(320px,90vw,440px); }
+    .problema-foto-caption{ padding:0 20px 26px; }
+    .problema-foto-caption p{ max-width:none; }
+  }
+
+  /* ==========================================================================
      VANTAGENS (fundo escuro)
      ========================================================================== */
   .why{ background:var(--mmg-navy-900,#16114A); color:#fff; }
@@ -682,6 +722,8 @@
       <div class="cli-chip"><img src="assets/clientes/iriedi.png" alt="I.Riedi" height="34" loading="lazy"></div>
       <div class="cli-chip"><img src="assets/clientes/jmacedo.png" alt="J.Macêdo" height="34" loading="lazy"></div>
       <div class="cli-chip"><img src="assets/clientes/bokada.png" alt="Bokada Alimentos" height="34" loading="lazy"></div>
+      <!-- IMAGEM: troque o src pelo caminho do logo da Beotang que você vai colocar em /assets/clientes/ -->
+      <div class="cli-chip"><img src="assets/clientes/beotang.jpg" alt="Beotang" height="34" loading="lazy"></div>
     </div>
   </div>
 </div>
@@ -716,6 +758,20 @@
         <p>Equipe fixa não acompanha picos e vales de demanda — gerando ociosidade ou sobrecarga.</p>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FOTO — Realidade do gestor (imagem local)
+     Troque o src abaixo pelo arquivo que você vai colocar em /assets/
+     Ex.: assets/gestor-estressado.jpg
+     ========================================================================== -->
+<section class="problema-foto">
+  <!-- IMAGEM: troque o src pelo caminho da sua imagem local -->
+  <img src="assets/img6.png" alt="Gestor sobrecarregado analisando relatórios de operação" loading="lazy">
+  <div class="problema-foto-caption">
+    <span class="eyebrow"><span class="dot"></span> Uma realidade conhecida</span>
+    <p>Falta de gente, prazos apertados e o medo de um processo trabalhista — essa rotina não precisa continuar assim.</p>
   </div>
 </section>
 
@@ -929,14 +985,21 @@
      ========================================================================== -->
 <section id="galeria" class="atuacao">
   <div class="wrap">
+    <div class="sechead">
+      <span class="eyebrow"><span class="dot"></span> Nossa operação</span>
+      <h2>Equipe MMG em Ação</h2>
+      <p>Confira registros reais das nossas equipes atuando em operações de movimentação de mercadorias.</p>
+    </div>
     <div class="galeria-grid">
       <figure class="galeria-item glow-box">
         <!-- IMAGEM 1: troque o src pelo caminho da sua imagem local -->
         <img src="assets/img4.png" alt="Descreva a imagem 1 aqui" loading="lazy">
+        <figcaption>Legenda opcional da imagem 1</figcaption>
       </figure>
       <figure class="galeria-item glow-box">
         <!-- IMAGEM 2: troque o src pelo caminho da sua imagem local -->
         <img src="assets/img5.png" alt="Descreva a imagem 2 aqui" loading="lazy">
+        <figcaption>Legenda opcional da imagem 2</figcaption>
       </figure>
     </div>
   </div>
