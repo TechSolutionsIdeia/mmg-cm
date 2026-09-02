@@ -435,6 +435,29 @@
   @media(max-width:760px){ .compare{ grid-template-columns:1fr; } }
 
   /* ==========================================================================
+     GALERIA — Fotos da operação (2 imagens locais)
+     ========================================================================== */
+  .galeria-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:24px;
+  }
+  .galeria-item{
+    background:#fff; border:1px solid var(--mmg-gray-200,#E4E7EC);
+    border-radius:var(--mmg-radius-lg,18px); overflow:hidden;
+    transition:transform var(--mmg-dur,.25s) var(--mmg-ease,ease), box-shadow var(--mmg-dur,.25s) var(--mmg-ease,ease), border-color var(--mmg-dur,.25s) var(--mmg-ease,ease);
+  }
+  .galeria-item:hover{ transform:translateY(-4px); box-shadow:var(--mmg-shadow-lg,0 18px 40px rgba(16,24,40,.12)); border-color:var(--mmg-orange-300,#F8B382); }
+  .galeria-item img{
+    width:100%; height:320px; object-fit:cover; display:block;
+  }
+  .galeria-item figcaption{
+    padding:14px 18px; font-size:var(--mmg-text-sm,.9rem); color:var(--mmg-gray-600,#475467); font-weight:500;
+  }
+  @media(max-width:760px){
+    .galeria-grid{ grid-template-columns:1fr; }
+    .galeria-item img{ height:240px; }
+  }
+
+  /* ==========================================================================
      DEPOIMENTOS
      ========================================================================== */
   .depoimentos{ background:var(--mmg-gray-50,#F7F7FB); }
@@ -520,7 +543,7 @@
   }
 
   /* ==========================================================================
-     BREAKPOINT — MOBILE (<= 760px): cards em coluna única
+     BREAKPOINT — <= 760px  (cards em coluna única)
      ========================================================================== */
   @media(max-width:760px){
     .cards{ --cols:1; --gap:16px; }
@@ -895,6 +918,26 @@
         <h4>Flexibilidade Total</h4>
         <p>Escale ou reduza a equipe conforme a demanda do seu negócio, sem contratos rígidos ou penalidades.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     GALERIA — Fotos da operação (2 imagens locais)
+     Troque os src abaixo pelos arquivos que você vai colocar em /assets/
+     Ex.: assets/operacao1.jpg e assets/operacao2.jpg
+     ========================================================================== -->
+<section id="galeria" class="atuacao">
+  <div class="wrap">
+    <div class="galeria-grid">
+      <figure class="galeria-item glow-box">
+        <!-- IMAGEM 1: troque o src pelo caminho da sua imagem local -->
+        <img src="assets/img4.png" alt="Descreva a imagem 1 aqui" loading="lazy">
+      </figure>
+      <figure class="galeria-item glow-box">
+        <!-- IMAGEM 2: troque o src pelo caminho da sua imagem local -->
+        <img src="assets/img5.png" alt="Descreva a imagem 2 aqui" loading="lazy">
+      </figure>
     </div>
   </div>
 </section>
